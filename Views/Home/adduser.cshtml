@@ -1,0 +1,53 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.LoginRegisViewModel
+
+<div class="container mt-4">
+    <h2>Add User</h2>
+
+    <p class="text-danger">@ViewBag.Status</p>
+
+    <form asp-controller="Home" asp-action="AddUser" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="FirstName" class="form-label">First Name</label>
+            <input asp-for="FirstName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="LastName" class="form-label">Last Name</label>
+            <input asp-for="LastName" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label">Email</label>
+            <input asp-for="Email" type="email" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Phone" class="form-label">Phone</label>
+            <input asp-for="Phone" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Password" class="form-label">Password</label>
+            <input asp-for="Password" type="password" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label">Address</label>
+            <textarea asp-for="Address" class="form-control"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="RoleName" class="form-label">Role</label>
+            <select asp-for="RoleName" class="form-control">
+                <option value="">เลือก Role</option>
+                <option value="Doctor">Doctor</option>
+                <option value="FinanceStaff">FinanceStaff</option>
+                <option value="ScheduleManager">ScheduleManager</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">เพิ่มผู้ใช้</button>
+    </form>
+</div>

@@ -1,0 +1,457 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.LoginRegisViewModel
+@{
+    ViewData["Title"] = "ลงทะเบียน";
+}
+
+<style>
+    body.register-layout {
+        min-width: 320px;
+        margin: 0;
+        background: #f4f6f9;
+    }
+
+    .register-layout-content,
+    .register-layout-main {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .register-page {
+        width: min(100%, 1440px);
+        margin: 0 auto;
+        padding: 20px 24px 32px;
+        color: #253044;
+    }
+
+    .register-hero {
+        position: relative;
+        display: flex;
+        min-height: 250px;
+        align-items: flex-end;
+        overflow: hidden;
+        padding: 36px 42px;
+        border-radius: 12px;
+        background: linear-gradient(120deg, #eaf2ff 0%, #f2f6fc 55%, #e8eef7 100%);
+    }
+
+    .register-hero::after {
+        position: absolute;
+        top: -110px;
+        right: 7%;
+        width: 360px;
+        height: 360px;
+        border: 1px solid rgba(57,127,240,.12);
+        border-radius: 50%;
+        box-shadow: 0 0 0 45px rgba(57,127,240,.035), 0 0 0 95px rgba(57,127,240,.025);
+        content: "";
+    }
+
+    .register-hero-copy {
+        position: relative;
+        z-index: 1;
+    }
+
+    .register-eyebrow {
+        margin-bottom: 8px;
+        color: #397ff0;
+        font-size: .82rem;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+    }
+
+    .register-hero h1 {
+        margin-bottom: 8px;
+        color: #1d2b41;
+        font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+        font-weight: 750;
+    }
+
+    .register-hero p {
+        max-width: 650px;
+        margin: 0;
+        color: #67758a;
+    }
+
+    .register-steps {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(8px, 2vw, 26px);
+        padding: 30px 12px 26px;
+    }
+
+    .register-step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #8a94a3;
+        font-size: .87rem;
+        white-space: nowrap;
+    }
+
+    .register-step-number {
+        display: grid;
+        width: 32px;
+        height: 32px;
+        flex: 0 0 32px;
+        place-items: center;
+        border: 1px solid #dfe4eb;
+        border-radius: 50%;
+        background: #fff;
+        color: #7d8795;
+        font-size: .82rem;
+        font-weight: 700;
+    }
+
+    .register-step.active {
+        color: #263650;
+        font-weight: 650;
+    }
+
+    .register-step.active .register-step-number {
+        border-color: #397ff0;
+        background: #397ff0;
+        color: #fff;
+        box-shadow: 0 0 0 4px rgba(57,127,240,.12);
+    }
+
+    .register-step-line {
+        width: clamp(24px, 8vw, 100px);
+        height: 1px;
+        background: #d7dde6;
+    }
+
+    .register-content {
+        display: grid;
+        grid-template-columns: minmax(0, 1.65fr) minmax(260px, .85fr);
+        gap: 28px;
+        align-items: start;
+    }
+
+    .register-card {
+        padding: 28px;
+        border: 1px solid #e6eaf0;
+        border-radius: 11px;
+        background: #fff;
+        box-shadow: 0 5px 18px rgba(29,43,65,.045);
+    }
+
+    .register-section-title {
+        margin-bottom: 5px;
+        color: #263650;
+        font-size: 1.15rem;
+        font-weight: 700;
+    }
+
+    .register-section-help {
+        margin-bottom: 24px;
+        color: #8791a0;
+        font-size: .88rem;
+    }
+
+    .register-form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 17px 18px;
+    }
+
+    .register-field label {
+        margin-bottom: 7px;
+        color: #3d4858;
+        font-size: .87rem;
+        font-weight: 600;
+    }
+
+    .register-field .form-control {
+        min-height: 45px;
+        border-color: #dce1e8;
+        border-radius: 6px;
+        font-size: .91rem;
+    }
+
+    .register-field textarea.form-control {
+        min-height: 88px;
+        resize: vertical;
+    }
+
+    .register-field .form-control:focus {
+        border-color: #397ff0;
+        box-shadow: 0 0 0 .2rem rgba(57,127,240,.13);
+    }
+
+    .register-field-full {
+        grid-column: 1 / -1;
+    }
+
+    .register-aside {
+        display: grid;
+        gap: 18px;
+    }
+
+    .register-profile {
+        text-align: center;
+    }
+
+    .register-avatar {
+        position: relative;
+        display: grid;
+        width: 92px;
+        height: 92px;
+        margin: 0 auto 13px;
+        place-items: center;
+        border: 1px solid #e3e8ef;
+        border-radius: 10px;
+        background: #f2f5f9;
+        color: #9aa5b4;
+        font-size: 2rem;
+    }
+
+    .register-avatar::before {
+        width: 19px;
+        height: 19px;
+        margin-top: 20px;
+        border-radius: 50%;
+        background: #b7c0cc;
+        content: "";
+    }
+
+    .register-avatar::after {
+        position: absolute;
+        width: 42px;
+        height: 23px;
+        margin-top: 43px;
+        border-radius: 24px 24px 8px 8px;
+        background: #b7c0cc;
+        content: "";
+    }
+
+    .register-profile strong {
+        display: block;
+        margin-bottom: 4px;
+        color: #344156;
+        font-size: .95rem;
+    }
+
+    .register-profile p {
+        margin: 0;
+        color: #8a94a3;
+        font-size: .82rem;
+        line-height: 1.6;
+    }
+
+    .register-info-title {
+        margin-bottom: 14px;
+        color: #344156;
+        font-size: .98rem;
+        font-weight: 700;
+    }
+
+    .register-info-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 0;
+        border-bottom: 1px solid #edf0f4;
+        color: #7b8797;
+        font-size: .83rem;
+    }
+
+    .register-info-row:last-child {
+        border-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    .register-info-row span:last-child {
+        color: #465367;
+        text-align: right;
+    }
+
+    .register-form-actions {
+        display: grid;
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .register-submit,
+    .register-back {
+        min-height: 46px;
+        border-radius: 6px;
+        font-weight: 650;
+    }
+
+    .register-submit {
+        background: #397ff0;
+    }
+
+    .register-back {
+        border-color: #dce1e8;
+        color: #596679;
+    }
+
+    .register-signin {
+        margin: 18px 0 0;
+        color: #818b99;
+        font-size: .86rem;
+        text-align: center;
+    }
+
+    .register-signin a {
+        color: #3478e5;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    @@media (max-width: 800px) {
+        .register-content {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        .register-aside {
+            grid-template-columns: 1fr 1fr;
+            align-items: stretch;
+        }
+    }
+
+    @@media (max-width: 560px) {
+        .register-page {
+            padding: 12px 12px 24px;
+        }
+
+        .register-hero {
+            min-height: 200px;
+            padding: 26px 22px;
+        }
+
+        .register-steps {
+            justify-content: space-between;
+            gap: 4px;
+            padding: 23px 0;
+        }
+
+        .register-step {
+            flex-direction: column;
+            gap: 5px;
+            font-size: .72rem;
+        }
+
+        .register-step-line {
+            width: 12%;
+            margin-top: -19px;
+        }
+
+        .register-card {
+            padding: 20px 17px;
+        }
+
+        .register-form-grid,
+        .register-aside {
+            grid-template-columns: 1fr;
+        }
+
+        .register-field-full {
+            grid-column: auto;
+        }
+    }
+</style>
+
+<div class="register-page">
+    <header class="register-hero">
+        <div class="register-hero-copy">
+            <div class="register-eyebrow">MediQueue Thai</div>
+            <h1>สร้างบัญชีผู้ใช้</h1>
+            <p>ลงทะเบียนเพื่อจัดการข้อมูลส่วนตัวและใช้งานระบบจองคิวโรงพยาบาลได้สะดวกยิ่งขึ้น</p>
+        </div>
+    </header>
+
+    <nav class="register-steps" aria-label="ขั้นตอนการลงทะเบียน">
+        <div class="register-step active">
+            <span class="register-step-number">1</span>
+            <span>ข้อมูลบัญชี</span>
+        </div>
+        <span class="register-step-line" aria-hidden="true"></span>
+        <div class="register-step">
+            <span class="register-step-number">2</span>
+            <span>ข้อมูลผู้ใช้</span>
+        </div>
+        <span class="register-step-line" aria-hidden="true"></span>
+        <div class="register-step">
+            <span class="register-step-number">3</span>
+            <span>เสร็จสิ้น</span>
+        </div>
+    </nav>
+
+    <div class="register-content">
+        <section class="register-card">
+            <h2 class="register-section-title">ข้อมูลสำหรับลงทะเบียน</h2>
+            <p class="register-section-help">กรอกข้อมูลให้ครบถ้วนเพื่อสร้างบัญชีผู้ป่วย</p>
+
+            <form asp-controller="Home" asp-action="Register" method="post">
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                @if (ViewBag.Status != null)
+                {
+                    <div class="alert alert-danger" role="alert">@ViewBag.Status</div>
+                }
+
+                <div class="register-form-grid">
+                    <div class="register-field">
+                        <label asp-for="FirstName">ชื่อ</label>
+                        <input asp-for="FirstName" class="form-control" placeholder="กรอกชื่อ" autocomplete="given-name" required />
+                        <span asp-validation-for="FirstName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="register-field">
+                        <label asp-for="LastName">นามสกุล</label>
+                        <input asp-for="LastName" class="form-control" placeholder="กรอกนามสกุล" autocomplete="family-name" required />
+                        <span asp-validation-for="LastName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="register-field">
+                        <label asp-for="Email">อีเมล</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="name@example.com" autocomplete="email" required />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="register-field">
+                        <label asp-for="Phone">เบอร์โทรศัพท์</label>
+                        <input asp-for="Phone" type="tel" class="form-control" placeholder="กรอกเบอร์โทรศัพท์" autocomplete="tel" />
+                        <span asp-validation-for="Phone" class="text-danger small"></span>
+                    </div>
+
+                    <div class="register-field register-field-full">
+                        <label asp-for="Password">รหัสผ่าน</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="กำหนดรหัสผ่าน" autocomplete="new-password" required />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <div class="register-field register-field-full">
+                        <label asp-for="Address">ที่อยู่</label>
+                        <textarea asp-for="Address" class="form-control" placeholder="กรอกที่อยู่ปัจจุบัน"></textarea>
+                        <span asp-validation-for="Address" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="register-form-actions">
+                    <button type="submit" class="btn btn-primary register-submit">สร้างบัญชี</button>
+                    <a asp-controller="Home" asp-action="Login" class="btn btn-outline-secondary register-back">กลับไปเข้าสู่ระบบ</a>
+                </div>
+            </form>
+        </section>
+
+        <aside class="register-aside">
+            <section class="register-card register-profile">
+                <div class="register-avatar" aria-hidden="true"></div>
+                <strong>ข้อมูลผู้ป่วย</strong>
+                <p>ข้อมูลของคุณจะถูกใช้สำหรับการจองคิวและติดต่อเกี่ยวกับบริการ</p>
+            </section>
+
+            <section class="register-card">
+                <h2 class="register-info-title">สิ่งที่ต้องใช้ในการสมัคร</h2>
+                <div class="register-info-row"><span>ข้อมูลบัญชี</span><span>อีเมลและรหัสผ่าน</span></div>
+                <div class="register-info-row"><span>ข้อมูลส่วนตัว</span><span>ชื่อและเบอร์โทรศัพท์</span></div>
+                <div class="register-info-row"><span>การยืนยัน</span><span>ใช้อีเมลที่ติดต่อได้</span></div>
+            </section>
+        </aside>
+    </div>
+</div>

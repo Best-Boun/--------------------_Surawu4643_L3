@@ -1,0 +1,398 @@
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\appsettings.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.runtime.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.endpoints.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.exe
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.deps.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.runtimeconfig.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.AssemblyInfoInputs.cache
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.AssemblyInfo.cs
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.csproj.CoreCompileInputs.cache
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.RazorAssemblyInfo.cache
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.RazorAssemblyInfo.cs
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\bundle\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.styles.css
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\projectbundle\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.bundle.scp.css
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fg78zpykwq-{0}-b9sayid5wm-b9sayid5wm.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\1bcjqzsipl-{0}-61n19gt1b8-61n19gt1b8.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\c7yoiegcdf-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\p2sffxek5v-{0}-bqjiyaj88i-bqjiyaj88i.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\3tjg64qcxg-{0}-c2jlpeoesf-c2jlpeoesf.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jhmbjhtcwr-{0}-erw9l3u2r3-erw9l3u2r3.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wn3iyqy6bh-{0}-aexeepp0ev-aexeepp0ev.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\kh5j1b6tnq-{0}-d7shbmvgxk-d7shbmvgxk.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\oog69wlyzr-{0}-ausgxo2sd3-ausgxo2sd3.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\icks5nr7hw-{0}-k8d9w2qqmf-k8d9w2qqmf.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\sljg5vfmsj-{0}-cosvhxvwiu-cosvhxvwiu.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\cownakhyj2-{0}-ub07r2b239-ub07r2b239.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jm6j8cu6qk-{0}-fvhpjtyr6v-fvhpjtyr6v.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\hlx2cnwu6g-{0}-b7pk76d08c-b7pk76d08c.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b5hzq0o6n5-{0}-fsbi9cje9m-fsbi9cje9m.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\8y1bsg3sz8-{0}-rzd6atqjts-rzd6atqjts.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wj3nezxujs-{0}-ee0r1s7dh0-ee0r1s7dh0.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\6qmxjst57q-{0}-dxx9fxp4il-dxx9fxp4il.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wivbdoxg9t-{0}-jd9uben2k1-jd9uben2k1.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\f1f0jkz5ej-{0}-khv3u5hwcm-khv3u5hwcm.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\0azgzpd8b8-{0}-r4e9w2rdcm-r4e9w2rdcm.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\nrwcmbinpf-{0}-lcd1t2u6c8-lcd1t2u6c8.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\mi6mr64xdh-{0}-c2oey78nd0-c2oey78nd0.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\auy0jm9coo-{0}-tdbxkamptv-tdbxkamptv.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\y8xynaysuz-{0}-j5mq2jizvt-j5mq2jizvt.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\dfs4tsxjdj-{0}-06098lyss8-06098lyss8.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\lk1zate0q5-{0}-nvvlpmu67g-nvvlpmu67g.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b451w25fk9-{0}-s35ty4nyc5-s35ty4nyc5.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\t7wuodzcbs-{0}-pj5nd1wqec-pj5nd1wqec.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\2h69k211d1-{0}-46ein0sx1k-46ein0sx1k.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\dr0nnm8ubj-{0}-v0zj4ognzu-v0zj4ognzu.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wkqjetnaei-{0}-37tfw0ft22-37tfw0ft22.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\rj39uy4lsn-{0}-hrwsygsryq-hrwsygsryq.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\d44p5992r2-{0}-pk9g2wxc8p-pk9g2wxc8p.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\8geh2z7lyl-{0}-ft3s53vfgj-ft3s53vfgj.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\ebhia8clin-{0}-6cfz1n2cew-6cfz1n2cew.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\norb0v6zkm-{0}-6pdc2jztkx-6pdc2jztkx.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\xsje8jao9a-{0}-493y06b0oq-493y06b0oq.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\3c4evqf1jw-{0}-iovd86k7lj-iovd86k7lj.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jw1ab51shb-{0}-vr1egmr9el-vr1egmr9el.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\rtl3mue798-{0}-kbrnm935zg-kbrnm935zg.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\28zlb0fnrn-{0}-jj8uyg4cgr-jj8uyg4cgr.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\m516eunr5e-{0}-y7v9cxd14o-y7v9cxd14o.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\4cjeb4kzgp-{0}-notf2xhcfb-notf2xhcfb.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\h12jbdal0r-{0}-h1s4sie4z3-h1s4sie4z3.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\ebnmxelqjp-{0}-63fj8s7r0e-63fj8s7r0e.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\t1vda0u2zd-{0}-0j3bgjxly4-0j3bgjxly4.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\vp9qzrtrh4-{0}-47otxtyo56-47otxtyo56.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\1djiq9txrz-{0}-4v8eqarkd7-4v8eqarkd7.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\z0g56rvm3r-{0}-356vix0kms-356vix0kms.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\4jh3cmfm8s-{0}-83jwlth58m-83jwlth58m.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\qdb5e7z33u-{0}-mrlpezrjn3-mrlpezrjn3.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\xycwfb17rb-{0}-lzl9nlhx6b-lzl9nlhx6b.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fytl2kmv47-{0}-ag7o75518u-ag7o75518u.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\d70bo0pvcy-{0}-x0q3zqp4vz-x0q3zqp4vz.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\0eynm5nnnq-{0}-0i3buxo5is-0i3buxo5is.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\vu2ubcyn2x-{0}-o1o13a6vjx-o1o13a6vjx.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\2jmmwmvt7f-{0}-ttgo8qnofa-ttgo8qnofa.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\le88zmb7kr-{0}-2z0ns9nrw6-2z0ns9nrw6.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\l5uyrmnlud-{0}-muycvpuwrr-muycvpuwrr.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\nvm5xbb2l3-{0}-87fc7y1x7t-87fc7y1x7t.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fyqt7hkjfh-{0}-mlv21k5csn-mlv21k5csn.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b6v2zmpemc-{0}-gxdle28tcn-gxdle28tcn.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\p2ki68y4fy-{0}-gxdle28tcn-gxdle28tcn.gz
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\refint\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.genruntimeconfig.cache
+C:\Users\5-903\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ref\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\appsettings.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.endpoints.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.runtime.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.exe
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.deps.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.runtimeconfig.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.AssemblyInfoInputs.cache
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.AssemblyInfo.cs
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.csproj.CoreCompileInputs.cache
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.RazorAssemblyInfo.cache
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.RazorAssemblyInfo.cs
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\bundle\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.styles.css
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\projectbundle\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.bundle.scp.css
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fg78zpykwq-{0}-b9sayid5wm-b9sayid5wm.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\1bcjqzsipl-{0}-61n19gt1b8-61n19gt1b8.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\c7yoiegcdf-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\p2sffxek5v-{0}-bqjiyaj88i-bqjiyaj88i.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\3tjg64qcxg-{0}-c2jlpeoesf-c2jlpeoesf.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jhmbjhtcwr-{0}-erw9l3u2r3-erw9l3u2r3.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wn3iyqy6bh-{0}-aexeepp0ev-aexeepp0ev.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\kh5j1b6tnq-{0}-d7shbmvgxk-d7shbmvgxk.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\oog69wlyzr-{0}-ausgxo2sd3-ausgxo2sd3.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\icks5nr7hw-{0}-k8d9w2qqmf-k8d9w2qqmf.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\sljg5vfmsj-{0}-cosvhxvwiu-cosvhxvwiu.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\cownakhyj2-{0}-ub07r2b239-ub07r2b239.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jm6j8cu6qk-{0}-fvhpjtyr6v-fvhpjtyr6v.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\hlx2cnwu6g-{0}-b7pk76d08c-b7pk76d08c.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b5hzq0o6n5-{0}-fsbi9cje9m-fsbi9cje9m.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\8y1bsg3sz8-{0}-rzd6atqjts-rzd6atqjts.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wj3nezxujs-{0}-ee0r1s7dh0-ee0r1s7dh0.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\6qmxjst57q-{0}-dxx9fxp4il-dxx9fxp4il.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wivbdoxg9t-{0}-jd9uben2k1-jd9uben2k1.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\f1f0jkz5ej-{0}-khv3u5hwcm-khv3u5hwcm.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\0azgzpd8b8-{0}-r4e9w2rdcm-r4e9w2rdcm.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\nrwcmbinpf-{0}-lcd1t2u6c8-lcd1t2u6c8.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\mi6mr64xdh-{0}-c2oey78nd0-c2oey78nd0.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\auy0jm9coo-{0}-tdbxkamptv-tdbxkamptv.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\y8xynaysuz-{0}-j5mq2jizvt-j5mq2jizvt.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\dfs4tsxjdj-{0}-06098lyss8-06098lyss8.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\lk1zate0q5-{0}-nvvlpmu67g-nvvlpmu67g.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b451w25fk9-{0}-s35ty4nyc5-s35ty4nyc5.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\t7wuodzcbs-{0}-pj5nd1wqec-pj5nd1wqec.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\2h69k211d1-{0}-46ein0sx1k-46ein0sx1k.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\dr0nnm8ubj-{0}-v0zj4ognzu-v0zj4ognzu.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wkqjetnaei-{0}-37tfw0ft22-37tfw0ft22.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\rj39uy4lsn-{0}-hrwsygsryq-hrwsygsryq.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\d44p5992r2-{0}-pk9g2wxc8p-pk9g2wxc8p.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\8geh2z7lyl-{0}-ft3s53vfgj-ft3s53vfgj.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\ebhia8clin-{0}-6cfz1n2cew-6cfz1n2cew.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\norb0v6zkm-{0}-6pdc2jztkx-6pdc2jztkx.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\xsje8jao9a-{0}-493y06b0oq-493y06b0oq.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\3c4evqf1jw-{0}-iovd86k7lj-iovd86k7lj.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jw1ab51shb-{0}-vr1egmr9el-vr1egmr9el.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\rtl3mue798-{0}-kbrnm935zg-kbrnm935zg.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\28zlb0fnrn-{0}-jj8uyg4cgr-jj8uyg4cgr.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\m516eunr5e-{0}-y7v9cxd14o-y7v9cxd14o.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\4cjeb4kzgp-{0}-notf2xhcfb-notf2xhcfb.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\h12jbdal0r-{0}-h1s4sie4z3-h1s4sie4z3.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\ebnmxelqjp-{0}-63fj8s7r0e-63fj8s7r0e.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\t1vda0u2zd-{0}-0j3bgjxly4-0j3bgjxly4.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\vp9qzrtrh4-{0}-47otxtyo56-47otxtyo56.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\1djiq9txrz-{0}-4v8eqarkd7-4v8eqarkd7.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\z0g56rvm3r-{0}-356vix0kms-356vix0kms.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\4jh3cmfm8s-{0}-83jwlth58m-83jwlth58m.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\qdb5e7z33u-{0}-mrlpezrjn3-mrlpezrjn3.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\xycwfb17rb-{0}-lzl9nlhx6b-lzl9nlhx6b.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fytl2kmv47-{0}-ag7o75518u-ag7o75518u.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\d70bo0pvcy-{0}-x0q3zqp4vz-x0q3zqp4vz.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\0eynm5nnnq-{0}-0i3buxo5is-0i3buxo5is.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\vu2ubcyn2x-{0}-o1o13a6vjx-o1o13a6vjx.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\2jmmwmvt7f-{0}-ttgo8qnofa-ttgo8qnofa.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\le88zmb7kr-{0}-2z0ns9nrw6-2z0ns9nrw6.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\l5uyrmnlud-{0}-muycvpuwrr-muycvpuwrr.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\nvm5xbb2l3-{0}-87fc7y1x7t-87fc7y1x7t.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fyqt7hkjfh-{0}-mlv21k5csn-mlv21k5csn.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b6v2zmpemc-{0}-gxdle28tcn-gxdle28tcn.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\p2ki68y4fy-{0}-gxdle28tcn-gxdle28tcn.gz
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\refint\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.genruntimeconfig.cache
+C:\Users\5-903\Desktop\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ref\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\appsettings.Development.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\appsettings.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.runtime.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.endpoints.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.exe
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.deps.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.runtimeconfig.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.AssemblyInfoInputs.cache
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.AssemblyInfo.cs
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.csproj.CoreCompileInputs.cache
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.RazorAssemblyInfo.cache
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.RazorAssemblyInfo.cs
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\bundle\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.styles.css
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\scopedcss\projectbundle\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.bundle.scp.css
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fg78zpykwq-{0}-b9sayid5wm-b9sayid5wm.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\1bcjqzsipl-{0}-61n19gt1b8-61n19gt1b8.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\c7yoiegcdf-{0}-xtxxf3hu2r-xtxxf3hu2r.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\p2sffxek5v-{0}-bqjiyaj88i-bqjiyaj88i.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\3tjg64qcxg-{0}-c2jlpeoesf-c2jlpeoesf.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jhmbjhtcwr-{0}-erw9l3u2r3-erw9l3u2r3.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wn3iyqy6bh-{0}-aexeepp0ev-aexeepp0ev.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\kh5j1b6tnq-{0}-d7shbmvgxk-d7shbmvgxk.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\oog69wlyzr-{0}-ausgxo2sd3-ausgxo2sd3.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\icks5nr7hw-{0}-k8d9w2qqmf-k8d9w2qqmf.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\sljg5vfmsj-{0}-cosvhxvwiu-cosvhxvwiu.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\cownakhyj2-{0}-ub07r2b239-ub07r2b239.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jm6j8cu6qk-{0}-fvhpjtyr6v-fvhpjtyr6v.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\hlx2cnwu6g-{0}-b7pk76d08c-b7pk76d08c.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b5hzq0o6n5-{0}-fsbi9cje9m-fsbi9cje9m.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\8y1bsg3sz8-{0}-rzd6atqjts-rzd6atqjts.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wj3nezxujs-{0}-ee0r1s7dh0-ee0r1s7dh0.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\6qmxjst57q-{0}-dxx9fxp4il-dxx9fxp4il.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wivbdoxg9t-{0}-jd9uben2k1-jd9uben2k1.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\f1f0jkz5ej-{0}-khv3u5hwcm-khv3u5hwcm.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\0azgzpd8b8-{0}-r4e9w2rdcm-r4e9w2rdcm.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\nrwcmbinpf-{0}-lcd1t2u6c8-lcd1t2u6c8.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\mi6mr64xdh-{0}-c2oey78nd0-c2oey78nd0.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\auy0jm9coo-{0}-tdbxkamptv-tdbxkamptv.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\y8xynaysuz-{0}-j5mq2jizvt-j5mq2jizvt.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\dfs4tsxjdj-{0}-06098lyss8-06098lyss8.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\lk1zate0q5-{0}-nvvlpmu67g-nvvlpmu67g.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b451w25fk9-{0}-s35ty4nyc5-s35ty4nyc5.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\t7wuodzcbs-{0}-pj5nd1wqec-pj5nd1wqec.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\2h69k211d1-{0}-46ein0sx1k-46ein0sx1k.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\dr0nnm8ubj-{0}-v0zj4ognzu-v0zj4ognzu.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\wkqjetnaei-{0}-37tfw0ft22-37tfw0ft22.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\rj39uy4lsn-{0}-hrwsygsryq-hrwsygsryq.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\d44p5992r2-{0}-pk9g2wxc8p-pk9g2wxc8p.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\8geh2z7lyl-{0}-ft3s53vfgj-ft3s53vfgj.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\ebhia8clin-{0}-6cfz1n2cew-6cfz1n2cew.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\norb0v6zkm-{0}-6pdc2jztkx-6pdc2jztkx.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\xsje8jao9a-{0}-493y06b0oq-493y06b0oq.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\3c4evqf1jw-{0}-iovd86k7lj-iovd86k7lj.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\jw1ab51shb-{0}-vr1egmr9el-vr1egmr9el.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\rtl3mue798-{0}-kbrnm935zg-kbrnm935zg.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\28zlb0fnrn-{0}-jj8uyg4cgr-jj8uyg4cgr.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\m516eunr5e-{0}-y7v9cxd14o-y7v9cxd14o.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\4cjeb4kzgp-{0}-notf2xhcfb-notf2xhcfb.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\h12jbdal0r-{0}-h1s4sie4z3-h1s4sie4z3.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\ebnmxelqjp-{0}-63fj8s7r0e-63fj8s7r0e.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\t1vda0u2zd-{0}-0j3bgjxly4-0j3bgjxly4.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\vp9qzrtrh4-{0}-47otxtyo56-47otxtyo56.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\1djiq9txrz-{0}-4v8eqarkd7-4v8eqarkd7.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\z0g56rvm3r-{0}-356vix0kms-356vix0kms.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\4jh3cmfm8s-{0}-83jwlth58m-83jwlth58m.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\qdb5e7z33u-{0}-mrlpezrjn3-mrlpezrjn3.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\xycwfb17rb-{0}-lzl9nlhx6b-lzl9nlhx6b.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fytl2kmv47-{0}-ag7o75518u-ag7o75518u.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\d70bo0pvcy-{0}-x0q3zqp4vz-x0q3zqp4vz.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\0eynm5nnnq-{0}-0i3buxo5is-0i3buxo5is.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\vu2ubcyn2x-{0}-o1o13a6vjx-o1o13a6vjx.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\2jmmwmvt7f-{0}-ttgo8qnofa-ttgo8qnofa.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\le88zmb7kr-{0}-2z0ns9nrw6-2z0ns9nrw6.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\l5uyrmnlud-{0}-muycvpuwrr-muycvpuwrr.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\nvm5xbb2l3-{0}-87fc7y1x7t-87fc7y1x7t.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\fyqt7hkjfh-{0}-mlv21k5csn-mlv21k5csn.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\b6v2zmpemc-{0}-gxdle28tcn-gxdle28tcn.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\compressed\p2ki68y4fy-{0}-gxdle28tcn-gxdle28tcn.gz
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\refint\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.genruntimeconfig.cache
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ref\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Humanizer.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.Build.Locator.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.CodeAnalysis.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.CodeAnalysis.CSharp.Workspaces.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.CodeAnalysis.Workspaces.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.CodeAnalysis.Workspaces.MSBuild.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Mono.TextTemplating.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\MySqlConnector.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\Pomelo.EntityFrameworkCore.MySql.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\System.CodeDom.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\System.Composition.AttributedModel.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\System.Composition.Convention.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\System.Composition.Hosting.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\System.Composition.Runtime.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\System.Composition.TypedParts.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\cs\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\de\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\es\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\fr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\it\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ja\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ko\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pl\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pt-BR\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ru\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\cs\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\de\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\es\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\fr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\it\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ja\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ko\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pl\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pt-BR\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ru\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\cs\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\de\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\es\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\fr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\it\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ja\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ko\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pl\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pt-BR\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ru\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\cs\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\de\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\es\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\fr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\it\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ja\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ko\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pl\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ru\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\cs\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\de\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\es\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\fr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\it\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ja\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ko\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pl\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\pt-BR\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\ru\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.csproj.AssemblyReference.cache
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\________.978CB3E1.Up2Date
+C:\Users\tippe\AppData\Local\Temp\csi402-validation\appsettings.Development.json
+C:\Users\tippe\AppData\Local\Temp\csi402-validation\appsettings.json
+C:\Users\tippe\AppData\Local\Temp\csi402-validation\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.runtime.json
+C:\Users\tippe\AppData\Local\Temp\csi402-validation\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.endpoints.json
+C:\Users\tippe\AppData\Local\Temp\csi402-validation\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.deps.json
+C:\Users\tippe\AppData\Local\Temp\csi402-validation\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.runtimeconfig.json
+C:\Users\tippe\AppData\Local\Temp\csi402-validation\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\tippe\AppData\Local\Temp\csi402-validation\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb
+C:\Users\tippe\AppData\Local\Temp\login-view-build\appsettings.Development.json
+C:\Users\tippe\AppData\Local\Temp\login-view-build\appsettings.json
+C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.runtime.json
+C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.staticwebassets.endpoints.json
+C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.exe
+C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.deps.json
+C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.runtimeconfig.json
+C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
+C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb

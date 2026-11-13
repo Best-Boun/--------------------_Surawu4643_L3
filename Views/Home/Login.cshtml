@@ -1,0 +1,330 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.LoginRegisViewModel
+@{
+    ViewData["Title"] = "เข้าสู่ระบบ";
+}
+
+<style>
+    body.login-layout {
+        min-width: 320px;
+        min-height: 100vh;
+        margin: 0;
+        background: #f3f5f8;
+    }
+
+    .login-layout-content,
+    .login-layout-main {
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+    }
+
+    .login-shell {
+        min-height: 100vh;
+        padding: 18px;
+        background: #f3f5f8;
+    }
+
+    .login-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        min-height: calc(100vh - 54px);
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid #e8ebf0;
+        border-radius: 12px;
+        box-shadow: 0 12px 35px rgba(27, 44, 71, .1);
+    }
+
+    .login-hero {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        min-height: 650px;
+        overflow: hidden;
+        padding: 34px 7%;
+        color: #fff;
+        background:
+            linear-gradient(155deg, rgba(13, 30, 55, .38), rgba(11, 37, 75, .92)),
+            linear-gradient(135deg, #8099ae 0%, #d2d9de 42%, #647b8d 43%, #273d57 100%);
+    }
+
+    .login-hero::before,
+    .login-hero::after {
+        position: absolute;
+        content: "";
+        pointer-events: none;
+    }
+
+    .login-hero::before {
+        inset: 0;
+        opacity: .3;
+        background:
+            linear-gradient(90deg, transparent 12%, rgba(255,255,255,.55) 12.2%, transparent 12.8%, transparent 27%, rgba(255,255,255,.4) 27.3%, transparent 28%),
+            linear-gradient(0deg, transparent 55%, rgba(255,255,255,.45) 55.3%, transparent 56%),
+            repeating-linear-gradient(90deg, transparent 0 15%, rgba(255,255,255,.12) 15.2% 15.6%, transparent 15.8% 30%);
+    }
+
+    .login-hero::after {
+        inset: auto -15% -34% -15%;
+        height: 58%;
+        border-radius: 50% 50% 0 0;
+        background: linear-gradient(165deg, rgba(230,239,247,.22), rgba(8,29,59,.55));
+        transform: rotate(-8deg);
+    }
+
+    .login-brand,
+    .login-hero-copy,
+    .login-hero-note {
+        position: relative;
+        z-index: 1;
+    }
+
+    .login-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.05rem;
+        font-weight: 700;
+    }
+
+    .login-brand-mark {
+        display: grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border-radius: 11px;
+        background: rgba(255,255,255,.95);
+        color: #3478e5;
+        font-size: 1.3rem;
+        font-weight: 800;
+    }
+
+    .login-hero-copy {
+        max-width: 520px;
+        margin: auto 0;
+        padding: 48px 0;
+    }
+
+    .login-hero-copy h1 {
+        max-width: 500px;
+        margin-bottom: 18px;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        font-weight: 800;
+        line-height: 1.25;
+    }
+
+    .login-hero-copy p {
+        max-width: 430px;
+        margin: 0;
+        color: rgba(255,255,255,.84);
+        line-height: 1.8;
+    }
+
+    .login-hero-note {
+        color: rgba(255,255,255,.8);
+        font-size: .8rem;
+    }
+
+    .login-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 56px 9%;
+        background: #fff;
+    }
+
+    .login-form-wrap {
+        width: min(100%, 440px);
+    }
+
+    .login-tabs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 34px;
+        padding: 4px;
+        border-radius: 8px;
+        background: #f2f4f7;
+    }
+
+    .login-tabs a {
+        padding: 10px 12px;
+        border-radius: 6px;
+        color: #626d7a;
+        font-size: .9rem;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .login-tabs a.active {
+        background: #fff;
+        color: #202936;
+        box-shadow: 0 1px 5px rgba(26, 42, 63, .12);
+    }
+
+    .login-heading {
+        margin-bottom: 8px;
+        color: #202936;
+        font-size: 2rem;
+        font-weight: 750;
+    }
+
+    .login-subheading {
+        margin-bottom: 28px;
+        color: #7a8491;
+        font-size: .92rem;
+    }
+
+    .login-field label {
+        margin-bottom: 7px;
+        color: #303946;
+        font-size: .88rem;
+        font-weight: 600;
+    }
+
+    .login-field .form-control {
+        min-height: 48px;
+        border-color: #d9dee6;
+        border-radius: 7px;
+        font-size: .92rem;
+    }
+
+    .login-field .form-control:focus {
+        border-color: #397ff0;
+        box-shadow: 0 0 0 .2rem rgba(57,127,240,.15);
+    }
+
+    .login-password-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 7px;
+    }
+
+    .login-submit {
+        min-height: 48px;
+        margin-top: 20px;
+        border: 0;
+        border-radius: 7px;
+        background: #397ff0;
+        font-weight: 650;
+    }
+
+    .login-submit:hover {
+        background: #286de0;
+    }
+
+    .login-register {
+        margin-top: 22px;
+        color: #77818e;
+        font-size: .9rem;
+        text-align: center;
+    }
+
+    .login-register a {
+        color: #3478e5;
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    @@media (max-width: 767.98px) {
+        .login-shell {
+            padding: 0;
+        }
+
+        .login-card {
+            grid-template-columns: 1fr;
+            border: 0;
+            border-radius: 0;
+        }
+
+        .login-hero {
+            min-height: 250px;
+            padding: 22px 7%;
+        }
+
+        .login-hero-copy {
+            padding: 28px 0;
+        }
+
+        .login-hero-copy h1 {
+            margin-bottom: 8px;
+            font-size: 1.8rem;
+        }
+
+        .login-hero-copy p {
+            font-size: .9rem;
+        }
+
+        .login-hero-note {
+            display: none;
+        }
+
+        .login-panel {
+            padding: 38px 7%;
+        }
+
+        .login-tabs {
+            margin-bottom: 28px;
+        }
+    }
+</style>
+
+<div class="login-shell">
+    <div class="login-card">
+        <section class="login-hero" aria-label="เกี่ยวกับ MediQueue Thai">
+            <div class="login-brand">
+                <span class="login-brand-mark" aria-hidden="true">+</span>
+                <span>MediQueue Thai</span>
+            </div>
+
+            <div class="login-hero-copy">
+                <h1>ยกระดับการรับบริการด้านสาธารณสุข</h1>
+                <p>ระบบจัดการคิวและนัดหมายอัจฉริยะ เพื่อความสะดวกรวดเร็วในการเข้ารับบริการทางการแพทย์</p>
+            </div>
+
+            <div class="login-hero-note">© 2024 MediQueue Thai. ระบบจองคิวโรงพยาบาล</div>
+        </section>
+
+        <section class="login-panel">
+            <div class="login-form-wrap">
+                <nav class="login-tabs" aria-label="เมนูบัญชี">
+                    <a class="active" asp-controller="Home" asp-action="Login">เข้าสู่ระบบ</a>
+                    <a asp-controller="Home" asp-action="Register">ลงทะเบียนใหม่</a>
+                </nav>
+
+                <h2 class="login-heading">ยินดีต้อนรับกลับ</h2>
+                <p class="login-subheading">กรุณากรอกข้อมูลเพื่อเข้าสู่ระบบจัดการคิวโรงพยาบาล</p>
+
+                <form asp-controller="Home" asp-action="Login" method="post">
+                    <div asp-validation-summary="All" class="text-danger mb-3"></div>
+                    @if (ViewBag.Status != null)
+                    {
+                        <div class="alert alert-danger" role="alert">@ViewBag.Status</div>
+                    }
+
+                    <div class="login-field mb-3">
+                        <label asp-for="Email">อีเมล</label>
+                        <input asp-for="Email" type="email" class="form-control" placeholder="ระบุข้อมูลของคุณ" autocomplete="username" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="login-field">
+                        <div class="login-password-row">
+                            <label asp-for="Password" class="mb-0">รหัสผ่าน</label>
+                            <span class="text-muted small">กรุณาใช้รหัสผ่านที่ลงทะเบียนไว้</span>
+                        </div>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="กรอกรหัสผ่าน" autocomplete="current-password" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary login-submit w-100">เข้าสู่ระบบ <span aria-hidden="true">→</span></button>
+                </form>
+
+                <div class="login-register">
+                    ยังไม่มีบัญชีใช่ไหม? <a asp-controller="Home" asp-action="Register">ลงทะเบียนใหม่</a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

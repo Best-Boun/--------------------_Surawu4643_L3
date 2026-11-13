@@ -1,0 +1,49 @@
+@model IEnumerable<ระบบจองคิวโรงพยายาบา_Surawu4643_L3.Models.User>
+@using ระบบจองคิวโรงพยายาบา_Surawu4643_L3.Models
+@{
+    var roles = ViewBag.RoleList as List<Role>;
+}
+<div class="container mt-3">
+    <h2>User List</h2>
+
+    <a asp-controller="Home" asp-action="AddUser" class="btn btn-dark mb-3">
+        + Add User
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ชื่อ</th>
+                <th>อีเมล</th>
+                <th>เบอร์โทร</th>
+                <th>Role</th>
+                <th>สถานะ</th>
+                <th>จัดการ</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var user in Model)
+            {
+                var role = roles?.FirstOrDefault(r => r.RoleId == user.RoleId);
+
+                <tr>
+                    <td>@user.FirstName @user.LastName</td>
+                    <td>@user.Email</td>
+                    <td>@user.Phone</td>
+                    <td>@(role?.RoleName ?? "ไม่พบ Role")</td>
+                    <td>@user.Status</td>
+                    <td>
+                        <a asp-controller="Home" asp-action="EditUser" asp-route-UserId="@user.UserId">
+                            แก้ไข
+                        </a>
+
+                        <a asp-controller="Home" asp-action="DeleteUser" asp-route-UserId="@user.UserId">
+                            ลบ
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
