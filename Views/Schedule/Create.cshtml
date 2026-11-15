@@ -1,0 +1,54 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.ScheduleViewModel
+@{
+    ViewData["Title"] = "เพิ่มรอบเวลา";
+    Layout = "_ScheduleLayout";
+    var doctors = ViewBag.DoctorList as List<Doctor>;
+    var users = ViewBag.UserList as List<User>;
+}
+
+<h3>➕ เพิ่มรอบเวลาของแพทย์</h3>
+
+@if (ViewBag.Status != null)
+{
+    <div class="alert alert-danger" style="max-width:600px">@ViewBag.Status</div>
+}
+
+<form asp-controller="Schedule" asp-action="Create" method="post" style="max-width:600px">
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="mb-3">
+        <label asp-for="DoctorId" class="form-label">แพทย์</label>
+        <select asp-for="DoctorId" class="form-select" required>
+            <option value="">-- เลือกแพทย์ --</option>
+            @foreach (var d in doctors)
+            {
+                var du = users.FirstOrDefault(x => x.UserId == d.UserId);
+                <option value="@d.DoctorId">@(du != null ? du.FirstName + " " + du.LastName : "-") (@d.Specialization)</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="ScheduleDate" class="form-label">วันที่เปิดให้จอง</label>
+        <input asp-for="ScheduleDate" type="date" class="form-control" required />
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="StartTime" class="form-label">เวลาเริ่ม</label>
+            <input asp-for="StartTime" type="time" class="form-control" required />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="EndTime" class="form-label">เวลาสิ้นสุด</label>
+            <input asp-for="EndTime" type="time" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MaxQueue" class="form-label">จำนวนคิวที่รองรับ</label>
+        <input asp-for="MaxQueue" type="number" min="1" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">บันทึก</button>
+    <a class="btn btn-outline-secondary" asp-controller="Schedule" asp-action="Index" asp-route-UserId="@Model.UserId">ยกเลิก</a>
+</form>

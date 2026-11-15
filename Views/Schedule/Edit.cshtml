@@ -1,0 +1,64 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.ScheduleViewModel
+@{
+    ViewData["Title"] = "แก้ไขรอบเวลา";
+    Layout = "_ScheduleLayout";
+    var doctors = ViewBag.DoctorList as List<Doctor>;
+    var users = ViewBag.UserList as List<User>;
+    var doc = doctors.FirstOrDefault(x => x.DoctorId == Model.DoctorId);
+    var du = doc == null ? null : users.FirstOrDefault(y => y.UserId == doc.UserId);
+    int booked = (int)ViewBag.Booked;
+}
+
+<h3>✏️ แก้ไขรอบเวลา</h3>
+
+@if (ViewBag.Status != null)
+{
+    <div class="alert alert-danger" style="max-width:600px">@ViewBag.Status</div>
+}
+
+<div class="alert alert-info" style="max-width:600px">
+    แพทย์: <b>@(du != null ? du.FirstName + " " + du.LastName : "-")</b><br />
+    จองแล้ว <b>@booked</b> คิว
+    @if (booked > 0)
+    {
+        <span>(เปลี่ยนวัน/เวลาไม่ได้ และลดจำนวนคิวต่ำกว่า @booked ไม่ได้)</span>
+    }
+</div>
+
+<form asp-controller="Schedule" asp-action="Edit" method="post" style="max-width:600px">
+    <input type="hidden" asp-for="UserId" />
+    <input type="hidden" asp-for="ScheduleId" />
+    <input type="hidden" asp-for="DoctorId" />
+
+    <div class="mb-3">
+        <label asp-for="ScheduleDate" class="form-label">วันที่เปิดให้จอง</label>
+        <input asp-for="ScheduleDate" type="date" class="form-control" required />
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="StartTime" class="form-label">เวลาเริ่ม</label>
+            <input asp-for="StartTime" type="time" class="form-control" required />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="EndTime" class="form-label">เวลาสิ้นสุด</label>
+            <input asp-for="EndTime" type="time" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MaxQueue" class="form-label">จำนวนคิวที่รองรับ</label>
+        <input asp-for="MaxQueue" type="number" min="1" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Status" class="form-label">สถานะ</label>
+        <select asp-for="Status" class="form-select">
+            <option value="OPEN">OPEN (เปิดให้จอง)</option>
+            <option value="CLOSED">CLOSED (ปิดรอบ)</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">บันทึก</button>
+    <a class="btn btn-outline-secondary" asp-controller="Schedule" asp-action="Index" asp-route-UserId="@Model.UserId">ยกเลิก</a>
+</form>

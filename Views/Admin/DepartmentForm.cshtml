@@ -1,0 +1,30 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.DepartmentFormViewModel
+@{
+    bool isNew = Model.DepartmentId == 0;
+    ViewData["Title"] = isNew ? "เพิ่มแผนก" : "แก้ไขแผนก";
+    Layout = "_AdminLayout";
+}
+
+<h3>@(isNew ? "➕ เพิ่มแผนก" : "✏️ แก้ไขแผนก")</h3>
+
+@if (ViewBag.Status != null)
+{
+    <div class="alert alert-danger" style="max-width:600px">@ViewBag.Status</div>
+}
+
+<form asp-controller="Admin" asp-action="DepartmentForm" method="post" style="max-width:600px">
+    <input type="hidden" asp-for="AdminId" />
+    <input type="hidden" asp-for="DepartmentId" />
+
+    <div class="mb-3">
+        <label asp-for="DepartmentName" class="form-label">ชื่อแผนก</label>
+        <input asp-for="DepartmentName" class="form-control" required />
+    </div>
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label">รายละเอียด</label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">บันทึก</button>
+    <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="DepartmentList" asp-route-UserId="@Model.AdminId">ยกเลิก</a>
+</form>

@@ -1,0 +1,88 @@
+@{
+    ViewData["Title"] = "ตรวจสอบการชำระเงิน";
+    Layout = "_FinanceLayout";
+    var payments = ViewBag.PaymentList as List<Payment>;
+    var appointments = ViewBag.AppointmentList as List<Appointment>;
+    var patients = ViewBag.PatientList as List<Patient>;
+    var users = ViewBag.UserList as List<User>;
+    string status = ViewBag.FilterStatus as string ?? "PENDING";
+}
+
+<h3>💳 ตรวจสอบการชำระเงิน</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card text-bg-warning">
+            <div class="card-body">
+                <div>รอตรวจสอบ</div>
+                <h3>@ViewBag.PendingCount รายการ</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-success">
+            <div class="card-body">
+                <div>ชำระแล้ววันนี้</div>
+                <h3>@ViewBag.PaidTodayCount รายการ</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card text-bg-primary">
+            <div class="card-body">
+                <div>ยอดรับวันนี้ (บาท)</div>
+                <h3>@(((decimal)ViewBag.PaidTodayTotal).ToString("N2"))</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ul class="nav nav-pills mb-3">
+    <li class="nav-item"><a class="nav-link @(status == "PENDING" ? "active" : "")" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="PENDING">รอตรวจสอบ</a></li>
+    <li class="nav-item"><a class="nav-link @(status == "PAID" ? "active" : "")" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="PAID">ชำระแล้ว</a></li>
+    <li class="nav-item"><a class="nav-link @(status == "REJECTED" ? "active" : "")" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="REJECTED">ปฏิเสธ</a></li>
+    <li class="nav-item"><a class="nav-link @(status == "ALL" ? "active" : "")" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="ALL">ทั้งหมด</a></li>
+</ul>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr>
+            <th>วันที่ชำระ</th><th>หมายเลขคิว</th><th>ผู้ป่วย</th>
+            <th class="text-end">จำนวนเงิน</th><th>วิธีชำระ</th><th>เลขอ้างอิง</th><th>สถานะ</th><th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (payments.Count == 0)
+        {
+            <tr><td colspan="8" class="text-center text-muted">ไม่มีรายการ</td></tr>
+        }
+        @foreach (var p in payments)
+        {
+            var ap = appointments.FirstOrDefault(x => x.AppointmentId == p.AppointmentId);
+            var pt = patients.FirstOrDefault(x => x.PatientId == p.PatientId);
+            var pu = pt == null ? null : users.FirstOrDefault(y => y.UserId == pt.UserId);
+            <tr>
+                <td>@(p.PaymentDate != null ? p.PaymentDate.Value.ToString("dd/MM/yyyy HH:mm") : "-")</td>
+                <td>@(ap != null ? ap.QueueNo : "-")</td>
+                <td>@(pu != null ? pu.FirstName + " " + pu.LastName : "-")</td>
+                <td class="text-end">@p.Amount.ToString("N2")</td>
+                <td>@p.PaymentMethod</td>
+                <td>@p.ReferenceNo</td>
+                <td>@p.PaymentStatus</td>
+                <td>
+                    <a class="btn btn-sm btn-primary" asp-controller="Finance" asp-action="Detail"
+                       asp-route-UserId="@ViewBag.UserId" asp-route-PaymentId="@p.PaymentId">ตรวจสอบ</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

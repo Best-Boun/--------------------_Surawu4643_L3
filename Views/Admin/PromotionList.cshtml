@@ -1,0 +1,86 @@
+@{
+    ViewData["Title"] = "โปรโมชั่น";
+    Layout = "_AdminLayout";
+    var promos = ViewBag.PromoList as List<Promotion>;
+    var usedList = ViewBag.UsedList as List<AppointmentPromotion>;
+}
+
+<h3>🏷️ จัดการโปรโมชั่น</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<p>
+    <a class="btn btn-success" asp-controller="Admin" asp-action="PromotionForm" asp-route-UserId="@ViewBag.UserId">➕ เพิ่มโปรโมชั่น</a>
+</p>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr>
+            <th>ชื่อ</th><th>ประเภท</th><th class="text-end">ลด (%)</th><th>เงื่อนไข</th>
+            <th>ช่วงเวลา</th><th class="text-center">ใช้แล้ว</th><th>สถานะ</th><th>จัดการ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (promos.Count == 0)
+        {
+            <tr><td colspan="8" class="text-center text-muted">ยังไม่มีโปรโมชั่น</td></tr>
+        }
+        @foreach (var p in promos)
+        {
+            string cond = "-";
+            if (p.PromotionType == "AGE") { cond = "อายุตั้งแต่ " + p.MinimumAge + " ปี"; }
+            else if (p.PromotionType == "HEALTH_PACKAGE") { cond = "เลือกแพ็กเกจตรวจสุขภาพ"; }
+            else if (p.PromotionType == "FAMILY") { cond = "ตั้งแต่ " + p.MinimumPerson + " คน"; }
+            else if (p.PromotionType == "WEB") { cond = "จองผ่านเว็บ"; }
+            else if (p.PromotionType == "BIRTH_MONTH") { cond = "นัดตรงกับเดือนเกิด"; }
+
+            bool active = string.Equals(p.Status, "ACTIVE", StringComparison.OrdinalIgnoreCase);
+            <tr>
+                <td>@p.PromotionName</td>
+                <td>@p.PromotionType</td>
+                <td class="text-end">@p.DiscountPercent.ToString("0.##")</td>
+                <td>@cond</td>
+                <td class="small">
+                    @(p.StartDate != null ? p.StartDate.Value.ToString("dd/MM/yyyy") : "ไม่กำหนด")
+                    -
+                    @(p.EndDate != null ? p.EndDate.Value.ToString("dd/MM/yyyy") : "ไม่กำหนด")
+                </td>
+                <td class="text-center">@usedList.Count(x => x.PromotionId == p.PromotionId)</td>
+                <td>
+                    @if (active)
+                    {
+                        <span class="badge text-bg-success">ACTIVE</span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-secondary">@p.Status</span>
+                    }
+                </td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Admin" asp-action="PromotionForm"
+                       asp-route-UserId="@ViewBag.UserId" asp-route-PromotionId="@p.PromotionId">แก้ไข</a>
+
+                    <form asp-controller="Admin" asp-action="PromotionToggle" method="post" class="d-inline">
+                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                        <input type="hidden" name="PromotionId" value="@p.PromotionId" />
+                        <button class="btn btn-sm btn-outline-warning">@(active ? "ปิดใช้งาน" : "เปิดใช้งาน")</button>
+                    </form>
+
+                    <form asp-controller="Admin" asp-action="PromotionDelete" method="post" class="d-inline"
+                          onsubmit="return confirm('ยืนยันการลบโปรโมชั่นนี้?');">
+                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                        <input type="hidden" name="PromotionId" value="@p.PromotionId" />
+                        <button class="btn btn-sm btn-outline-danger">ลบ</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

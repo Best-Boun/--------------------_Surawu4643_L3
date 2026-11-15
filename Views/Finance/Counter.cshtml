@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "รับชำระที่เคาน์เตอร์";
+    Layout = "_FinanceLayout";
+    var appointments = ViewBag.AppointmentList as List<Appointment>;
+    var patients = ViewBag.PatientList as List<Patient>;
+    var users = ViewBag.UserList as List<User>;
+}
+
+<h3>💵 รับชำระที่เคาน์เตอร์</h3>
+<p class="text-muted">แสดงนัดหมายที่ยังไม่มีรายการชำระเงิน เมื่อกดรับชำระ ระบบจะบันทึกเป็น PAID และออกใบเสร็จทันที</p>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr><th>หมายเลขคิว</th><th>วันที่/เวลา</th><th>ผู้ป่วย</th><th class="text-end">ยอดสุทธิ</th><th>รับชำระ</th></tr>
+    </thead>
+    <tbody>
+        @if (appointments.Count == 0)
+        {
+            <tr><td colspan="5" class="text-center text-muted">ไม่มีนัดหมายที่ค้างชำระ</td></tr>
+        }
+        @foreach (var a in appointments)
+        {
+            var pt = patients.FirstOrDefault(x => x.PatientId == a.PatientId);
+            var pu = pt == null ? null : users.FirstOrDefault(y => y.UserId == pt.UserId);
+            <tr>
+                <td>@a.QueueNo</td>
+                <td>@a.AppointmentDate.ToString("dd/MM/yyyy") @a.AppointmentTime.ToString("HH:mm")</td>
+                <td>@(pu != null ? pu.FirstName + " " + pu.LastName : "-")</td>
+                <td class="text-end">@((a.NetPrice ?? 0).ToString("N2"))</td>
+                <td>
+                    <form asp-controller="Finance" asp-action="ReceiveCash" method="post" class="d-flex gap-2"
+                          onsubmit="return confirm('ยืนยันรับเงินและออกใบเสร็จ?');">
+                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                        <input type="hidden" name="AppointmentId" value="@a.AppointmentId" />
+                        <select name="PaymentMethod" class="form-select form-select-sm" required>
+                            <option value="เงินสดที่โรงพยาบาล">เงินสด</option>
+                            <option value="บัตรเครดิต/เดบิต">บัตรเครดิต/เดบิต</option>
+                            <option value="QR PromptPay">QR PromptPay</option>
+                        </select>
+                        <button class="btn btn-sm btn-success text-nowrap">รับชำระ</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

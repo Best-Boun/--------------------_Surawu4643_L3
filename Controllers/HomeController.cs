@@ -139,6 +139,28 @@ public class HomeController : Controller
             return RedirectToAction("Index", "Doctor", new { UserId = user.UserId });
         }
 
+        if (role != null && role.RoleName == "FinanceStaff")
+        {
+            return RedirectToAction("Index", "Finance", new { UserId = user.UserId });
+        }
+        if (role != null && role.RoleName == "ScheduleManager")
+        {
+            return RedirectToAction("Index", "Schedule", new { UserId = user.UserId });
+        }
+        if (role != null && role.RoleName == "Doctor")
+        {
+            return RedirectToAction("Index", "DoctorPortal", new { UserId = user.UserId });
+        }
+        if (role != null && role.RoleName == "Admin")
+        {
+            return RedirectToAction("Index", "Admin", new { UserId = user.UserId });
+        }
+        if (user.Status != null && !string.Equals(user.Status, "ACTIVE", StringComparison.OrdinalIgnoreCase))
+        {
+            ViewBag.Status = "บัญชีนี้ถูกระงับการใช้งาน กรุณาติดต่อผู้ดูแลระบบ";
+            return View(data);
+        }
+
         return RedirectToAction("Index", "Home");
     }
     [HttpGet]
@@ -220,118 +242,6 @@ public class HomeController : Controller
     public IActionResult Logout()
     {
         return RedirectToAction("Login", "Home");
-    }
-
-    [HttpGet]
-    public IActionResult AddUser()
-    {
-        return View(new LoginRegisViewModel());
-    }
-
-    [HttpPost]
-    public IActionResult AddUser(LoginRegisViewModel data)
-    {
-        string[] allowedRoles =
-        {
-        "Doctor",
-        "FinanceStaff",
-        "ScheduleManager"
-    };
-
-        if (string.IsNullOrWhiteSpace(data.FirstName) ||
-            string.IsNullOrWhiteSpace(data.LastName))
-        {
-            ViewBag.Status = "กรุณากรอกชื่อและนามสกุล";
-            return View(data);
-        }
-
-        if (string.IsNullOrWhiteSpace(data.RoleName) ||
-            !allowedRoles.Contains(data.RoleName))
-        {
-            ViewBag.Status = "กรุณาเลือก Role ที่ถูกต้อง";
-            return View(data);
-        }
-
-        if (!ModelState.IsValid)
-        {
-            return View(data);
-        }
-
-        var existingUser = (from u in _db.Users
-                            where u.Email == data.Email
-                            select u).FirstOrDefault();
-
-        if (existingUser != null)
-        {
-            ViewBag.Status = "อีเมลนี้ถูกใช้แล้ว";
-            return View(data);
-        }
-
-        var role = (from r in _db.Roles
-                    where r.RoleName == data.RoleName
-                    select r).FirstOrDefault();
-
-        if (role == null)
-        {
-            ViewBag.Status = "ไม่พบ Role ที่เลือกในฐานข้อมูล";
-            return View(data);
-        }
-
-        User user = new User();
-        user.RoleId = role.RoleId;
-        user.Email = data.Email;
-        user.PasswordHash = data.Password;
-        user.FirstName = data.FirstName;
-        user.LastName = data.LastName;
-        user.Phone = data.Phone;
-        user.Address = data.Address;
-        user.Status = "Active";
-        user.CreatedAt = DateTime.Now;
-
-        _db.Add(user);
-        _db.SaveChanges();
-
-        return RedirectToAction("UserList");
-    }
-
-    [HttpGet]
-    public IActionResult UserList()
-    {
-        var users = (from u in _db.Users
-                     select u).ToList();
-
-        var roles = (from r in _db.Roles
-                     select r).ToList();
-
-        ViewBag.RoleList = roles;
-
-        return View(users);
-    }
-    public IActionResult EditUser(int UserId)
-    {
-        var User = (from u in _db.Users
-                    where u.UserId == UserId
-                    select u).FirstOrDefault();
-
-        return View(User);
-    }
-
-    [HttpPost]
-    public IActionResult EditUser(User data)
-    {
-        var User = (from u in _db.Users
-                    where u.UserId == data.UserId
-                    select u).FirstOrDefault();
-
-        User.FirstName = data.FirstName;
-        User.LastName = data.LastName;
-        User.Email = data.Email;
-        User.Phone = data.Phone;
-        User.Address = data.Address;
-
-        _db.SaveChanges();
-
-        return RedirectToAction("UserList", "Home");
     }
 
     public IActionResult DeleteUser(int UserId)

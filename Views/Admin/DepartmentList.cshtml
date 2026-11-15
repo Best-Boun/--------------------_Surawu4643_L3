@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "แผนก";
+    Layout = "_AdminLayout";
+    var depts = ViewBag.DeptList as List<Department>;
+    var doctors = ViewBag.DoctorList as List<Doctor>;
+    var services = ViewBag.ServiceList as List<Service>;
+}
+
+<h3>🏥 จัดการแผนก</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<p>
+    <a class="btn btn-success" asp-controller="Admin" asp-action="DepartmentForm" asp-route-UserId="@ViewBag.UserId">➕ เพิ่มแผนก</a>
+</p>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr><th>ชื่อแผนก</th><th>รายละเอียด</th><th class="text-center">แพทย์</th><th class="text-center">บริการ</th><th>จัดการ</th></tr>
+    </thead>
+    <tbody>
+        @if (depts.Count == 0)
+        {
+            <tr><td colspan="5" class="text-center text-muted">ยังไม่มีแผนก</td></tr>
+        }
+        @foreach (var d in depts)
+        {
+            <tr>
+                <td>@d.DepartmentName</td>
+                <td>@d.Description</td>
+                <td class="text-center">@doctors.Count(x => x.DepartmentId == d.DepartmentId)</td>
+                <td class="text-center">@services.Count(x => x.DepartmentId == d.DepartmentId)</td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Admin" asp-action="DepartmentForm"
+                       asp-route-UserId="@ViewBag.UserId" asp-route-DepartmentId="@d.DepartmentId">แก้ไข</a>
+
+                    <form asp-controller="Admin" asp-action="DepartmentDelete" method="post" class="d-inline"
+                          onsubmit="return confirm('ยืนยันการลบแผนกนี้?');">
+                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                        <input type="hidden" name="DepartmentId" value="@d.DepartmentId" />
+                        <button class="btn btn-sm btn-outline-danger">ลบ</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

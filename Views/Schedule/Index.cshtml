@@ -1,0 +1,103 @@
+@{
+    ViewData["Title"] = "ตารางแพทย์";
+    Layout = "_ScheduleLayout";
+    var schedules = ViewBag.ScheduleList as List<DoctorSchedule>;
+    var appointments = ViewBag.AppointmentList as List<Appointment>;
+    var doctors = ViewBag.DoctorList as List<Doctor>;
+    var users = ViewBag.UserList as List<User>;
+    var filterDoctorId = (int?)ViewBag.FilterDoctorId;
+    string period = ViewBag.Period as string ?? "UPCOMING";
+}
+
+<h3>📅 ตารางแพทย์</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<form asp-controller="Schedule" asp-action="Index" method="get" class="row g-2 mb-3">
+    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+    <div class="col-md-4">
+        <select name="DoctorId" class="form-select">
+            <option value="">แพทย์ทุกท่าน</option>
+            @foreach (var d in doctors)
+            {
+                var du = users.FirstOrDefault(x => x.UserId == d.UserId);
+                <option value="@d.DoctorId" selected="@(filterDoctorId == d.DoctorId)">@(du != null ? du.FirstName + " " + du.LastName : "-")</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-3">
+        <select name="Period" class="form-select">
+            <option value="UPCOMING" selected="@(period == "UPCOMING")">ตั้งแต่วันนี้เป็นต้นไป</option>
+            <option value="ALL" selected="@(period == "ALL")">ทั้งหมด (รวมที่ผ่านมาแล้ว)</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100">ค้นหา</button>
+    </div>
+    <div class="col-md-3 text-end">
+        <a class="btn btn-success" asp-controller="Schedule" asp-action="Create" asp-route-UserId="@ViewBag.UserId">➕ เพิ่มรอบเวลา</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr>
+            <th>วันที่</th><th>เวลา</th><th>แพทย์</th>
+            <th class="text-center">จองแล้ว / รองรับ</th><th class="text-center">คิวว่าง</th>
+            <th>สถานะ</th><th>จัดการ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (schedules.Count == 0)
+        {
+            <tr><td colspan="7" class="text-center text-muted">ไม่มีรอบเวลา</td></tr>
+        }
+        @foreach (var s in schedules)
+        {
+            var doc = doctors.FirstOrDefault(x => x.DoctorId == s.DoctorId);
+            var du = doc == null ? null : users.FirstOrDefault(y => y.UserId == doc.UserId);
+            int booked = appointments.Count(z => z.ScheduleId == s.ScheduleId);
+            <tr>
+                <td>@s.ScheduleDate.ToString("dd/MM/yyyy")</td>
+                <td>@s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm")</td>
+                <td>@(du != null ? du.FirstName + " " + du.LastName : "-")</td>
+                <td class="text-center">@booked / @s.MaxQueue</td>
+                <td class="text-center">@s.AvailableQueue</td>
+                <td>
+                    @if (s.Status == "OPEN")
+                    {
+                        <span class="badge text-bg-success">OPEN</span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-secondary">@s.Status</span>
+                    }
+                </td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Schedule" asp-action="Edit"
+                       asp-route-UserId="@ViewBag.UserId" asp-route-ScheduleId="@s.ScheduleId">แก้ไข</a>
+
+                    <form asp-controller="Schedule" asp-action="ToggleStatus" method="post" class="d-inline">
+                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                        <input type="hidden" name="ScheduleId" value="@s.ScheduleId" />
+                        <button class="btn btn-sm btn-outline-warning">@(s.Status == "OPEN" ? "ปิดรอบ" : "เปิดรอบ")</button>
+                    </form>
+
+                    <form asp-controller="Schedule" asp-action="Delete" method="post" class="d-inline"
+                          onsubmit="return confirm('ยืนยันการลบรอบเวลานี้?');">
+                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                        <input type="hidden" name="ScheduleId" value="@s.ScheduleId" />
+                        <button class="btn btn-sm btn-outline-danger">ลบ</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

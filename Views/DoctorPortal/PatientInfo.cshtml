@@ -1,0 +1,79 @@
+@{
+    ViewData["Title"] = "ข้อมูลผู้ป่วย";
+    Layout = "_DoctorLayout";
+    var ap = ViewBag.Appointment as Appointment;
+    var pt = ViewBag.Patient as Patient;
+    var pu = ViewBag.PatientUser as User;
+    var lines = ViewBag.ServiceLines as List<AppointmentService>;
+    var services = ViewBag.ServiceList as List<Service>;
+    var history = ViewBag.History as List<Appointment>;
+}
+
+<h3>👤 ข้อมูลผู้ป่วย</h3>
+
+<div class="card mb-3" style="max-width:700px">
+    <div class="card-body">
+        <h5>@(pu != null ? pu.FirstName + " " + pu.LastName : "-")</h5>
+        <div>อายุ: <b>@ViewBag.Age</b> ปี (เกิด @pt.BirthDate.ToString("dd/MM/yyyy"))</div>
+        <div>เพศ: @(string.IsNullOrEmpty(pt.Gender) ? "-" : pt.Gender)</div>
+        <div>เบอร์โทร: @(pu != null && !string.IsNullOrEmpty(pu.Phone) ? pu.Phone : "-")</div>
+        <div>ที่อยู่: @(string.IsNullOrEmpty(pt.Address) ? "-" : pt.Address)</div>
+        <div>ผู้ติดต่อฉุกเฉิน: @(string.IsNullOrEmpty(pt.EmergencyContact) ? "-" : pt.EmergencyContact)
+            (@(string.IsNullOrEmpty(pt.EmergencyPhone) ? "-" : pt.EmergencyPhone))</div>
+    </div>
+</div>
+
+<div class="card mb-3" style="max-width:700px">
+    <div class="card-body">
+        <h5>นัดหมายนี้</h5>
+        <div>หมายเลขคิว: <b>@ap.QueueNo</b></div>
+        <div>วันที่/เวลา: @ap.AppointmentDate.ToString("dd/MM/yyyy") @ap.AppointmentTime.ToString("HH:mm")</div>
+        <div>สถานะ: <b>@ap.Status</b></div>
+        <div class="mt-2">บริการที่เลือก:</div>
+        <ul>
+            @foreach (var l in lines)
+            {
+                var sv = services.FirstOrDefault(x => x.ServiceId == l.ServiceId);
+                <li>@(sv != null ? sv.ServiceName : "บริการ") × @l.Quantity</li>
+            }
+        </ul>
+
+        @if (ap.Status == "WAITING")
+        {
+            <form asp-controller="DoctorPortal" asp-action="UpdateStatus" method="post" class="d-inline">
+                <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                <input type="hidden" name="AppointmentId" value="@ap.AppointmentId" />
+                <input type="hidden" name="NewStatus" value="IN_PROGRESS" />
+                <button class="btn btn-primary">เริ่มตรวจ</button>
+            </form>
+        }
+        @if (ap.Status == "IN_PROGRESS")
+        {
+            <form asp-controller="DoctorPortal" asp-action="UpdateStatus" method="post" class="d-inline">
+                <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                <input type="hidden" name="AppointmentId" value="@ap.AppointmentId" />
+                <input type="hidden" name="NewStatus" value="COMPLETED" />
+                <button class="btn btn-success">ตรวจเสร็จ</button>
+            </form>
+        }
+    </div>
+</div>
+
+<h5>ประวัตินัดหมายกับคุณหมอ</h5>
+<table class="table table-bordered table-striped" style="max-width:700px">
+    <thead><tr><th>วันที่</th><th>เวลา</th><th>หมายเลขคิว</th><th>สถานะ</th></tr></thead>
+    <tbody>
+        @foreach (var h in history)
+        {
+            <tr>
+                <td>@h.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                <td>@h.AppointmentTime.ToString("HH:mm")</td>
+                <td>@h.QueueNo</td>
+                <td>@h.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-outline-secondary" asp-controller="DoctorPortal" asp-action="Index"
+   asp-route-UserId="@ViewBag.UserId" asp-route-Date="@ap.AppointmentDate.ToString("yyyy-MM-dd")">กลับ</a>

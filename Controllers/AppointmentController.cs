@@ -27,9 +27,9 @@ public class AppointmentController : Controller
         }
 
         DateTime appointmentTime = ap.AppointmentDate.ToDateTime(ap.AppointmentTime);
-        if ((appointmentTime - DateTime.Now).TotalHours < 24)
+        if ((appointmentTime - DateTime.Now).TotalHours < 2)
         {
-            return "ต้องยกเลิก/เลื่อนนัดล่วงหน้าอย่างน้อย 24 ชั่วโมง";
+            return "ต้องยกเลิก/เลื่อนนัดล่วงหน้าอย่างน้อย 2 ชั่วโมง";
         }
         return "";
     }

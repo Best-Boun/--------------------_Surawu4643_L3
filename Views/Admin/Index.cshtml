@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "ภาพรวมระบบ";
+    Layout = "_AdminLayout";
+    var roles = ViewBag.RoleList as List<Role>;
+    var users = ViewBag.UserList as List<User>;
+}
+
+<h3>🏠 ภาพรวมระบบ</h3>
+
+<div class="row mb-4">
+    <div class="col-md-4 mb-3"><div class="card text-bg-primary"><div class="card-body">
+        <div>ผู้ใช้ทั้งหมด</div><h3>@users.Count คน</h3>
+    </div></div></div>
+    <div class="col-md-4 mb-3"><div class="card text-bg-success"><div class="card-body">
+        <div>ผู้ป่วย / แพทย์</div><h3>@ViewBag.PatientCount / @ViewBag.DoctorCount คน</h3>
+    </div></div></div>
+    <div class="col-md-4 mb-3"><div class="card text-bg-warning"><div class="card-body">
+        <div>โปรโมชั่นที่เปิดใช้งาน</div><h3>@ViewBag.ActivePromoCount รายการ</h3>
+    </div></div></div>
+    <div class="col-md-4 mb-3"><div class="card"><div class="card-body">
+        <div>แผนก</div><h3>@ViewBag.DeptCount แผนก</h3>
+    </div></div></div>
+    <div class="col-md-4 mb-3"><div class="card"><div class="card-body">
+        <div>บริการ</div><h3>@ViewBag.ServiceCount รายการ</h3>
+    </div></div></div>
+</div>
+
+<h5>จำนวนผู้ใช้แยกตาม Role</h5>
+<table class="table table-bordered table-striped" style="max-width:500px">
+    <thead><tr><th>Role</th><th class="text-end">จำนวน</th></tr></thead>
+    <tbody>
+        @foreach (var r in roles)
+        {
+            <tr>
+                <td>@r.RoleName</td>
+                <td class="text-end">@users.Count(x => x.RoleId == r.RoleId)</td>
+            </tr>
+        }
+    </tbody>
+</table>

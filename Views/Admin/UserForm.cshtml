@@ -1,0 +1,133 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.UserFormViewModel
+@{
+    bool isNew = Model.UserId == 0;
+    ViewData["Title"] = isNew ? "เพิ่มผู้ใช้" : "แก้ไขผู้ใช้";
+    Layout = "_AdminLayout";
+    var roles = ViewBag.RoleList as List<Role>;
+    var depts = ViewBag.DeptList as List<Department>;
+    bool isPatient = ViewBag.IsPatient == true;
+    bool isSelf = ViewBag.IsSelf == true;
+}
+
+<h3>@(isNew ? "➕ เพิ่มเจ้าหน้าที่ / แพทย์" : "✏️ แก้ไขผู้ใช้")</h3>
+
+@if (ViewBag.Status != null)
+{
+    <div class="alert alert-danger" style="max-width:700px">@ViewBag.Status</div>
+}
+@if (isPatient)
+{
+    <div class="alert alert-info" style="max-width:700px">นี่คือบัญชีผู้ป่วย เปลี่ยน Role ไม่ได้ แก้ไขได้เฉพาะข้อมูลทั่วไป สถานะ และรหัสผ่าน</div>
+}
+@if (isSelf)
+{
+    <div class="alert alert-info" style="max-width:700px">นี่คือบัญชีของคุณเอง เปลี่ยน Role หรือระงับบัญชีตัวเองไม่ได้</div>
+}
+
+<form asp-controller="Admin" asp-action="UserForm" method="post" style="max-width:700px">
+    <input type="hidden" asp-for="AdminId" />
+    <input type="hidden" asp-for="UserId" />
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="FirstName" class="form-label">ชื่อ</label>
+            <input asp-for="FirstName" class="form-control" required />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="LastName" class="form-label">นามสกุล</label>
+            <input asp-for="LastName" class="form-control" required />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Email" class="form-label">อีเมล</label>
+            <input asp-for="Email" type="email" class="form-control" required />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Phone" class="form-label">เบอร์โทรศัพท์</label>
+            <input asp-for="Phone" class="form-control" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Password" class="form-label">@(isNew ? "รหัสผ่าน" : "รหัสผ่านใหม่ (เว้นว่าง = ไม่เปลี่ยน)")</label>
+            <input asp-for="Password" type="password" class="form-control" autocomplete="new-password" />
+        </div>
+        <div class="col-md-6 mb-3">
+            <label asp-for="Status" class="form-label">สถานะบัญชี</label>
+            <select asp-for="Status" class="form-select" disabled="@isSelf">
+                <option value="ACTIVE">ACTIVE (ใช้งานได้)</option>
+                <option value="INACTIVE">INACTIVE (ระงับ)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Address" class="form-label">ที่อยู่</label>
+        <textarea asp-for="Address" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RoleId" class="form-label">Role (สิทธิ์การใช้งาน)</label>
+        @if (isPatient)
+        {
+            <input class="form-control" value="@ViewBag.TargetRoleName" disabled />
+        }
+        else
+        {
+            <select asp-for="RoleId" id="roleSelect" class="form-select" disabled="@isSelf">
+                <option value="">-- เลือก Role --</option>
+                @foreach (var r in roles.Where(x => x.RoleName != "Patient"))
+                {
+                    <option value="@r.RoleId" data-name="@r.RoleName">@r.RoleName</option>
+                }
+            </select>
+        }
+    </div>
+
+    <div id="doctorBox" class="card mb-3" hidden>
+        <div class="card-body">
+            <h6>ข้อมูลแพทย์ (ใช้เมื่อ Role = Doctor)</h6>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label asp-for="DepartmentId" class="form-label">แผนก</label>
+                    <select asp-for="DepartmentId" class="form-select">
+                        <option value="">-- เลือกแผนก --</option>
+                        @foreach (var dp in depts)
+                        {
+                            <option value="@dp.DepartmentId">@dp.DepartmentName</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="LicenseNo" class="form-label">เลขใบอนุญาตประกอบวิชาชีพ</label>
+                    <input asp-for="LicenseNo" class="form-control" />
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Specialization" class="form-label">ความเชี่ยวชาญ</label>
+                    <input asp-for="Specialization" class="form-control" />
+                </div>
+                <div class="col-md-12">
+                    <label asp-for="Biography" class="form-label">ประวัติ/รายละเอียดแพทย์</label>
+                    <textarea asp-for="Biography" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">บันทึก</button>
+    <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="UserList" asp-route-UserId="@Model.AdminId">ยกเลิก</a>
+</form>
+
+@section Scripts {
+    <script>
+        (() => {
+            const sel = document.getElementById("roleSelect");
+            const box = document.getElementById("doctorBox");
+            if (!sel) return;
+
+            function toggle() {
+                const opt = sel.options[sel.selectedIndex];
+                box.hidden = !(opt && opt.dataset.name === "Doctor");
+            }
+            sel.addEventListener("change", toggle);
+            toggle();
+        })();
+    </script>
+}

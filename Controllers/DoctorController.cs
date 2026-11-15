@@ -177,6 +177,7 @@ public class DoctorController : Controller
                           && (string.IsNullOrEmpty(Keyword)
                               || u.FirstName.Contains(Keyword)
                               || u.LastName.Contains(Keyword)
+                              || (u.FirstName + " " + u.LastName).Contains(Keyword)
                               || (d.Specialization != null && d.Specialization.Contains(Keyword)))
                        select d).ToList();
 
@@ -195,17 +196,18 @@ public class DoctorController : Controller
                                      .ToList();
 
         var doctorIds = doctors.Select(d => d.DoctorId).ToList();
-        var today = DateOnly.FromDateTime(DateTime.Now);
+        var now = DateTime.Now;
+        var today = DateOnly.FromDateTime(now);
+        var nowTime = TimeOnly.FromDateTime(now);
         ViewBag.ScheduleList = (from s in _db.DoctorSchedules
                                 where doctorIds.Contains(s.DoctorId)
-                                   && s.ScheduleDate >= today
                                    && s.Status == "OPEN"
                                    && s.AvailableQueue > 0
+                                   && (s.ScheduleDate > today || (s.ScheduleDate == today && s.StartTime > nowTime))
                                 orderby s.ScheduleDate, s.StartTime
                                 select s).ToList();
         return View();
     }
-
     // ขั้น 3: เลือกวันและเวลา
     public IActionResult SelectDate(int UserId, int DoctorId)
     {
@@ -222,20 +224,22 @@ public class DoctorController : Controller
             return RedirectToAction("Index", new { UserId = UserId });
         }
 
-        var today = DateOnly.FromDateTime(DateTime.Now);
-        var schedules = (from s in _db.DoctorSchedules
-                         where s.DoctorId == DoctorId
-                            && s.Status == "OPEN"
-                            && s.AvailableQueue > 0
-                            && s.ScheduleDate >= today
-                         orderby s.ScheduleDate, s.StartTime
-                         select s).ToList();
-
         ViewBag.UserId = UserId;
         ViewBag.DoctorUser = (from u in _db.Users
                               where u.UserId == doctor.UserId
                               select u).FirstOrDefault();
-        ViewBag.DoctorInfo = doctor;
+
+        var now = DateTime.Now;
+        var today = DateOnly.FromDateTime(now);
+        var nowTime = TimeOnly.FromDateTime(now);
+        var schedules = (from s in _db.DoctorSchedules
+                         where s.DoctorId == DoctorId
+                            && s.Status == "OPEN"
+                            && s.AvailableQueue > 0
+                            && (s.ScheduleDate > today || (s.ScheduleDate == today && s.StartTime > nowTime))
+                         orderby s.ScheduleDate, s.StartTime
+                         select s).ToList();
+
         ViewBag.ScheduleList = schedules;
         return View();
     }

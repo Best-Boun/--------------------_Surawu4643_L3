@@ -1,0 +1,87 @@
+@{
+    ViewData["Title"] = "ผู้ใช้และสิทธิ์";
+    Layout = "_AdminLayout";
+    var users = ViewBag.UserList as List<User>;
+    var roles = ViewBag.RoleList as List<Role>;
+    var filterRoleId = (int?)ViewBag.FilterRoleId;
+    string keyword = ViewBag.Keyword as string ?? "";
+    int adminId = (int)ViewBag.UserId;
+}
+
+<h3>👥 ผู้ใช้และสิทธิ์</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<form asp-controller="Admin" asp-action="UserList" method="get" class="row g-2 mb-3">
+    <input type="hidden" name="UserId" value="@adminId" />
+    <div class="col-md-4">
+        <input name="Keyword" value="@keyword" class="form-control" placeholder="ค้นหาชื่อ / อีเมล" />
+    </div>
+    <div class="col-md-3">
+        <select name="RoleId" class="form-select">
+            <option value="">ทุก Role</option>
+            @foreach (var r in roles)
+            {
+                <option value="@r.RoleId" selected="@(filterRoleId == r.RoleId)">@r.RoleName</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2"><button class="btn btn-primary w-100">ค้นหา</button></div>
+    <div class="col-md-3 text-end">
+        <a class="btn btn-success" asp-controller="Admin" asp-action="UserForm" asp-route-UserId="@adminId">➕ เพิ่มเจ้าหน้าที่/แพทย์</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr><th>ชื่อ</th><th>อีเมล</th><th>เบอร์โทร</th><th>Role</th><th>สถานะ</th><th>จัดการ</th></tr>
+    </thead>
+    <tbody>
+        @if (users.Count == 0)
+        {
+            <tr><td colspan="6" class="text-center text-muted">ไม่พบผู้ใช้</td></tr>
+        }
+        @foreach (var u in users)
+        {
+            var role = roles.FirstOrDefault(r => r.RoleId == u.RoleId);
+            bool inactive = string.Equals(u.Status, "INACTIVE", StringComparison.OrdinalIgnoreCase);
+            <tr>
+                <td>@u.FirstName @u.LastName</td>
+                <td>@u.Email</td>
+                <td>@u.Phone</td>
+                <td>@(role != null ? role.RoleName : "ไม่พบ Role")</td>
+                <td>
+                    @if (inactive)
+                    {
+                        <span class="badge text-bg-secondary">INACTIVE</span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-success">ACTIVE</span>
+                    }
+                </td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Admin" asp-action="UserForm"
+                       asp-route-UserId="@adminId" asp-route-TargetId="@u.UserId">แก้ไข</a>
+
+                    @if (u.UserId != adminId)
+                    {
+                        <form asp-controller="Admin" asp-action="DeleteUser" method="post" class="d-inline"
+                              onsubmit="return confirm('ยืนยันการลบผู้ใช้นี้?');">
+                            <input type="hidden" name="UserId" value="@adminId" />
+                            <input type="hidden" name="TargetId" value="@u.UserId" />
+                            <button class="btn btn-sm btn-outline-danger">ลบ</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

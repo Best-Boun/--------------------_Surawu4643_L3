@@ -1,0 +1,98 @@
+@{
+    ViewData["Title"] = "รายละเอียดการชำระเงิน";
+    Layout = "_FinanceLayout";
+    var pay = ViewBag.Payment as Payment;
+    var ap = ViewBag.Appointment as Appointment;
+    var details = ViewBag.Details as List<PaymentDetail>;
+    var rc = ViewBag.ReceiptInfo as Receipt;
+    var pu = ViewBag.PatientUser as User;
+    bool amountOk = (bool)ViewBag.AmountOk;
+}
+
+<h3>รายละเอียดการชำระเงิน</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<div class="card mb-3" style="max-width:700px">
+    <div class="card-body">
+        <div>ผู้ป่วย: <b>@(pu != null ? pu.FirstName + " " + pu.LastName : "-")</b></div>
+        <div>หมายเลขคิว: <b>@(ap != null ? ap.QueueNo : "-")</b></div>
+        <div>วิธีชำระ: @pay.PaymentMethod</div>
+        <div>เลขอ้างอิง: @(string.IsNullOrEmpty(pay.ReferenceNo) ? "-" : pay.ReferenceNo)</div>
+        <div>วันที่ชำระ: @(pay.PaymentDate != null ? pay.PaymentDate.Value.ToString("dd/MM/yyyy HH:mm") : "-")</div>
+        <div>สถานะ: <b>@pay.PaymentStatus</b></div>
+    </div>
+</div>
+
+<table class="table table-bordered" style="max-width:700px">
+    <thead><tr><th>รายการ</th><th class="text-end">จำนวนเงิน (บาท)</th></tr></thead>
+    <tbody>
+        @foreach (var d in details)
+        {
+            <tr><td>@d.Description</td><td class="text-end">@d.Amount.ToString("N2")</td></tr>
+        }
+        <tr class="table-light">
+            <td><b>ยอดสุทธิของนัดหมาย (ที่ระบบคำนวณ)</b></td>
+            <td class="text-end"><b>@(((decimal)ViewBag.Expected).ToString("N2"))</b></td>
+        </tr>
+        <tr class="table-primary">
+            <td><b>ยอดที่ผู้ป่วยชำระ</b></td>
+            <td class="text-end"><b>@pay.Amount.ToString("N2")</b></td>
+        </tr>
+    </tbody>
+</table>
+
+@if (amountOk)
+{
+    <div class="alert alert-success" style="max-width:700px">✔ ยอดเงินถูกต้อง ตรงกับยอดสุทธิและรายละเอียดค่าใช้จ่าย</div>
+}
+else
+{
+    <div class="alert alert-danger" style="max-width:700px">
+        ✘ ยอดเงินไม่ตรงกัน (ผลรวมรายละเอียด @(((decimal)ViewBag.DetailSum).ToString("N2")) บาท) กรุณาตรวจสอบก่อนยืนยัน
+    </div>
+}
+
+@if (pay.PaymentStatus == "PENDING")
+{
+    <div class="d-flex gap-2">
+        <form asp-controller="Finance" asp-action="Verify" method="post"
+              onsubmit="return confirm('ยืนยันว่าได้รับเงินแล้วและออกใบเสร็จ?');">
+            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+            <input type="hidden" name="PaymentId" value="@pay.PaymentId" />
+            <button class="btn btn-success">✅ ยืนยันการชำระเงิน + ออกใบเสร็จ</button>
+        </form>
+
+        <form asp-controller="Finance" asp-action="Reject" method="post"
+              onsubmit="return confirm('ปฏิเสธรายการนี้?');">
+            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+            <input type="hidden" name="PaymentId" value="@pay.PaymentId" />
+            <button class="btn btn-outline-danger">ปฏิเสธรายการ</button>
+        </form>
+    </div>
+}
+
+@if (rc != null)
+{
+    <div class="card mt-4" style="max-width:700px">
+        <div class="card-body">
+            <h4 class="text-center">ใบเสร็จรับเงิน</h4>
+            <p class="text-center text-muted">Hospital Queue</p>
+            <div>เลขที่ใบเสร็จ: <b>@rc.ReceiptNo</b></div>
+            <div>วันที่ออก: @(rc.IssuedDate != null ? rc.IssuedDate.Value.ToString("dd/MM/yyyy HH:mm") : "-")</div>
+            <div>รวมค่าบริการ: @rc.TotalAmount.ToString("N2")</div>
+            <div>ส่วนลด: -@rc.DiscountAmount.ToString("N2")</div>
+            <div class="fw-bold mb-3">ยอดสุทธิ: @rc.NetAmount.ToString("N2")</div>
+            <button class="btn btn-outline-primary" onclick="window.print()">🖨️ พิมพ์</button>
+        </div>
+    </div>
+}
+
+<a class="btn btn-outline-secondary mt-3" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId">กลับ</a>

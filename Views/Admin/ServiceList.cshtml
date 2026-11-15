@@ -1,0 +1,78 @@
+@{
+    ViewData["Title"] = "บริการและราคา";
+    Layout = "_AdminLayout";
+    var services = ViewBag.ServiceList as List<Service>;
+    var depts = ViewBag.DeptList as List<Department>;
+    var filterDeptId = (int?)ViewBag.FilterDeptId;
+}
+
+<h3>🩺 จัดการบริการและราคา</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<form asp-controller="Admin" asp-action="ServiceList" method="get" class="row g-2 mb-3">
+    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+    <div class="col-md-4">
+        <select name="DepartmentId" class="form-select">
+            <option value="">ทุกแผนก</option>
+            @foreach (var d in depts)
+            {
+                <option value="@d.DepartmentId" selected="@(filterDeptId == d.DepartmentId)">@d.DepartmentName</option>
+            }
+        </select>
+    </div>
+    <div class="col-md-2"><button class="btn btn-primary w-100">ค้นหา</button></div>
+    <div class="col-md-6 text-end">
+        <a class="btn btn-success" asp-controller="Admin" asp-action="ServiceForm" asp-route-UserId="@ViewBag.UserId">➕ เพิ่มบริการ</a>
+    </div>
+</form>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr><th>บริการ</th><th>แผนก</th><th>ประเภท</th><th class="text-end">ราคา (บาท)</th><th>สถานะ</th><th>จัดการ</th></tr>
+    </thead>
+    <tbody>
+        @if (services.Count == 0)
+        {
+            <tr><td colspan="6" class="text-center text-muted">ไม่มีบริการ</td></tr>
+        }
+        @foreach (var s in services)
+        {
+            var dp = depts.FirstOrDefault(x => x.DepartmentId == s.DepartmentId);
+            <tr>
+                <td>@s.ServiceName<div class="small text-muted">@s.Description</div></td>
+                <td>@(dp != null ? dp.DepartmentName : "-")</td>
+                <td>@s.ServiceType</td>
+                <td class="text-end">@s.Price.ToString("N2")</td>
+                <td>
+                    @if (string.Equals(s.Status, "ACTIVE", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <span class="badge text-bg-success">ACTIVE</span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-secondary">@s.Status</span>
+                    }
+                </td>
+                <td class="text-nowrap">
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Admin" asp-action="ServiceForm"
+                       asp-route-UserId="@ViewBag.UserId" asp-route-ServiceId="@s.ServiceId">แก้ไข</a>
+
+                    <form asp-controller="Admin" asp-action="ServiceDelete" method="post" class="d-inline"
+                          onsubmit="return confirm('ยืนยันการลบบริการนี้?');">
+                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                        <input type="hidden" name="ServiceId" value="@s.ServiceId" />
+                        <button class="btn btn-sm btn-outline-danger">ลบ</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
