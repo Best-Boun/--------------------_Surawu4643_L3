@@ -1,0 +1,60 @@
+@model Appointment
+@{
+    ViewData["Title"] = "ชำระเงิน";
+    Layout = "_NavLayout";
+    var lines = ViewBag.Lines as List<AppointmentService>;
+    var services = ViewBag.ServiceList as List<Service>;
+    var promoLines = ViewBag.PromoLines as List<AppointmentPromotion>;
+    var promos = ViewBag.PromoList as List<Promotion>;
+}
+
+<h3>💳 ชำระเงิน</h3>
+<p>หมายเลขคิว: <b>@Model.QueueNo</b></p>
+
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<table class="table table-bordered" style="max-width:700px">
+    <thead><tr><th>รายการ</th><th class="text-end">จำนวนเงิน (บาท)</th></tr></thead>
+    <tbody>
+        @foreach (var l in lines)
+        {
+            var sv = services.FirstOrDefault(x => x.ServiceId == l.ServiceId);
+            <tr><td>@(sv != null ? sv.ServiceName : "บริการ") × @l.Quantity</td><td class="text-end">@l.Subtotal.ToString("N2")</td></tr>
+        }
+        <tr class="table-light"><td><b>รวมค่าบริการ</b></td><td class="text-end"><b>@((Model.TotalPrice ?? 0).ToString("N2"))</b></td></tr>
+        @foreach (var l in promoLines)
+        {
+            var pm = promos.FirstOrDefault(y => y.PromotionId == l.PromotionId);
+            <tr class="text-success">
+                <td>ส่วนลด: @(pm != null ? pm.PromotionName : "โปรโมชั่น")</td>
+                <td class="text-end">-@((l.DiscountAmount ?? 0).ToString("N2"))</td>
+            </tr>
+        }
+        <tr class="table-primary"><td><b>ยอดสุทธิที่ต้องชำระ</b></td><td class="text-end"><b>@((Model.NetPrice ?? 0).ToString("N2"))</b></td></tr>
+    </tbody>
+</table>
+
+<form asp-controller="Payment" asp-action="Pay" method="post" style="max-width:700px">
+    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+    <input type="hidden" name="AppointmentId" value="@Model.AppointmentId" />
+
+    <div class="mb-3">
+        <label class="form-label">วิธีชำระเงิน</label>
+        <select name="PaymentMethod" class="form-select" required>
+            <option value="">-- เลือก --</option>
+            <option value="โอนเงินผ่านธนาคาร">โอนเงินผ่านธนาคาร</option>
+            <option value="QR PromptPay">QR PromptPay</option>
+            <option value="บัตรเครดิต/เดบิต">บัตรเครดิต/เดบิต</option>
+            <option value="เงินสดที่โรงพยาบาล">เงินสดที่โรงพยาบาล</option>
+        </select>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">เลขอ้างอิงการโอน (ถ้ามี)</label>
+        <input name="ReferenceNo" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">ยืนยันการชำระเงิน</button>
+    <a class="btn btn-outline-secondary" asp-controller="Appointment" asp-action="MyAppointments" asp-route-UserId="@ViewBag.UserId">กลับ</a>
+</form>

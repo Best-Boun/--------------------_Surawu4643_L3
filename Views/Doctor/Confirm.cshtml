@@ -1,0 +1,62 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.BookingViewModel
+@{
+    ViewData["Title"] = "ยืนยันการจอง";
+    Layout = "_NavLayout";
+    var schedule = ViewBag.Schedule as DoctorSchedule;
+    var du = ViewBag.DoctorUser as User;
+    var dept = ViewBag.Dept as Department;
+    var services = ViewBag.ServiceList as List<Service>;
+    var promos = ViewBag.PromoList as List<Promotion>;
+}
+
+<h3>ขั้นตอนที่ 4/4 : เลือกบริการและยืนยันการจอง</h3>
+
+@if (ViewBag.Status != null)
+{
+    <div class="alert alert-danger">@ViewBag.Status</div>
+}
+
+<div class="card mb-3">
+    <div class="card-body">
+        <div>แพทย์: <b>@(du != null ? du.FirstName + " " + du.LastName : "-")</b> (แผนก @(dept != null ? dept.DepartmentName : "-"))</div>
+        <div>วันที่: <b>@schedule.ScheduleDate.ToString("dd/MM/yyyy")</b> เวลา <b>@schedule.StartTime.ToString("HH:mm")</b></div>
+    </div>
+</div>
+
+<form asp-controller="Doctor" asp-action="Summary" method="post">
+    <input type="hidden" name="UserId" value="@Model.UserId" />
+    <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
+
+    <h5>เลือกบริการ</h5>
+    <table class="table table-bordered">
+        <thead><tr><th></th><th>บริการ</th><th>รายละเอียด</th><th class="text-end">ราคา (บาท)</th></tr></thead>
+        <tbody>
+            @foreach (var s in services)
+            {
+                <tr>
+                    <td><input type="checkbox" name="ServiceIds" value="@s.ServiceId" checked="@Model.ServiceIds.Contains(s.ServiceId)" /></td>
+                    <td>@s.ServiceName</td>
+                    <td>@s.Description</td>
+                    <td class="text-end">@s.Price.ToString("N2")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="mb-3" style="max-width:300px">
+        <label class="form-label">จำนวนผู้เข้ารับบริการ (โปรโมชั่นครอบครัวต้องมี 3 คนขึ้นไป)</label>
+        <input type="number" name="PersonCount" min="1" value="@Model.PersonCount" class="form-control" />
+    </div>
+
+    <h5>โปรโมชั่นที่เปิดให้ใช้</h5>
+    <ul>
+        @foreach (var p in promos)
+        {
+            <li><b>@p.PromotionName</b> ลด @p.DiscountPercent.ToString("0.##")% — @p.Description</li>
+        }
+    </ul>
+    <p class="text-muted small">ระบบจะตรวจสอบสิทธิ์โปรโมชั่นให้อัตโนมัติในหน้าถัดไป</p>
+
+    <button type="submit" class="btn btn-primary">ดูสรุปค่าใช้จ่าย</button>
+    <a class="btn btn-outline-secondary" asp-controller="Doctor" asp-action="Index" asp-route-UserId="@Model.UserId">ยกเลิก</a>
+</form>

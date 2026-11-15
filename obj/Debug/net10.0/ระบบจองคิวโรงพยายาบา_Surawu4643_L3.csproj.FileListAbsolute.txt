@@ -396,3 +396,4 @@ C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิ�
 C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.runtimeconfig.json
 C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.dll
 C:\Users\tippe\AppData\Local\Temp\login-view-build\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.pdb
+C:\Users\tippe\Downloads\67144643 CSI402\67144643\ระบบจองคิวโรงพยายาบา_Surawu4643_L3\obj\Debug\net10.0\ระบบจองคิวโรงพยายาบา_Surawu4643_L3.sourcelink.json

@@ -1,77 +1,34 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>@ViewData["Title"] - Hospital Queue</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-white shadow-sm border-bottom">
     <div class="container-fluid px-4">
-
-        <!-- Logo / Title -->
         <a class="navbar-brand fw-bold text-primary"
-           asp-controller="Home"
-           asp-action="Index">
+           asp-controller="Doctor" asp-action="Index" asp-route-UserId="@ViewBag.UserId">
             🏥 Hospital Queue
         </a>
 
-        <!-- Menu -->
-        <div class="d-flex align-items-center gap-2">
-
-            <a class="nav-link px-3"
-               asp-controller="Home"
-               asp-action="Index">
-                🏠 Home
-            </a>
-
-
-            <a class="nav-link px-3"
-               asp-controller="Doctor"
-               asp-action="Index">
-                🩺 เลือกแผนก
-            </a>
-
-            <span class="text-secondary">→</span>
-
-            <a class="nav-link px-3"
-               asp-controller="Doctor"
-               asp-action="SelectDoctor">
-                👨‍⚕️ เลือกแพทย์
-            </a>
-
-            <span class="text-secondary">→</span>
-
-            <a class="nav-link px-3"
-               asp-controller="Doctor"
-               asp-action="SelectDate">
-                📅 เลือกวันและเวลา
-            </a>
-
-            <span class="text-secondary">→</span>
-
-            <a class="nav-link px-3"
-               asp-controller="Doctor"
-               asp-action="Confirm">
-                ✅ ยืนยันการจอง
-            </a>
-
+        <div class="d-flex align-items-center gap-2 flex-wrap">
+            <a class="nav-link px-3" asp-controller="Doctor" asp-action="Index" asp-route-UserId="@ViewBag.UserId">🩺 จองคิว</a>
+            <a class="nav-link px-3" asp-controller="Appointment" asp-action="MyAppointments" asp-route-UserId="@ViewBag.UserId">📋 นัดหมายของฉัน</a>
+            <a class="nav-link px-3" asp-controller="Payment" asp-action="History" asp-route-UserId="@ViewBag.UserId">💳 ประวัติการชำระเงิน</a>
         </div>
 
-        <!-- Profile -->
-        <div class="ms-auto">
-            <a class="btn btn-outline-primary"
-               asp-controller="Profile"
-               asp-action="Index">
-                👤 โปรไฟล์
-            </a>
+        <div class="ms-auto d-flex gap-2">
+            <a class="btn btn-outline-primary" asp-controller="Profile" asp-action="Index" asp-route-UserId="@ViewBag.UserId">👤 โปรไฟล์</a>
+            <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Logout">ออกจากระบบ</a>
         </div>
-
     </div>
 </nav>
 <div class="container-fluid p-4">
-            @RenderBody()
-        </div>
+    @RenderBody()
+</div>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

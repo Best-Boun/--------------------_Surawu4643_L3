@@ -1,0 +1,85 @@
+@model ระบบจองคิวโรงพยาบาล.ViewModels.ProfileViewModel
+@{
+    ViewData["Title"] = "โปรไฟล์";
+    Layout = "_NavLayout";
+}
+
+<div class="container" style="max-width:760px">
+    <h3>👤 ข้อมูลส่วนตัว</h3>
+
+    @if (ViewBag.Success != null)
+    {
+        <div class="alert alert-success">@ViewBag.Success</div>
+    }
+    @if (ViewBag.Status != null)
+    {
+        <div class="alert alert-warning">@ViewBag.Status</div>
+    }
+
+    @if (ViewBag.Age != null)
+    {
+        <div class="alert alert-info">
+            อายุของคุณ <b>@ViewBag.Age</b> ปี
+            @if ((int)ViewBag.Age >= 60)
+            {
+                <span>• คุณมีสิทธิ์โปรโมชั่นผู้สูงอายุ</span>
+            }
+            @if (Model.BirthDate != null && Model.BirthDate.Value.Month == DateTime.Now.Month)
+            {
+                <span>• เดือนนี้เป็นเดือนเกิดของคุณ มีสิทธิ์โปรโมชั่นเดือนเกิด</span>
+            }
+        </div>
+    }
+
+    <form asp-controller="Profile" asp-action="Index" method="post">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <input type="hidden" asp-for="UserId" />
+
+        <div class="mb-3">
+            <label class="form-label">อีเมล (แก้ไขไม่ได้)</label>
+            <input class="form-control" value="@ViewBag.Email" disabled />
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="FirstName" class="form-label">ชื่อ</label>
+                <input asp-for="FirstName" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="LastName" class="form-label">นามสกุล</label>
+                <input asp-for="LastName" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Phone" class="form-label">เบอร์โทรศัพท์</label>
+                <input asp-for="Phone" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="BirthDate" class="form-label">วันเกิด</label>
+                <input asp-for="BirthDate" type="date" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Gender" class="form-label">เพศ</label>
+                <select asp-for="Gender" class="form-select">
+                    <option value="">-- เลือก --</option>
+                    <option value="ชาย">ชาย</option>
+                    <option value="หญิง">หญิง</option>
+                    <option value="อื่นๆ">อื่นๆ</option>
+                </select>
+            </div>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Address" class="form-label">ที่อยู่</label>
+            <textarea asp-for="Address" class="form-control"></textarea>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="EmergencyContact" class="form-label">ผู้ติดต่อฉุกเฉิน</label>
+                <input asp-for="EmergencyContact" class="form-control" />
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="EmergencyPhone" class="form-label">เบอร์ติดต่อฉุกเฉิน</label>
+                <input asp-for="EmergencyPhone" class="form-control" />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">บันทึก</button>
+    </form>
+</div>

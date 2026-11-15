@@ -1,0 +1,36 @@
+@{
+    ViewData["Title"] = "เลือกวันและเวลา";
+    Layout = "_NavLayout";
+    var du = ViewBag.DoctorUser as User;
+    var schedules = ViewBag.ScheduleList as List<DoctorSchedule>;
+}
+
+<h3>ขั้นตอนที่ 3/4 : เลือกวันและเวลา</h3>
+<p>แพทย์: <b>@(du != null ? du.FirstName + " " + du.LastName : "-")</b></p>
+
+@if (schedules.Count == 0)
+{
+    <div class="alert alert-warning">แพทย์ท่านนี้ยังไม่มีรอบเวลาที่เปิดให้จอง</div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr><th>วันที่</th><th>เวลา</th><th>คิวว่าง</th><th></th></tr>
+        </thead>
+        <tbody>
+            @foreach (var s in schedules)
+            {
+                <tr>
+                    <td>@s.ScheduleDate.ToString("dd/MM/yyyy")</td>
+                    <td>@s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm")</td>
+                    <td>@s.AvailableQueue / @s.MaxQueue</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-controller="Doctor" asp-action="Confirm"
+                           asp-route-UserId="@ViewBag.UserId" asp-route-ScheduleId="@s.ScheduleId">เลือกรอบนี้</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

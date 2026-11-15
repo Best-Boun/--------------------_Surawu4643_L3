@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "ประวัติการชำระเงิน";
+    Layout = "_NavLayout";
+    var payments = ViewBag.PaymentList as List<Payment>;
+    var appointments = ViewBag.AppointmentList as List<Appointment>;
+    var receipts = ViewBag.ReceiptList as List<Receipt>;
+}
+
+<h3>💳 ประวัติการชำระเงิน</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr><th>วันที่ชำระ</th><th>หมายเลขคิว</th><th class="text-end">จำนวนเงิน</th><th>วิธีชำระ</th><th>สถานะ</th><th>ใบเสร็จ</th></tr>
+    </thead>
+    <tbody>
+        @foreach (var p in payments)
+        {
+            var ap = appointments.FirstOrDefault(x => x.AppointmentId == p.AppointmentId);
+            var rc = receipts.FirstOrDefault(y => y.PaymentId == p.PaymentId);
+            <tr>
+                <td>@(p.PaymentDate != null ? p.PaymentDate.Value.ToString("dd/MM/yyyy HH:mm") : "-")</td>
+                <td>@(ap != null ? ap.QueueNo : "-")</td>
+                <td class="text-end">@p.Amount.ToString("N2")</td>
+                <td>@p.PaymentMethod</td>
+                <td>@p.PaymentStatus</td>
+                <td>
+                    @if (rc != null)
+                    {
+                        <a asp-controller="Payment" asp-action="Receipt" asp-route-UserId="@ViewBag.UserId" asp-route-PaymentId="@p.PaymentId">@rc.ReceiptNo</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">-</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

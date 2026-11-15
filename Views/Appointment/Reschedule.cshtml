@@ -1,0 +1,45 @@
+@{
+    ViewData["Title"] = "เลื่อนนัด";
+    Layout = "_NavLayout";
+    var ap = ViewBag.Appointment as Appointment;
+    var schedules = ViewBag.ScheduleList as List<DoctorSchedule>;
+}
+
+<h3>เลื่อนนัด</h3>
+<p>นัดเดิม: <b>@ap.QueueNo</b> วันที่ @ap.AppointmentDate.ToString("dd/MM/yyyy") เวลา @ap.AppointmentTime.ToString("HH:mm")</p>
+
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+@if (schedules.Count == 0)
+{
+    <div class="alert alert-warning">ไม่มีรอบเวลาอื่นที่ว่างของแพทย์ท่านนี้</div>
+}
+else
+{
+    <table class="table table-bordered table-striped">
+        <thead><tr><th>วันที่</th><th>เวลา</th><th>คิวว่าง</th><th></th></tr></thead>
+        <tbody>
+            @foreach (var s in schedules)
+            {
+                <tr>
+                    <td>@s.ScheduleDate.ToString("dd/MM/yyyy")</td>
+                    <td>@s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm")</td>
+                    <td>@s.AvailableQueue / @s.MaxQueue</td>
+                    <td>
+                        <form asp-controller="Appointment" asp-action="DoReschedule" method="post"
+                              onsubmit="return confirm('ยืนยันการเลื่อนนัด?');">
+                            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                            <input type="hidden" name="AppointmentId" value="@ap.AppointmentId" />
+                            <input type="hidden" name="NewScheduleId" value="@s.ScheduleId" />
+                            <button class="btn btn-sm btn-primary">เลื่อนมารอบนี้</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<a class="btn btn-outline-secondary" asp-controller="Appointment" asp-action="MyAppointments" asp-route-UserId="@ViewBag.UserId">กลับ</a>

@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "ใบเสร็จ";
+    Layout = "_NavLayout";
+    var pay = ViewBag.Payment as Payment;
+    var rc = ViewBag.ReceiptInfo as Receipt;
+    var ap = ViewBag.Appointment as Appointment;
+    var details = ViewBag.Details as List<PaymentDetail>;
+    var pu = ViewBag.PatientUser as User;
+}
+
+@if (rc == null)
+{
+    <div class="alert alert-warning">
+        ยังไม่มีใบเสร็จสำหรับรายการนี้ (สถานะการชำระเงิน: <b>@pay.PaymentStatus</b>)
+        ใบเสร็จจะออกหลังเจ้าหน้าที่การเงินตรวจสอบการชำระเงินแล้ว
+    </div>
+}
+else
+{
+    <div class="card" style="max-width:700px">
+        <div class="card-body">
+            <h4 class="text-center">ใบเสร็จรับเงิน</h4>
+            <p class="text-center text-muted">Hospital Queue</p>
+            <div>เลขที่ใบเสร็จ: <b>@rc.ReceiptNo</b></div>
+            <div>วันที่ออก: @(rc.IssuedDate != null ? rc.IssuedDate.Value.ToString("dd/MM/yyyy HH:mm") : "-")</div>
+            <div>ผู้ป่วย: @(pu != null ? pu.FirstName + " " + pu.LastName : "-")</div>
+            <div>หมายเลขคิว: @(ap != null ? ap.QueueNo : "-")</div>
+            <div class="mb-3">วิธีชำระ: @pay.PaymentMethod</div>
+
+            <table class="table table-sm">
+                <thead><tr><th>รายการ</th><th class="text-end">จำนวนเงิน</th></tr></thead>
+                <tbody>
+                    @foreach (var d in details)
+                    {
+                        <tr><td>@d.Description</td><td class="text-end">@d.Amount.ToString("N2")</td></tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr><td>รวมค่าบริการ</td><td class="text-end">@rc.TotalAmount.ToString("N2")</td></tr>
+                    <tr><td>ส่วนลด</td><td class="text-end">-@rc.DiscountAmount.ToString("N2")</td></tr>
+                    <tr class="fw-bold"><td>ยอดสุทธิ</td><td class="text-end">@rc.NetAmount.ToString("N2")</td></tr>
+                </tfoot>
+            </table>
+            <button class="btn btn-outline-primary" onclick="window.print()">🖨️ พิมพ์</button>
+        </div>
+    </div>
+}
+<a class="btn btn-outline-secondary mt-3" asp-controller="Payment" asp-action="History" asp-route-UserId="@ViewBag.UserId">กลับ</a>

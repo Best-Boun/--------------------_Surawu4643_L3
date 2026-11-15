@@ -1,0 +1,69 @@
+@model IEnumerable<Appointment>
+@{
+    ViewData["Title"] = "นัดหมายของฉัน";
+    Layout = "_NavLayout";
+    var doctors = ViewBag.DoctorList as List<Doctor>;
+    var users = ViewBag.UserList as List<User>;
+    var payments = ViewBag.PaymentList as List<Payment>;
+}
+
+<h3>📋 นัดหมายของฉัน</h3>
+
+@if (TempData["Success"] is string ok)
+{
+    <div class="alert alert-success">@ok</div>
+}
+@if (TempData["Error"] is string err)
+{
+    <div class="alert alert-danger">@err</div>
+}
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr>
+            <th>หมายเลขคิว</th><th>วันที่/เวลา</th><th>แพทย์</th>
+            <th>สถานะ</th><th class="text-end">ยอดสุทธิ</th><th>การชำระเงิน</th><th>จัดการ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var a in Model)
+        {
+            var doc = doctors.FirstOrDefault(x => x.DoctorId == a.DoctorId);
+            var docUser = doc == null ? null : users.FirstOrDefault(y => y.UserId == doc.UserId);
+            var pay = payments.Where(z => z.AppointmentId == a.AppointmentId).OrderByDescending(z => z.PaymentId).FirstOrDefault();
+            bool canPay = a.Status != "CANCELLED" && (pay == null || (pay.PaymentStatus != "PENDING" && pay.PaymentStatus != "PAID"));
+            <tr>
+                <td>@a.QueueNo</td>
+                <td>@a.AppointmentDate.ToString("dd/MM/yyyy") @a.AppointmentTime.ToString("HH:mm")</td>
+                <td>@(docUser != null ? docUser.FirstName + " " + docUser.LastName : "-")</td>
+                <td>@a.Status</td>
+                <td class="text-end">@((a.NetPrice ?? 0).ToString("N2"))</td>
+                <td>@(pay != null ? pay.PaymentStatus : "ยังไม่ชำระ")</td>
+                <td>
+                    @if (canPay)
+                    {
+                        <a class="btn btn-sm btn-success" asp-controller="Payment" asp-action="Pay"
+                           asp-route-UserId="@ViewBag.UserId" asp-route-AppointmentId="@a.AppointmentId">ชำระเงิน</a>
+                    }
+                    @if (pay != null && pay.PaymentStatus == "PAID")
+                    {
+                        <a class="btn btn-sm btn-outline-primary" asp-controller="Payment" asp-action="Receipt"
+                           asp-route-UserId="@ViewBag.UserId" asp-route-PaymentId="@pay.PaymentId">ใบเสร็จ</a>
+                    }
+                    @if (a.Status == "WAITING")
+                    {
+                        <a class="btn btn-sm btn-outline-warning" asp-controller="Appointment" asp-action="Reschedule"
+                           asp-route-UserId="@ViewBag.UserId" asp-route-AppointmentId="@a.AppointmentId">เลื่อนนัด</a>
+
+                        <form asp-controller="Appointment" asp-action="Cancel" method="post" class="d-inline"
+                              onsubmit="return confirm('ยืนยันการยกเลิกนัดนี้?');">
+                            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                            <input type="hidden" name="AppointmentId" value="@a.AppointmentId" />
+                            <button class="btn btn-sm btn-outline-danger">ยกเลิก</button>
+                        </form>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

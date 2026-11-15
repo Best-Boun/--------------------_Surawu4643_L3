@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ระบบจองคิวโรงพยายาบา_Surawu4643_L3.Models;
-using ระบบจองคิวโรงพยายาบาล.ViewModels;
 using ระบบจองคิวโรงพยาบาล.ViewModels;
 namespace ระบบจองคิวโรงพยายาบา_Surawu4643_L3.Controllers;
 
@@ -100,9 +99,8 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Login()
     {
-        return View(new LoginRegisViewModel());
+        return View();
     }
-
     [HttpPost]
     public IActionResult Login(LoginRegisViewModel data)
     {
@@ -120,16 +118,34 @@ public class HomeController : Controller
             ViewBag.Status = "อีเมลหรือรหัสผ่านไม่ถูกต้อง";
             return View(data);
         }
+
         TempData["LoginSuccess"] = user.FirstName + " " + user.LastName;
+
+        var role = (from r in _db.Roles
+                    where r.RoleId == user.RoleId
+                    select r).FirstOrDefault();
+
+        if (role != null && role.RoleName == "Patient")
+        {
+            var patient = (from p in _db.Patients
+                           where p.UserId == user.UserId
+                           select p).FirstOrDefault();
+
+            // บัญชีเก่าที่ยังไม่มีข้อมูล patient ให้ไปกรอกโปรไฟล์ก่อน
+            if (patient == null)
+            {
+                return RedirectToAction("Index", "Profile", new { UserId = user.UserId });
+            }
+            return RedirectToAction("Index", "Doctor", new { UserId = user.UserId });
+        }
+
         return RedirectToAction("Index", "Home");
     }
-
     [HttpGet]
     public IActionResult Register()
     {
-        return View(new LoginRegisViewModel());
+        return View();
     }
-
     [HttpPost]
     public IActionResult Register(LoginRegisViewModel data)
     {
@@ -137,6 +153,18 @@ public class HomeController : Controller
             string.IsNullOrWhiteSpace(data.LastName))
         {
             ViewBag.Status = "กรุณากรอกชื่อและนามสกุล";
+            return View(data);
+        }
+
+        if (data.BirthDate == null)
+        {
+            ViewBag.Status = "กรุณาระบุวันเกิด";
+            return View(data);
+        }
+
+        if (data.BirthDate.Value > DateOnly.FromDateTime(DateTime.Now))
+        {
+            ViewBag.Status = "วันเกิดต้องไม่เป็นวันในอนาคต";
             return View(data);
         }
 
@@ -173,13 +201,25 @@ public class HomeController : Controller
         user.LastName = data.LastName;
         user.Phone = data.Phone;
         user.Address = data.Address;
-        user.Status = "Active";
+        user.Birthday = data.BirthDate;
+        user.Status = "ACTIVE";
         user.CreatedAt = DateTime.Now;
-
         _db.Add(user);
+
+        Patient patient = new Patient();
+        patient.User = user;                       // ผูกกับ user ข้างบน (บันทึกครั้งเดียวได้ทั้งคู่)
+        patient.BirthDate = data.BirthDate.Value;
+        patient.Address = data.Address;
+        _db.Add(patient);
+
         _db.SaveChanges();
 
-        return RedirectToAction("UserList");
+        return RedirectToAction("Login");
+    }
+
+    public IActionResult Logout()
+    {
+        return RedirectToAction("Login", "Home");
     }
 
     [HttpGet]
@@ -268,49 +308,49 @@ public class HomeController : Controller
         return View(users);
     }
     public IActionResult EditUser(int UserId)
-{
-    var User = (from u in _db.Users
-                where u.UserId == UserId
-                select u).FirstOrDefault();
-
-    return View(User);
-}
-
-[HttpPost]
-public IActionResult EditUser(User data)
-{
-    var User = (from u in _db.Users
-                where u.UserId == data.UserId
-                select u).FirstOrDefault();
-
-    User.FirstName = data.FirstName;
-    User.LastName = data.LastName;
-    User.Email = data.Email;
-    User.Phone = data.Phone;
-    User.Address = data.Address;
-
-    _db.SaveChanges();
-
-    return RedirectToAction("UserList", "Home");
-}
-
-public IActionResult DeleteUser(int UserId)
-{
-    var check = (from u in _db.Users
-                 where u.UserId == UserId
-                 select u).FirstOrDefault();
-
-    if (check != null)
     {
-        _db.Remove(check);
+        var User = (from u in _db.Users
+                    where u.UserId == UserId
+                    select u).FirstOrDefault();
+
+        return View(User);
+    }
+
+    [HttpPost]
+    public IActionResult EditUser(User data)
+    {
+        var User = (from u in _db.Users
+                    where u.UserId == data.UserId
+                    select u).FirstOrDefault();
+
+        User.FirstName = data.FirstName;
+        User.LastName = data.LastName;
+        User.Email = data.Email;
+        User.Phone = data.Phone;
+        User.Address = data.Address;
+
         _db.SaveChanges();
-        return RedirectToAction("UserList", "Home", new { status = "ลบสำเร็จ" });
+
+        return RedirectToAction("UserList", "Home");
     }
-    else
+
+    public IActionResult DeleteUser(int UserId)
     {
-        return RedirectToAction("UserList", "Home", new { status = "ลบไม่สำเร็จ" });
+        var check = (from u in _db.Users
+                     where u.UserId == UserId
+                     select u).FirstOrDefault();
+
+        if (check != null)
+        {
+            _db.Remove(check);
+            _db.SaveChanges();
+            return RedirectToAction("UserList", "Home", new { status = "ลบสำเร็จ" });
+        }
+        else
+        {
+            return RedirectToAction("UserList", "Home", new { status = "ลบไม่สำเร็จ" });
+        }
     }
-}
 
     private readonly Csi402dbContext _db;
     public HomeController(Csi402dbContext db)

@@ -20,5 +20,7 @@ namespace ระบบจองคิวโรงพยาบาล.ViewModels
         public string? Address { get; set; }
 
         public string? RoleName { get; set; }
+
+        public DateOnly? BirthDate { get; set; }
     }
 }

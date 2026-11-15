@@ -1,0 +1,400 @@
+@{
+    ViewData["Title"] = "ค้นหาแพทย์";
+    Layout = "_NavLayout";
+    var doctors = ViewBag.DoctorList as List<Doctor> ?? new List<Doctor>();
+    var users = ViewBag.UserList as List<User> ?? new List<User>();
+    var depts = ViewBag.DeptList as List<Department> ?? new List<Department>();
+    var schedules = ViewBag.ScheduleList as List<DoctorSchedule> ?? new List<DoctorSchedule>();
+    var specializations = ViewBag.SpecializationList as List<string> ?? new List<string>();
+    var selectedDepartmentId = (int?)ViewBag.DepartmentId;
+    var selectedSpecialization = ViewBag.Specialization as string;
+    var keyword = ViewBag.Keyword as string ?? "";
+}
+
+<style>
+    .doctor-search-page {
+        --doctor-blue: #347ee8;
+        --doctor-ink: #1d2b45;
+        --doctor-muted: #78869b;
+        color: var(--doctor-ink);
+        padding: 8px 8px 36px;
+    }
+
+    .doctor-page-heading {
+        margin: 8px 0 22px;
+    }
+
+    .doctor-page-heading h1 {
+        margin: 0 0 8px;
+        font-size: clamp(1.55rem, 2.4vw, 2rem);
+        font-weight: 750;
+        letter-spacing: -.03em;
+    }
+
+    .doctor-page-heading p {
+        margin: 0;
+        color: var(--doctor-muted);
+    }
+
+    .doctor-filter-panel {
+        padding: 18px;
+        border: 1px solid #e3e9f1;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 6px 20px rgba(29, 52, 83, .05);
+    }
+
+    .doctor-filter-panel label {
+        display: block;
+        margin-bottom: 7px;
+        color: #53627a;
+        font-size: .82rem;
+        font-weight: 650;
+    }
+
+    .doctor-filter-panel .form-control,
+    .doctor-filter-panel .form-select {
+        min-height: 42px;
+        border-color: #dfe6ef;
+        border-radius: 9px;
+        font-size: .9rem;
+    }
+
+    .doctor-filter-actions {
+        display: flex;
+        gap: 8px;
+        height: 100%;
+        align-items: flex-end;
+    }
+
+    .doctor-filter-actions .btn {
+        min-height: 42px;
+        white-space: nowrap;
+    }
+
+    .doctor-results-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin: 24px 0 16px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid #dfe5ed;
+    }
+
+    .doctor-results-heading h2 {
+        margin: 0 0 4px;
+        font-size: 1.15rem;
+        font-weight: 720;
+    }
+
+    .doctor-results-heading p {
+        margin: 0;
+        color: var(--doctor-muted);
+        font-size: .82rem;
+    }
+
+    .doctor-result-count {
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: #edf5ff;
+        color: #2469c6;
+        font-size: .82rem;
+        font-weight: 650;
+        white-space: nowrap;
+    }
+
+    .doctor-card {
+        height: 100%;
+        padding: 16px;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        background: #fff;
+        box-shadow: 0 6px 18px rgba(29, 52, 83, .045);
+        transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .doctor-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 26px rgba(29, 52, 83, .1);
+    }
+
+    .doctor-card__identity {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        min-height: 66px;
+    }
+
+    .doctor-card__avatar {
+        display: grid;
+        width: 58px;
+        height: 58px;
+        flex: 0 0 58px;
+        place-items: center;
+        border: 1px solid #d7e7fa;
+        border-radius: 50%;
+        background: linear-gradient(145deg, #eaf4ff, #d6e8ff);
+        color: #2e74ce;
+        font-size: 1.35rem;
+        font-weight: 750;
+    }
+
+    .doctor-card__name {
+        margin: 0 0 4px;
+        font-size: 1rem;
+        font-weight: 720;
+    }
+
+    .doctor-card__specialization {
+        margin: 0;
+        color: var(--doctor-muted);
+        font-size: .82rem;
+    }
+
+    .doctor-card__details {
+        display: grid;
+        gap: 9px;
+        margin: 14px 0;
+        padding: 12px 0;
+        border-top: 1px solid #edf1f5;
+        border-bottom: 1px solid #edf1f5;
+    }
+
+    .doctor-card__detail {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        color: #5e6d82;
+        font-size: .83rem;
+    }
+
+    .doctor-card__detail-icon {
+        width: 16px;
+        flex: 0 0 16px;
+        color: #7b8ba1;
+        text-align: center;
+    }
+
+    .doctor-card__availability {
+        color: #2874d6;
+        font-weight: 600;
+    }
+
+    .doctor-card__bio {
+        display: -webkit-box;
+        overflow: hidden;
+        margin: 0 0 12px;
+        color: var(--doctor-muted);
+        font-size: .82rem;
+        line-height: 1.5;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .doctor-card__button {
+        width: 100%;
+        padding: 9px 12px;
+        border-radius: 9px;
+        background: var(--doctor-blue);
+        font-weight: 650;
+    }
+
+    .doctor-card__button:hover {
+        background: #236bcf;
+    }
+
+    .doctor-empty {
+        padding: 36px 16px;
+        border: 1px dashed #cbd6e4;
+        border-radius: 14px;
+        background: #fff;
+        color: var(--doctor-muted);
+        text-align: center;
+    }
+
+    .doctor-tips {
+        margin-top: 28px;
+        padding-top: 20px;
+        border-top: 1px solid #dfe5ed;
+    }
+
+    .doctor-tips h2 {
+        margin: 0 0 14px;
+        font-size: 1.1rem;
+        font-weight: 720;
+    }
+
+    .doctor-tip {
+        height: 100%;
+        padding: 16px;
+        border: 1px solid #e4e9f0;
+        border-radius: 12px;
+        background: #fff;
+    }
+
+    .doctor-tip__icon {
+        display: grid;
+        width: 34px;
+        height: 34px;
+        margin-bottom: 10px;
+        place-items: center;
+        border-radius: 10px;
+        background: #edf5ff;
+        color: var(--doctor-blue);
+        font-weight: 700;
+    }
+
+    .doctor-tip h3 {
+        margin: 0 0 4px;
+        font-size: .9rem;
+        font-weight: 700;
+    }
+
+    .doctor-tip p {
+        margin: 0;
+        color: var(--doctor-muted);
+        font-size: .8rem;
+    }
+
+    @@media (max-width: 767.98px) {
+        .doctor-search-page { padding: 0 0 24px; }
+        .doctor-filter-actions { align-items: stretch; }
+        .doctor-filter-actions .btn { flex: 1; }
+        .doctor-results-heading { align-items: flex-start; }
+    }
+</style>
+
+<main class="doctor-search-page">
+    <header class="doctor-page-heading">
+        <div class="text-primary fw-semibold small mb-2">นัดหมายแพทย์ · ขั้นตอนที่ 2 จาก 4</div>
+        <h1>ค้นหาแพทย์</h1>
+        <p>ค้นหาและเลือกแพทย์ผู้เชี่ยวชาญตามความต้องการของคุณเพื่อทำการจองนัดหมาย</p>
+    </header>
+
+    <form asp-controller="Doctor" asp-action="SelectDoctor" method="get" class="doctor-filter-panel">
+        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+        <div class="row g-3 align-items-end">
+            <div class="col-lg-3 col-md-6">
+                <label for="doctor-keyword">ค้นหาแพทย์</label>
+                <input id="doctor-keyword" name="Keyword" value="@keyword" class="form-control"
+                       placeholder="ระบุชื่อแพทย์..." />
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label for="doctor-department">แผนก</label>
+                <select id="doctor-department" name="DepartmentId" class="form-select">
+                    <option value="">ทุกแผนก</option>
+                    @foreach (var dp in depts)
+                    {
+                        <option value="@dp.DepartmentId"
+                                selected="@(selectedDepartmentId == dp.DepartmentId ? "selected" : null)">
+                            @dp.DepartmentName
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <label for="doctor-specialization">ความเชี่ยวชาญ</label>
+                <select id="doctor-specialization" name="Specialization" class="form-select">
+                    <option value="">ทุกความเชี่ยวชาญ</option>
+                    @foreach (var specialization in specializations)
+                    {
+                        <option value="@specialization"
+                                selected="@(selectedSpecialization == specialization ? "selected" : null)">
+                            @specialization
+                        </option>
+                    }
+                </select>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="doctor-filter-actions">
+                    <a class="btn btn-outline-secondary" asp-controller="Doctor" asp-action="SelectDoctor"
+                       asp-route-UserId="@ViewBag.UserId">ล้างตัวกรอง</a>
+                    <button type="submit" class="btn btn-primary px-4">⌕ ค้นหา</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <section aria-labelledby="doctor-results-title">
+        <div class="doctor-results-heading">
+            <div>
+                <h2 id="doctor-results-title">ผลการค้นหา</h2>
+                <p>เลือกแพทย์เพื่อดูวันและเวลาที่เปิดให้จอง</p>
+            </div>
+            <span class="doctor-result-count">พบแพทย์ @doctors.Count ท่าน</span>
+        </div>
+
+        @if (doctors.Count == 0)
+        {
+            <div class="doctor-empty">ไม่พบแพทย์ตามเงื่อนไขที่ค้นหา ลองเปลี่ยนตัวกรองแล้วค้นหาอีกครั้ง</div>
+        }
+        else
+        {
+            <div class="row g-3">
+                @foreach (var doctor in doctors)
+                {
+                    var doctorUser = users.FirstOrDefault(x => x.UserId == doctor.UserId);
+                    var department = depts.FirstOrDefault(x => x.DepartmentId == doctor.DepartmentId);
+                    var nextSchedule = schedules
+                        .Where(x => x.DoctorId == doctor.DoctorId)
+                        .OrderBy(x => x.ScheduleDate)
+                        .ThenBy(x => x.StartTime)
+                        .FirstOrDefault();
+                    var initial = !string.IsNullOrWhiteSpace(doctorUser?.FirstName)
+                        ? doctorUser.FirstName[..1]
+                        : "พ";
+                    var doctorName = doctorUser == null
+                        ? "แพทย์"
+                        : $"{doctorUser.FirstName} {doctorUser.LastName}";
+
+                    <div class="col-xl-4 col-md-6">
+                        <article class="doctor-card">
+                            <div class="doctor-card__identity">
+                                <div class="doctor-card__avatar" aria-hidden="true">@initial</div>
+                                <div>
+                                    <h3 class="doctor-card__name">@doctorName</h3>
+                                    <p class="doctor-card__specialization">
+                                        @(string.IsNullOrWhiteSpace(doctor.Specialization) ? "แพทย์ประจำแผนก" : doctor.Specialization)
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="doctor-card__details">
+                                <div class="doctor-card__detail">
+                                    <span class="doctor-card__detail-icon" aria-hidden="true">✚</span>
+                                    <span>แผนก: @(department?.DepartmentName ?? "-")</span>
+                                </div>
+                                @if (nextSchedule != null)
+                                {
+                                    <div class="doctor-card__detail doctor-card__availability">
+                                        <span class="doctor-card__detail-icon" aria-hidden="true">◷</span>
+                                        <span>ว่างวันที่ @nextSchedule.ScheduleDate.ToString("dd/MM/yyyy") เวลา @nextSchedule.StartTime.ToString("HH:mm") น.</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="doctor-card__detail">
+                                        <span class="doctor-card__detail-icon" aria-hidden="true">◷</span>
+                                        <span>ยังไม่มีเวลาที่เปิดจอง</span>
+                                    </div>
+                                }
+                            </div>
+
+                            @if (!string.IsNullOrWhiteSpace(doctor.Biography))
+                            {
+                                <p class="doctor-card__bio">@doctor.Biography</p>
+                            }
+
+                            <a class="btn btn-primary doctor-card__button"
+                               asp-controller="Doctor" asp-action="SelectDate"
+                               asp-route-UserId="@ViewBag.UserId" asp-route-DoctorId="@doctor.DoctorId">
+                                จองนัดตรวจ <span class="float-end" aria-hidden="true">›</span>
+                            </a>
+                        </article>
+                    </div>
+                }
+            </div>
+        }
+    </section>
+</main>
