@@ -155,6 +155,10 @@ public class HomeController : Controller
         {
             return RedirectToAction("Index", "Admin", new { UserId = user.UserId });
         }
+        if (role != null && role.RoleName == "Manager")
+        {
+            return RedirectToAction("Index", "Manager", new { UserId = user.UserId });
+        }
         if (user.Status != null && !string.Equals(user.Status, "ACTIVE", StringComparison.OrdinalIgnoreCase))
         {
             ViewBag.Status = "บัญชีนี้ถูกระงับการใช้งาน กรุณาติดต่อผู้ดูแลระบบ";
