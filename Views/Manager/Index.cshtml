@@ -5,8 +5,8 @@
     var doctors = ViewBag.DoctorList as List<Doctor>;
     var users = ViewBag.UserList as List<User>;
     var depts = ViewBag.DeptList as List<Department>;
-    DateOnly from = (DateOnly)ViewBag.From;
-    DateOnly to = (DateOnly)ViewBag.To;
+    DateOnly fromDate = (DateOnly)ViewBag.From;
+    DateOnly toDate = (DateOnly)ViewBag.To;
 
     int total = aps.Count;
     int cancelled = aps.Count(x => x.Status == "CANCELLED");
@@ -25,11 +25,11 @@
     <input type="hidden" name="UserId" value="@ViewBag.UserId" />
     <div class="col-md-3">
         <label class="form-label">ตั้งแต่วันที่</label>
-        <input type="date" name="From" value="@from.ToString("yyyy-MM-dd")" class="form-control" />
+        <input type="date" name="From" value="@fromDate.ToString("yyyy-MM-dd")" class="form-control" />
     </div>
     <div class="col-md-3">
         <label class="form-label">ถึงวันที่</label>
-        <input type="date" name="To" value="@to.ToString("yyyy-MM-dd")" class="form-control" />
+        <input type="date" name="To" value="@toDate.ToString("yyyy-MM-dd")" class="form-control" />
     </div>
     <div class="col-md-2 d-flex align-items-end">
         <button class="btn btn-primary w-100">ดูข้อมูล</button>
@@ -37,35 +37,71 @@
 </form>
 
 <p class="text-muted">
-    ช่วงวันนัด: @from.ToString("dd/MM/yyyy") - @to.ToString("dd/MM/yyyy")
+    ช่วงวันนัด: @fromDate.ToString("dd/MM/yyyy") - @toDate.ToString("dd/MM/yyyy")
 </p>
 
 <div class="row mb-4">
-    <div class="col-md-4 mb-3"><div class="card text-bg-primary"><div class="card-body">
-        <div>การจองทั้งหมดในช่วงนี้</div><h3>@total คิว</h3>
-    </div></div></div>
-    <div class="col-md-4 mb-3"><div class="card text-bg-success"><div class="card-body">
-        <div>การจองที่ไม่ถูกยกเลิก</div><h3>@(total - cancelled) คิว</h3>
-    </div></div></div>
-    <div class="col-md-4 mb-3"><div class="card text-bg-secondary"><div class="card-body">
-        <div>ยกเลิก</div><h3>@cancelled คิว</h3>
-    </div></div></div>
-    <div class="col-md-4 mb-3"><div class="card text-bg-warning"><div class="card-body">
-        <div>ผู้ป่วยทั้งหมดในระบบ</div><h3>@ViewBag.PatientTotal คน</h3>
-    </div></div></div>
-    <div class="col-md-4 mb-3"><div class="card"><div class="card-body">
-        <div>ผู้ป่วยสมัครใหม่ในช่วงนี้</div><h3>@ViewBag.NewPatients คน</h3>
-    </div></div></div>
-    <div class="col-md-4 mb-3"><div class="card"><div class="card-body">
-        <div>ผู้ป่วยที่จองในช่วงนี้</div><h3>@ViewBag.BookedPatients คน</h3>
-    </div></div></div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-bg-primary">
+            <div class="card-body">
+                <div>การจองทั้งหมดในช่วงนี้</div>
+                <h3>@total คิว</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-bg-success">
+            <div class="card-body">
+                <div>การจองที่ไม่ถูกยกเลิก</div>
+                <h3>@(total - cancelled) คิว</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-bg-secondary">
+            <div class="card-body">
+                <div>ยกเลิก</div>
+                <h3>@cancelled คิว</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card text-bg-warning">
+            <div class="card-body">
+                <div>ผู้ป่วยทั้งหมดในระบบ</div>
+                <h3>@ViewBag.PatientTotal คน</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div>ผู้ป่วยสมัครใหม่ในช่วงนี้</div>
+                <h3>@ViewBag.NewPatients คน</h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <div>ผู้ป่วยที่จองในช่วงนี้</div>
+                <h3>@ViewBag.BookedPatients คน</h3>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="row">
     <div class="col-lg-6 mb-4">
         <h5>การจองแยกตามสถานะ</h5>
         <table class="table table-bordered table-striped">
-            <thead><tr><th>สถานะ</th><th class="text-end">จำนวน</th><th style="width:40%">สัดส่วน</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>สถานะ</th>
+                    <th class="text-end">จำนวน</th>
+                    <th style="width:40%">สัดส่วน</th>
+                </tr>
+            </thead>
             <tbody>
                 @foreach (var st in statuses)
                 {
@@ -88,16 +124,26 @@
     <div class="col-lg-6 mb-4">
         <h5>การจองแยกตามแผนก</h5>
         <table class="table table-bordered table-striped">
-            <thead><tr><th>แผนก</th><th class="text-end">จำนวนการจอง</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>แผนก</th>
+                    <th class="text-end">จำนวนการจอง</th>
+                </tr>
+            </thead>
             <tbody>
                 @if (depts.Count == 0)
                 {
-                    <tr><td colspan="2" class="text-center text-muted">ไม่มีข้อมูลแผนก</td></tr>
+                    <tr>
+                        <td colspan="2" class="text-center text-muted">ไม่มีข้อมูลแผนก</td>
+                    </tr>
                 }
                 @foreach (var dp in depts)
                 {
                     int n = aps.Count(a => doctors.Any(d => d.DoctorId == a.DoctorId && d.DepartmentId == dp.DepartmentId));
-                    <tr><td>@dp.DepartmentName</td><td class="text-end">@n</td></tr>
+                    <tr>
+                        <td>@dp.DepartmentName</td>
+                        <td class="text-end">@n</td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -108,11 +154,18 @@
     <div class="col-lg-6 mb-4">
         <h5>การจองแยกตามแพทย์</h5>
         <table class="table table-bordered table-striped">
-            <thead><tr><th>แพทย์</th><th class="text-end">จำนวนการจอง</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>แพทย์</th>
+                    <th class="text-end">จำนวนการจอง</th>
+                </tr>
+            </thead>
             <tbody>
                 @if (doctors.Count == 0)
                 {
-                    <tr><td colspan="2" class="text-center text-muted">ไม่มีข้อมูลแพทย์</td></tr>
+                    <tr>
+                        <td colspan="2" class="text-center text-muted">ไม่มีข้อมูลแพทย์</td>
+                    </tr>
                 }
                 @foreach (var d in doctors)
                 {
@@ -130,15 +183,25 @@
     <div class="col-lg-6 mb-4">
         <h5>การจองรายวัน</h5>
         <table class="table table-bordered table-striped">
-            <thead><tr><th>วันที่นัด</th><th class="text-end">จำนวนการจอง</th></tr></thead>
+            <thead>
+                <tr>
+                    <th>วันที่นัด</th>
+                    <th class="text-end">จำนวนการจอง</th>
+                </tr>
+            </thead>
             <tbody>
                 @if (days.Count == 0)
                 {
-                    <tr><td colspan="2" class="text-center text-muted">ไม่มีการจองในช่วงที่เลือก</td></tr>
+                    <tr>
+                        <td colspan="2" class="text-center text-muted">ไม่มีการจองในช่วงที่เลือก</td>
+                    </tr>
                 }
                 @foreach (var g in days)
                 {
-                    <tr><td>@g.Key.ToString("dd/MM/yyyy")</td><td class="text-end">@g.Count()</td></tr>
+                    <tr>
+                        <td>@g.Key.ToString("dd/MM/yyyy")</td>
+                        <td class="text-end">@g.Count()</td>
+                    </tr>
                 }
             </tbody>
         </table>

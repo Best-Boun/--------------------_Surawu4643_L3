@@ -37,34 +37,34 @@ public class ManagerController : Controller
         }
 
         var today = DateOnly.FromDateTime(DateTime.Now);
-        var from = From ?? new DateOnly(today.Year, today.Month, 1);
-        var to = To ?? today;
+        var fromDate = From ?? new DateOnly(today.Year, today.Month, 1);
+        var toDate = To ?? today;
 
-        if (to < from)
+        if (toDate < fromDate)
         {
             ViewBag.Status = "วันที่สิ้นสุดต้องไม่ก่อนวันที่เริ่ม ระบบสลับวันที่ให้แล้ว";
-            var tmp = from;
-            from = to;
-            to = tmp;
+            var tmp = fromDate;
+            fromDate = toDate;
+            toDate = tmp;
         }
 
         // การจองที่วันนัดอยู่ในช่วงที่เลือก
         var aps = (from a in _db.Appointments
-                   where a.AppointmentDate >= from && a.AppointmentDate <= to
+                   where a.AppointmentDate >= fromDate && a.AppointmentDate <= toDate
                    orderby a.AppointmentDate
                    select a).ToList();
 
         // ผู้ป่วยที่สมัครในช่วงที่เลือก
-        DateTime fromTime = from.ToDateTime(TimeOnly.MinValue);
-        DateTime toTime = to.AddDays(1).ToDateTime(TimeOnly.MinValue);
+        DateTime fromTime = fromDate.ToDateTime(TimeOnly.MinValue);
+        DateTime toTime = toDate.AddDays(1).ToDateTime(TimeOnly.MinValue);
         int newPatients = (from p in _db.Patients
                            join u in _db.Users on p.UserId equals u.UserId
                            where u.CreatedAt >= fromTime && u.CreatedAt < toTime
                            select p).Count();
 
         ViewBag.UserId = UserId;
-        ViewBag.From = from;
-        ViewBag.To = to;
+        ViewBag.From = fromDate;
+        ViewBag.To = toDate;
         ViewBag.AppointmentList = aps;
         ViewBag.PatientTotal = (from p in _db.Patients select p).Count();
         ViewBag.NewPatients = newPatients;
