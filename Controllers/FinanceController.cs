@@ -60,42 +60,97 @@ public class FinanceController : Controller
     }
 
     // หน้าหลัก: สรุปตัวเลข + รายการชำระเงิน (กรองตามสถานะ)
-    public IActionResult Index(int UserId, string? Status)
+    public IActionResult Index(int UserId, string? Status, int? PaymentId, string? Q)
+{
+    if (!IsFinance(UserId))
     {
-        if (!IsFinance(UserId))
-        {
-            return RedirectToAction("Login", "Home");
-        }
-
-        if (string.IsNullOrEmpty(Status))
-        {
-            Status = "PENDING";
-        }
-
-        var payments = (from p in _db.Payments
-                        where Status == "ALL" || p.PaymentStatus == Status
-                        orderby p.PaymentId descending
-                        select p).ToList();
-
-        // ตัวเลขสรุป
-        DateTime todayStart = DateTime.Today;
-        var paidToday = (from p in _db.Payments
-                         where p.PaymentStatus == "PAID" && p.PaymentDate >= todayStart
-                         select p).ToList();
-
-        ViewBag.UserId = UserId;
-        ViewBag.FilterStatus = Status;
-        ViewBag.PaymentList = payments;
-        ViewBag.AppointmentList = (from a in _db.Appointments select a).ToList();
-        ViewBag.PatientList = (from p in _db.Patients select p).ToList();
-        ViewBag.UserList = (from u in _db.Users select u).ToList();
-        ViewBag.PendingCount = (from p in _db.Payments
-                                where p.PaymentStatus == "PENDING"
-                                select p).Count();
-        ViewBag.PaidTodayCount = paidToday.Count;
-        ViewBag.PaidTodayTotal = paidToday.Sum(x => x.Amount);
-        return View();
+        return RedirectToAction("Login", "Home");
     }
+
+    if (string.IsNullOrEmpty(Status))
+    {
+        Status = "PENDING";
+    }
+
+    var payments = (from p in _db.Payments
+                    where Status == "ALL" || p.PaymentStatus == Status
+                    orderby p.PaymentId descending
+                    select p).ToList();
+
+    var appointments = (from a in _db.Appointments select a).ToList();
+    var patients = (from p in _db.Patients select p).ToList();
+    var users = (from u in _db.Users select u).ToList();
+    var lines = (from l in _db.AppointmentServices select l).ToList();
+    var services = (from s in _db.Services select s).ToList();
+
+    // ค้นหาเลขคิว / ชื่อผู้ป่วย
+    if (!string.IsNullOrWhiteSpace(Q))
+    {
+        string key = Q.Trim();
+        payments = payments.Where(p =>
+        {
+            var ap = appointments.FirstOrDefault(a => a.AppointmentId == p.AppointmentId);
+            var pt = patients.FirstOrDefault(x => x.PatientId == p.PatientId);
+            var pu = pt == null ? null : users.FirstOrDefault(u => u.UserId == pt.UserId);
+            string name = pu != null ? pu.FirstName + " " + pu.LastName : "";
+            return (ap != null && ap.QueueNo.Contains(key, StringComparison.OrdinalIgnoreCase))
+                || name.Contains(key, StringComparison.OrdinalIgnoreCase);
+        }).ToList();
+    }
+
+    // รายการที่เลือกแสดงในแผงขวา (ไม่เลือก = รายการแรก)
+    Payment? selected = null;
+    if (PaymentId != null)
+    {
+        selected = payments.FirstOrDefault(x => x.PaymentId == PaymentId);
+    }
+    if (selected == null && payments.Count > 0)
+    {
+        selected = payments[0];
+    }
+
+    if (selected != null)
+    {
+        var sAp = appointments.FirstOrDefault(a => a.AppointmentId == selected.AppointmentId);
+        var sDetails = (from d in _db.PaymentDetails
+                        where d.PaymentId == selected.PaymentId
+                        select d).ToList();
+        decimal expected = sAp != null ? (sAp.NetPrice ?? 0) : 0;
+        decimal detailSum = sDetails.Sum(x => x.Amount);
+
+        ViewBag.Selected = selected;
+        ViewBag.SelectedAppointment = sAp;
+        ViewBag.SelectedDetails = sDetails;
+        ViewBag.SelectedExpected = expected;
+        ViewBag.SelectedAmountOk = (selected.Amount == expected && detailSum == expected);
+    }
+
+    // ตัวเลขสรุป
+    DateTime todayStart = DateTime.Today;
+    var paidToday = (from p in _db.Payments
+                     where p.PaymentStatus == "PAID" && p.PaymentDate >= todayStart
+                     select p).ToList();
+
+    int paidCount = (from p in _db.Payments where p.PaymentStatus == "PAID" select p).Count();
+    int rejectedCount = (from p in _db.Payments where p.PaymentStatus == "REJECTED" select p).Count();
+
+    ViewBag.UserId = UserId;
+    ViewBag.FilterStatus = Status;
+    ViewBag.Keyword = Q;
+    ViewBag.PaymentList = payments;
+    ViewBag.AppointmentList = appointments;
+    ViewBag.PatientList = patients;
+    ViewBag.UserList = users;
+    ViewBag.ServiceLines = lines;
+    ViewBag.ServiceList = services;
+    ViewBag.PendingCount = (from p in _db.Payments where p.PaymentStatus == "PENDING" select p).Count();
+    ViewBag.PaidTodayCount = paidToday.Count;
+    ViewBag.PaidTodayTotal = paidToday.Sum(x => x.Amount);
+    ViewBag.ReceiptCount = (from r in _db.Receipts select r).Count();
+    ViewBag.PaidCount = paidCount;
+    ViewBag.RejectedCount = rejectedCount;
+    return View();
+}
 
     // รายละเอียดการชำระเงิน + ตรวจสอบยอด
     public IActionResult Detail(int UserId, int PaymentId)
@@ -182,7 +237,7 @@ public class FinanceController : Controller
         _db.SaveChanges();
 
         TempData["Success"] = "ยืนยันการชำระเงินและออกใบเสร็จเรียบร้อยแล้ว";
-        return RedirectToAction("Detail", new { UserId = UserId, PaymentId = PaymentId });
+        return RedirectToAction("Index", new { UserId = UserId, Status = "PAID", PaymentId = PaymentId });
     }
 
     // ปฏิเสธ (เช่น สลิปไม่ถูกต้อง) -> ผู้ป่วยจ่ายใหม่ได้

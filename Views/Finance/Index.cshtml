@@ -1,14 +1,33 @@
 @{
     ViewData["Title"] = "ตรวจสอบการชำระเงิน";
     Layout = "_FinanceLayout";
-    var payments = ViewBag.PaymentList as List<Payment>;
-    var appointments = ViewBag.AppointmentList as List<Appointment>;
-    var patients = ViewBag.PatientList as List<Patient>;
-    var users = ViewBag.UserList as List<User>;
+    var payments = ViewBag.PaymentList as List<Payment> ?? new List<Payment>();
+    var appointments = ViewBag.AppointmentList as List<Appointment> ?? new List<Appointment>();
+    var patients = ViewBag.PatientList as List<Patient> ?? new List<Patient>();
+    var users = ViewBag.UserList as List<User> ?? new List<User>();
+    var lines = ViewBag.ServiceLines as List<AppointmentService> ?? new List<AppointmentService>();
+    var services = ViewBag.ServiceList as List<Service> ?? new List<Service>();
+    var sel = ViewBag.Selected as Payment;
+    var selAp = ViewBag.SelectedAppointment as Appointment;
+    var selDetails = ViewBag.SelectedDetails as List<PaymentDetail> ?? new List<PaymentDetail>();
     string status = ViewBag.FilterStatus as string ?? "PENDING";
+    string keyword = ViewBag.Keyword as string ?? "";
+
+    int paidCount = (int)ViewBag.PaidCount;
+    int rejectedCount = (int)ViewBag.RejectedCount;
+    int decided = paidCount + rejectedCount;
+    double successRate = decided == 0 ? 0 : paidCount * 100.0 / decided;
+
+    string[] methodList = { "เงินสดที่โรงพยาบาล", "บัตรเครดิต/เดบิต", "QR PromptPay", "โอนเงินผ่านธนาคาร" };
 }
 
-<h3>💳 ตรวจสอบการชำระเงิน</h3>
+<div class="mq-head">
+    <div>
+        <h3>แดชบอร์ดฝ่ายการเงิน</h3>
+        <p>จัดการการรับชำระเงิน ตรวจสอบค่าบริการ และออกใบเสร็จรับเงิน</p>
+    </div>
+    <a class="btn btn-primary" asp-action="Counter" asp-route-UserId="@ViewBag.UserId">💵 เปิดเคาน์เตอร์รับเงิน</a>
+</div>
 
 @if (TempData["Success"] is string ok)
 {
@@ -19,70 +38,160 @@
     <div class="alert alert-danger">@err</div>
 }
 
-<div class="row mb-4">
-    <div class="col-md-4">
-        <div class="card text-bg-warning">
-            <div class="card-body">
-                <div>รอตรวจสอบ</div>
-                <h3>@ViewBag.PendingCount รายการ</h3>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-bg-success">
-            <div class="card-body">
-                <div>ชำระแล้ววันนี้</div>
-                <h3>@ViewBag.PaidTodayCount รายการ</h3>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="card text-bg-primary">
-            <div class="card-body">
-                <div>ยอดรับวันนี้ (บาท)</div>
-                <h3>@(((decimal)ViewBag.PaidTodayTotal).ToString("N2"))</h3>
-            </div>
-        </div>
-    </div>
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-md-6"><div class="mq-kpi">
+        <div class="mq-kpi-label">ยอดรวมวันนี้</div>
+        <div class="mq-kpi-value">฿@(((decimal)ViewBag.PaidTodayTotal).ToString("N2"))</div>
+        <div class="mq-kpi-sub up">ชำระแล้ววันนี้ @ViewBag.PaidTodayCount รายการ</div>
+    </div></div>
+    <div class="col-xl-3 col-md-6"><div class="mq-kpi">
+        <div class="mq-kpi-label">รายการรอชำระ</div>
+        <div class="mq-kpi-value">@ViewBag.PendingCount รายการ</div>
+        <div class="mq-kpi-sub @((int)ViewBag.PendingCount > 0 ? "down" : "up")">รอการเงินตรวจสอบ</div>
+    </div></div>
+    <div class="col-xl-3 col-md-6"><div class="mq-kpi">
+        <div class="mq-kpi-label">ใบเสร็จที่ออกแล้ว</div>
+        <div class="mq-kpi-value">@ViewBag.ReceiptCount ใบ</div>
+        <div class="mq-kpi-sub up">ทั้งหมดในระบบ</div>
+    </div></div>
+    <div class="col-xl-3 col-md-6"><div class="mq-kpi">
+        <div class="mq-kpi-label">อัตราการชำระเงินสำเร็จ</div>
+        <div class="mq-kpi-value">@successRate.ToString("0.#")%</div>
+        <div class="mq-kpi-sub up">ยืนยัน @paidCount / ปฏิเสธ @rejectedCount</div>
+    </div></div>
 </div>
 
-<ul class="nav nav-pills mb-3">
-    <li class="nav-item"><a class="nav-link @(status == "PENDING" ? "active" : "")" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="PENDING">รอตรวจสอบ</a></li>
-    <li class="nav-item"><a class="nav-link @(status == "PAID" ? "active" : "")" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="PAID">ชำระแล้ว</a></li>
-    <li class="nav-item"><a class="nav-link @(status == "REJECTED" ? "active" : "")" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="REJECTED">ปฏิเสธ</a></li>
-    <li class="nav-item"><a class="nav-link @(status == "ALL" ? "active" : "")" asp-controller="Finance" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="ALL">ทั้งหมด</a></li>
-</ul>
+<div class="mq-fin">
 
-<table class="table table-bordered table-striped align-middle">
-    <thead>
-        <tr>
-            <th>วันที่ชำระ</th><th>หมายเลขคิว</th><th>ผู้ป่วย</th>
-            <th class="text-end">จำนวนเงิน</th><th>วิธีชำระ</th><th>เลขอ้างอิง</th><th>สถานะ</th><th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (payments.Count == 0)
+    @* ---------- ซ้าย: รายการเรียกเก็บเงิน ---------- *@
+    <div class="mq-panel">
+        <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+            <div>
+                <div class="mq-panel-title">รายการเรียกเก็บเงินล่าสุด</div>
+                <div class="mq-panel-sub mb-0">ตรวจสอบข้อมูลคิวและยอดเงินที่ต้องเรียกเก็บ</div>
+            </div>
+            <div class="mq-tabs">
+                <a class="@(status == "ALL" ? "active" : "")" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="ALL">ทั้งหมด</a>
+                <a class="@(status == "PENDING" ? "active" : "")" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="PENDING">รอชำระ</a>
+                <a class="@(status == "PAID" ? "active" : "")" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="PAID">สำเร็จ</a>
+                <a class="@(status == "REJECTED" ? "active" : "")" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Status="REJECTED">ปฏิเสธ</a>
+            </div>
+        </div>
+
+        <form asp-action="Index" method="get" class="d-flex gap-2 mb-3">
+            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+            <input type="hidden" name="Status" value="@status" />
+            <input name="Q" value="@keyword" class="form-control" placeholder="ค้นหาตามชื่อคนไข้ หรือเลขคิว..." />
+            <button class="btn btn-primary text-nowrap">ค้นหา</button>
+        </form>
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                    <tr><th>เลขคิว</th><th>ชื่อ-นามสกุล</th><th>บริการ</th><th class="text-end">ยอดชำระ (฿)</th><th>สถานะ</th></tr>
+                </thead>
+                <tbody>
+                    @if (payments.Count == 0)
+                    {
+                        <tr><td colspan="5" class="text-center text-muted py-4">ไม่มีรายการ</td></tr>
+                    }
+                    @foreach (var p in payments)
+                    {
+                        var ap = appointments.FirstOrDefault(x => x.AppointmentId == p.AppointmentId);
+                        var pt = patients.FirstOrDefault(x => x.PatientId == p.PatientId);
+                        var pu = pt == null ? null : users.FirstOrDefault(y => y.UserId == pt.UserId);
+                        var svNames = lines.Where(l => ap != null && l.AppointmentId == ap.AppointmentId)
+                                           .Select(l => services.FirstOrDefault(s => s.ServiceId == l.ServiceId))
+                                           .Where(s => s != null)
+                                           .Select(s => s!.ServiceName)
+                                           .ToList();
+                        bool isSel = sel != null && sel.PaymentId == p.PaymentId;
+                        <tr class="mq-row-link @(isSel ? "selected" : "")">
+                            <td class="mq-code">
+                                <a class="text-decoration-none" asp-action="Index" asp-route-UserId="@ViewBag.UserId"
+                                   asp-route-Status="@status" asp-route-Q="@keyword" asp-route-PaymentId="@p.PaymentId">@(ap != null ? ap.QueueNo : "-")</a>
+                            </td>
+                            <td>
+                                <div class="mq-person">
+                                    <span class="mq-ava">@(pu != null ? pu.FirstName.Substring(0, 1) : "?")</span>
+                                    <div>@(pu != null ? pu.FirstName + " " + pu.LastName : "-")<small>@(string.IsNullOrEmpty(p.ReferenceNo) ? (p.PaymentDate != null ? p.PaymentDate.Value.ToString("dd/MM/yyyy HH:mm") : "-") : p.ReferenceNo)</small></div>
+                                </div>
+                            </td>
+                            <td class="small">@string.Join(", ", svNames)</td>
+                            <td class="text-end fw-bold">@p.Amount.ToString("N2")</td>
+                            <td><span class="mq-pill s-@(p.PaymentStatus)">@p.PaymentStatus</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="text-muted small mt-2">แสดง @payments.Count รายการ</div>
+    </div>
+
+    @* ---------- ขวา: ยืนยันการชำระเงิน ---------- *@
+    <div class="mq-panel mq-confirm">
+        <div class="mq-panel-title text-primary">💳 ยืนยันการชำระเงิน</div>
+        <div class="mq-panel-sub">ระบุรายละเอียดการรับเงินเพื่อจบขั้นตอน</div>
+
+        @if (sel == null)
         {
-            <tr><td colspan="8" class="text-center text-muted">ไม่มีรายการ</td></tr>
+            <div class="text-muted py-4 text-center">เลือกรายการทางซ้ายเพื่อดูรายละเอียด</div>
         }
-        @foreach (var p in payments)
+        else
         {
-            var ap = appointments.FirstOrDefault(x => x.AppointmentId == p.AppointmentId);
-            var pt = patients.FirstOrDefault(x => x.PatientId == p.PatientId);
-            var pu = pt == null ? null : users.FirstOrDefault(y => y.UserId == pt.UserId);
-            <tr>
-                <td>@(p.PaymentDate != null ? p.PaymentDate.Value.ToString("dd/MM/yyyy HH:mm") : "-")</td>
-                <td>@(ap != null ? ap.QueueNo : "-")</td>
-                <td>@(pu != null ? pu.FirstName + " " + pu.LastName : "-")</td>
-                <td class="text-end">@p.Amount.ToString("N2")</td>
-                <td>@p.PaymentMethod</td>
-                <td>@p.ReferenceNo</td>
-                <td>@p.PaymentStatus</td>
-                <td>
-                    <a class="btn btn-sm btn-primary" asp-controller="Finance" asp-action="Detail"
-                       asp-route-UserId="@ViewBag.UserId" asp-route-PaymentId="@p.PaymentId">ตรวจสอบ</a>
-                </td>
-            </tr>
+            var selPt = patients.FirstOrDefault(x => x.PatientId == sel.PatientId);
+            var selPu = selPt == null ? null : users.FirstOrDefault(y => y.UserId == selPt.UserId);
+            bool amountOk = (bool)ViewBag.SelectedAmountOk;
+
+            <div class="mq-sel">
+                <span class="tag">@(selAp != null ? selAp.QueueNo : "-")</span>
+                <div class="small text-muted">คิวที่เลือก</div>
+                <b>@(selPu != null ? selPu.FirstName + " " + selPu.LastName : "-")</b>
+                <div class="small text-muted">@(sel.PaymentDate != null ? sel.PaymentDate.Value.ToString("dd/MM/yyyy HH:mm") : "-")</div>
+            </div>
+
+            @foreach (var d in selDetails)
+            {
+                <div class="mq-line @(d.Amount < 0 ? "discount" : "")"><span>@d.Description</span><span>@d.Amount.ToString("N2")</span></div>
+            }
+            <div class="mq-line"><span>ยอดสุทธิของนัดหมาย (ระบบคำนวณ)</span><span>@(((decimal)ViewBag.SelectedExpected).ToString("N2"))</span></div>
+            <div class="mq-line total"><span>ยอดสุทธิที่ต้องชำระ</span><span>฿@sel.Amount.ToString("N2")</span></div>
+
+            <div class="mt-3 small fw-bold">ช่องทางการชำระเงิน</div>
+            <div class="mq-methods">
+                @foreach (var m in methodList)
+                {
+                    <div class="mq-method @(sel.PaymentMethod == m ? "on" : "")">@m</div>
+                }
+            </div>
+
+            @if (amountOk)
+            {
+                <div class="alert alert-success py-2">✔ ยอดเงินถูกต้อง</div>
+            }
+            else
+            {
+                <div class="alert alert-danger py-2">✘ ยอดเงินไม่ตรงกับยอดสุทธิ/รายละเอียด กรุณาตรวจสอบ</div>
+            }
+
+            @if (sel.PaymentStatus == "PENDING")
+            {
+                <form asp-action="Verify" method="post" class="mb-2" onsubmit="return confirm('ยืนยันว่าได้รับเงินแล้วและออกใบเสร็จ?');">
+                    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                    <input type="hidden" name="PaymentId" value="@sel.PaymentId" />
+                    <button class="btn btn-primary w-100">ยืนยันการรับชำระเงิน</button>
+                </form>
+                <form asp-action="Reject" method="post" onsubmit="return confirm('ปฏิเสธรายการนี้?');">
+                    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                    <input type="hidden" name="PaymentId" value="@sel.PaymentId" />
+                    <button class="btn btn-outline-danger w-100">ปฏิเสธรายการ</button>
+                </form>
+            }
+            else
+            {
+                <div class="mq-note mb-2">สถานะ: <b>@sel.PaymentStatus</b> (ดำเนินการแล้ว)</div>
+                <a class="btn btn-outline-primary w-100" asp-action="Detail" asp-route-UserId="@ViewBag.UserId" asp-route-PaymentId="@sel.PaymentId">ดูรายละเอียด / ใบเสร็จ</a>
+            }
         }
-    </tbody>
-</table>
+    </div>
+</div>

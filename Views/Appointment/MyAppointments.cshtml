@@ -54,9 +54,18 @@
                 <td>@a.QueueNo</td>
                 <td>@a.AppointmentDate.ToString("dd/MM/yyyy") @a.AppointmentTime.ToString("HH:mm")</td>
                 <td>@(docUser != null ? docUser.FirstName + " " + docUser.LastName : "-")</td>
-                <td>@a.Status</td>
+                <td><span class="mq-pill s-@(a.Status)">@a.Status</span></td>
                 <td class="text-end">@((a.NetPrice ?? 0).ToString("N2"))</td>
-                <td>@(pay != null ? pay.PaymentStatus : "ยังไม่ชำระ")</td>
+                <td>
+                    @if (pay != null)
+                    {
+                        <span class="mq-pill s-@(pay.PaymentStatus)">@pay.PaymentStatus</span>
+                    }
+                    else
+                    {
+                        <span class="text-muted">ยังไม่ชำระ</span>
+                    }
+                </td>
                 <td>
                     @if (canPay)
                     {

@@ -1,35 +1,71 @@
+@{
+    var ctl = Convert.ToString(ViewContext.RouteData.Values["controller"]);
+    var act = Convert.ToString(ViewContext.RouteData.Values["action"]);
+    string Cls(bool on) => on ? "mq-link active" : "mq-link";
+}
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - Hospital Queue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/mediqueue.css" asp-append-version="true" />
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg bg-white shadow-sm border-bottom">
-    <div class="container-fluid px-4">
-        <a class="navbar-brand fw-bold text-primary"
-           asp-controller="Doctor" asp-action="Index" asp-route-UserId="@ViewBag.UserId">
-            🏥 Hospital Queue
-        </a>
+    <div class="mq-app">
 
-        <div class="d-flex align-items-center gap-2 flex-wrap">
-            <a class="nav-link px-3" asp-controller="Doctor" asp-action="Index" asp-route-UserId="@ViewBag.UserId">🩺 จองคิว</a>
-            <a class="nav-link px-3" asp-controller="Appointment" asp-action="MyAppointments" asp-route-UserId="@ViewBag.UserId">📋 นัดหมายของฉัน</a>
-            <a class="nav-link px-3" asp-controller="Appointment" asp-action="History" asp-route-UserId="@ViewBag.UserId">🕘 ประวัตินัดหมาย</a>
-            <a class="nav-link px-3" asp-controller="Payment" asp-action="History" asp-route-UserId="@ViewBag.UserId">💳 ประวัติการชำระเงิน</a>
+        <aside class="mq-sidebar">
+            <a class="mq-brand text-decoration-none text-reset" asp-controller="Doctor" asp-action="Index"
+               asp-route-UserId="@ViewBag.UserId">
+                <span class="mq-brand-mark">🏥</span><span>MediQueue Thai</span>
+            </a>
+
+            <div class="mq-menu-title">เมนูหลัก</div>
+            <nav>
+                <a class="@(Cls(ctl == "Doctor"))" asp-controller="Doctor" asp-action="Index"
+                   asp-route-UserId="@ViewBag.UserId">🩺 จองคิว</a>
+                <a class="@(Cls(ctl == "Appointment" && act != "History"))" asp-controller="Appointment"
+                   asp-action="MyAppointments" asp-route-UserId="@ViewBag.UserId">📋 นัดหมายของฉัน</a>
+                <a class="@(Cls(ctl == "Appointment" && act == "History"))" asp-controller="Appointment"
+                   asp-action="History" asp-route-UserId="@ViewBag.UserId">🕘 ประวัตินัดหมาย</a>
+                <a class="@(Cls(ctl == "Payment"))" asp-controller="Payment" asp-action="History"
+                   asp-route-UserId="@ViewBag.UserId">💳 ประวัติการชำระเงิน</a>
+                <a class="@(Cls(ctl == "Profile"))" asp-controller="Profile" asp-action="Index"
+                   asp-route-UserId="@ViewBag.UserId">👤 ข้อมูลส่วนตัว</a>
+            </nav>
+
+            <div class="mq-side-foot">
+                <div class="mq-user">
+                    <span class="mq-avatar">👤</span>
+                    <div><b>ผู้ป่วย</b><small>สมาชิก</small></div>
+                </div>
+                <a class="mq-link" asp-controller="Home" asp-action="Logout">🚪 ออกจากระบบ</a>
+            </div>
+        </aside>
+
+        <div class="mq-main">
+            <header class="mq-topbar">
+                <div class="mq-crumb">หน้าหลัก &rsaquo; <b>@ViewData["Title"]</b></div>
+                <span class="mq-role">ผู้ป่วย</span>
+            </header>
+            <main class="mq-content">
+                @RenderBody()
+            </main>
+            <footer class="mq-footer">© @DateTime.Now.Year MediQueue Thai - ระบบจองคิวโรงพยาบาล</footer>
         </div>
 
-        <div class="ms-auto d-flex gap-2">
-            <a class="btn btn-outline-primary" asp-controller="Profile" asp-action="Index" asp-route-UserId="@ViewBag.UserId">👤 โปรไฟล์</a>
-            <a class="btn btn-outline-danger" asp-controller="Home" asp-action="Logout">ออกจากระบบ</a>
-        </div>
     </div>
-</nav>
-<div class="container-fluid p-4">
-    @RenderBody()
-</div>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

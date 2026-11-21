@@ -1,3 +1,8 @@
+@{
+    var ctl = Convert.ToString(ViewContext.RouteData.Values["controller"]);
+    var act = Convert.ToString(ViewContext.RouteData.Values["action"]);
+    string Cls(bool on) => on ? "mq-link active" : "mq-link";
+}
 <!DOCTYPE html>
 <html lang="th">
 
@@ -5,54 +10,60 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hospital Queue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/mediqueue.css" asp-append-version="true" />
 </head>
 
 <body>
-    <div class="d-flex">
+    <div class="mq-app">
 
-        <div class="bg-dark text-white p-3" style="width:250px; min-height:100vh;">
-            <h4>Hospital Queue</h4>
-            <div class="small text-white-50">ผู้ดูแลระบบ</div>
-            <hr>
+        <aside class="mq-sidebar">
+            <div class="mq-brand">
+                <span class="mq-brand-mark">🏥</span><span>MediQueue Thai</span>
+            </div>
 
-            <ul class="nav flex-column">
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white" asp-controller="Admin" asp-action="Index"
-                       asp-route-UserId="@ViewBag.UserId">🏠 ภาพรวมระบบ</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white" asp-controller="Admin" asp-action="Dashboard"
-                       asp-route-UserId="@ViewBag.UserId">📊 Dashboard</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white" asp-controller="Admin" asp-action="UserList"
-                       asp-route-UserId="@ViewBag.UserId">👥 ผู้ใช้และสิทธิ์</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white" asp-controller="Admin" asp-action="PromotionList"
-                       asp-route-UserId="@ViewBag.UserId">🏷️ โปรโมชั่น</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white" asp-controller="Admin" asp-action="DepartmentList"
-                       asp-route-UserId="@ViewBag.UserId">🏥 แผนก</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white" asp-controller="Admin" asp-action="ServiceList"
-                       asp-route-UserId="@ViewBag.UserId">🩺 บริการและราคา</a>
-                </li>
-                <li class="nav-item mb-2">
-                    <a class="nav-link text-white" asp-controller="Home" asp-action="Logout">🚪 ออกจากระบบ</a>
-                </li>
-            </ul>
-        </div>
+            <div class="mq-menu-title">สำหรับเจ้าหน้าที่</div>
+            <nav>
+                <a class="@(Cls(act == "Index"))" asp-controller="Admin" asp-action="Index"
+                   asp-route-UserId="@ViewBag.UserId">🏠 ภาพรวมระบบ</a>
+                <a class="@(Cls(act == "Dashboard"))" asp-controller="Admin" asp-action="Dashboard"
+                   asp-route-UserId="@ViewBag.UserId">📊 Dashboard</a>
+                <a class="@(Cls(act.StartsWith("User") || act == "DeleteUser"))" asp-controller="Admin"
+                   asp-action="UserList" asp-route-UserId="@ViewBag.UserId">👥 ผู้ใช้และสิทธิ์</a>
+                <a class="@(Cls(act.StartsWith("Promotion")))" asp-controller="Admin" asp-action="PromotionList"
+                   asp-route-UserId="@ViewBag.UserId">🏷️ โปรโมชั่น</a>
+                <a class="@(Cls(act.StartsWith("Department")))" asp-controller="Admin" asp-action="DepartmentList"
+                   asp-route-UserId="@ViewBag.UserId">🏥 แผนก</a>
+                <a class="@(Cls(act.StartsWith("Service")))" asp-controller="Admin" asp-action="ServiceList"
+                   asp-route-UserId="@ViewBag.UserId">🩺 บริการและราคา</a>
+            </nav>
 
-        <div class="container-fluid p-4">
-            @RenderBody()
+            <div class="mq-side-foot">
+                <div class="mq-user">
+                    <span class="mq-avatar">👤</span>
+                    <div><b>ผู้ดูแลระบบ</b><small>เจ้าหน้าที่</small></div>
+                </div>
+                <a class="mq-link" asp-controller="Home" asp-action="Logout">🚪 ออกจากระบบ</a>
+            </div>
+        </aside>
+
+        <div class="mq-main">
+            <header class="mq-topbar">
+                <div class="mq-crumb">หน้าหลัก &rsaquo; <b>@ViewData["Title"]</b></div>
+                <span class="mq-role">ผู้ดูแลระบบ</span>
+            </header>
+            <main class="mq-content">
+                @RenderBody()
+            </main>
+            <footer class="mq-footer">© @DateTime.Now.Year MediQueue Thai - ระบบจองคิวโรงพยาบาล</footer>
         </div>
 
     </div>
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     @await RenderSectionAsync("Scripts", required: false)

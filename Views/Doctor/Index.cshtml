@@ -118,12 +118,29 @@
         height: 145px;
     }
 
-    .department-art--1 { background: linear-gradient(135deg, #dceeff, #9dc9f7); }
-    .department-art--2 { background: linear-gradient(135deg, #e1f8f2, #9eddd0); }
-    .department-art--3 { background: linear-gradient(135deg, #ffe9e2, #ffc4b4); }
-    .department-art--4 { background: linear-gradient(135deg, #eee9ff, #c8baf8); }
-    .department-art--5 { background: linear-gradient(135deg, #fff4d8, #f8d88d); }
-    .department-art--6 { background: linear-gradient(135deg, #e2f1f3, #a9d8df); }
+    .department-art--1 {
+        background: linear-gradient(135deg, #dceeff, #9dc9f7);
+    }
+
+    .department-art--2 {
+        background: linear-gradient(135deg, #e1f8f2, #9eddd0);
+    }
+
+    .department-art--3 {
+        background: linear-gradient(135deg, #ffe9e2, #ffc4b4);
+    }
+
+    .department-art--4 {
+        background: linear-gradient(135deg, #eee9ff, #c8baf8);
+    }
+
+    .department-art--5 {
+        background: linear-gradient(135deg, #fff4d8, #f8d88d);
+    }
+
+    .department-art--6 {
+        background: linear-gradient(135deg, #e2f1f3, #a9d8df);
+    }
 
     .department-art__icon {
         z-index: 1;
@@ -228,10 +245,23 @@
     }
 
     @@media (max-width: 767.98px) {
-        .department-page { padding: 0 0 24px; }
-        .department-heading { align-items: stretch; flex-direction: column; }
-        .department-search { width: 100%; flex-basis: auto; }
-        .department-art { min-height: 150px; }
+        .department-page {
+            padding: 0 0 24px;
+        }
+
+        .department-heading {
+            align-items: stretch;
+            flex-direction: column;
+        }
+
+        .department-search {
+            width: 100%;
+            flex-basis: auto;
+        }
+
+        .department-art {
+            min-height: 150px;
+        }
     }
 </style>
 
@@ -244,7 +274,12 @@
     {
         <div class="alert alert-danger">@err</div>
     }
-
+    <div class="mq-hero">
+        <span class="mq-hero-tag">ยินดีต้อนรับสู่ MediQueue Thai</span>
+        <h1>สุขภาพที่ดี เริ่มต้นที่ความใส่ใจ</h1>
+        <p>จองคิวพบแพทย์ออนไลน์ เลือกแผนก แพทย์ วันและเวลาที่สะดวกได้ในไม่กี่ขั้นตอน</p>
+        <a class="btn" href="#department-grid">จองคิวทันที</a>
+    </div>
     <header class="department-heading">
         <div>
             <div class="text-primary fw-semibold small mb-2">นัดหมายแพทย์ · ขั้นตอนที่ 1 จาก 4</div>
@@ -253,8 +288,8 @@
         </div>
         <label class="department-search">
             <span aria-hidden="true">⌕</span>
-            <input id="department-search" class="form-control" type="search"
-                   placeholder="ค้นหาแผนกหรือบริการ..." aria-label="ค้นหาแผนกหรือบริการ">
+            <input id="department-search" class="form-control" type="search" placeholder="ค้นหาแผนกหรือบริการ..."
+                   aria-label="ค้นหาแผนกหรือบริการ">
         </label>
     </header>
 
@@ -270,25 +305,31 @@
         @foreach (var dp in depts)
         {
             var departmentServices = services.Where(x => x.DepartmentId == dp.DepartmentId).ToList();
-            var searchText = $"{dp.DepartmentName} {dp.Description} {string.Join(" ", departmentServices.Select(x => x.ServiceName))}";
+            var searchText = $"{dp.DepartmentName} {dp.Description} {string.Join(" ", departmentServices.Select(x =>
+        x.ServiceName))}";
             var icon = "✚";
-            if (dp.DepartmentName.Contains("เด็ก") || dp.DepartmentName.Contains("Pedi", StringComparison.OrdinalIgnoreCase))
+            if (dp.DepartmentName.Contains("เด็ก") || dp.DepartmentName.Contains("Pedi",
+        StringComparison.OrdinalIgnoreCase))
             {
                 icon = "🧸";
             }
-            else if (dp.DepartmentName.Contains("หัวใจ") || dp.DepartmentName.Contains("Cardio", StringComparison.OrdinalIgnoreCase))
+            else if (dp.DepartmentName.Contains("หัวใจ") || dp.DepartmentName.Contains("Cardio",
+        StringComparison.OrdinalIgnoreCase))
             {
                 icon = "♡";
             }
-            else if (dp.DepartmentName.Contains("กระดูก") || dp.DepartmentName.Contains("Ortho", StringComparison.OrdinalIgnoreCase))
+            else if (dp.DepartmentName.Contains("กระดูก") || dp.DepartmentName.Contains("Ortho",
+        StringComparison.OrdinalIgnoreCase))
             {
                 icon = "✣";
             }
-            else if (dp.DepartmentName.Contains("ตา") || dp.DepartmentName.Contains("Ophthalm", StringComparison.OrdinalIgnoreCase))
+            else if (dp.DepartmentName.Contains("ตา") || dp.DepartmentName.Contains("Ophthalm",
+        StringComparison.OrdinalIgnoreCase))
             {
                 icon = "◉";
             }
-            else if (dp.DepartmentName.Contains("สมอง") || dp.DepartmentName.Contains("Neuro", StringComparison.OrdinalIgnoreCase))
+            else if (dp.DepartmentName.Contains("สมอง") || dp.DepartmentName.Contains("Neuro",
+        StringComparison.OrdinalIgnoreCase))
             {
                 icon = "⌘";
             }
@@ -305,7 +346,8 @@
                     <div class="department-card__body">
                         <h3 class="department-card__title">@dp.DepartmentName</h3>
                         <p class="department-card__description">
-                            @(string.IsNullOrWhiteSpace(dp.Description) ? "ดูแลและให้คำปรึกษาโดยทีมบุคลากรทางการแพทย์" : dp.Description)
+                            @(string.IsNullOrWhiteSpace(dp.Description) ? "ดูแลและให้คำปรึกษาโดยทีมบุคลากรทางการแพทย์" :
+                        dp.Description)
                         </p>
 
                         @if (departmentServices.Count > 0)
@@ -323,8 +365,7 @@
                         }
                     </div>
                     <div class="department-card__footer">
-                        <a class="btn btn-primary department-card__button"
-                           asp-controller="Doctor" asp-action="SelectDoctor"
+                        <a class="btn btn-primary department-card__button" asp-controller="Doctor" asp-action="SelectDoctor"
                            asp-route-UserId="@ViewBag.UserId" asp-route-DepartmentId="@dp.DepartmentId">
                             เลือกแผนกนี้ <span aria-hidden="true">→</span>
                         </a>

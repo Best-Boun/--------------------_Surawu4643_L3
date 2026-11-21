@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ระบบจองคิวโรงพยายาบา_Surawu4643_L3")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fdddd693cda297f44ec7b270624fd3d924312a0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c15c25111a753783ea3737eec26f554e05093d87")]
 [assembly: System.Reflection.AssemblyProductAttribute("ระบบจองคิวโรงพยายาบา_Surawu4643_L3")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ระบบจองคิวโรงพยายาบา_Surawu4643_L3")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -31,7 +31,7 @@
                 <td>@(ap != null ? ap.QueueNo : "-")</td>
                 <td class="text-end">@p.Amount.ToString("N2")</td>
                 <td>@p.PaymentMethod</td>
-                <td>@p.PaymentStatus</td>
+                <td><span class="mq-pill s-@(p.PaymentStatus)">@p.PaymentStatus</span></td>
                 <td>
                     @if (rc != null)
                     {
