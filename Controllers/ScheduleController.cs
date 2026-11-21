@@ -158,14 +158,6 @@ public class ScheduleController : Controller
             return View(data);
         }
 
-        // ห้ามสร้างรอบที่เวลาเริ่มผ่านไปแล้ว
-        DateTime startAt = data.ScheduleDate!.Value.ToDateTime(data.StartTime!.Value);
-        if (startAt <= DateTime.Now)
-        {
-            ViewBag.Status = "ไม่สามารถสร้างรอบเวลาที่ผ่านมาแล้วได้";
-            return View(data);
-        }
-
         DoctorSchedule sc = new DoctorSchedule();
         sc.DoctorId = data.DoctorId;
         sc.ScheduleDate = data.ScheduleDate.Value;

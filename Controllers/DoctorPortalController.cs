@@ -181,13 +181,6 @@ public class DoctorPortalController : Controller
             return RedirectToAction("Index", new { UserId = UserId });
         }
 
-        var today = DateOnly.FromDateTime(DateTime.Now);
-        if (ap.AppointmentDate > today)
-        {
-            TempData["Error"] = "ยังไม่ถึงวันนัด ไม่สามารถเปลี่ยนสถานะได้";
-            return RedirectToAction("Index", new { UserId = UserId, Date = ap.AppointmentDate.ToString("yyyy-MM-dd") });
-        }
-
         bool ok = (ap.Status == "WAITING" && (NewStatus == "IN_PROGRESS" || NewStatus == "NO_SHOW"))
                || (ap.Status == "IN_PROGRESS" && NewStatus == "COMPLETED");
         if (!ok)
