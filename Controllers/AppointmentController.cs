@@ -58,8 +58,33 @@ public class AppointmentController : Controller
             return RedirectToAction("Index", "Profile", new { UserId = UserId });
         }
 
+        // แสดงเฉพาะนัดที่ยังดำเนินการอยู่ (ไม่เอา CANCELLED / COMPLETED / NO_SHOW)
         var list = (from a in _db.Appointments
                     where a.PatientId == patient.PatientId
+                       && (a.Status == "WAITING" || a.Status == "IN_PROGRESS")
+                    orderby a.AppointmentDate, a.AppointmentTime
+                    select a).ToList();
+
+        ViewBag.UserId = UserId;
+        ViewBag.DoctorList = (from d in _db.Doctors select d).ToList();
+        ViewBag.UserList = (from u in _db.Users select u).ToList();
+        ViewBag.PaymentList = (from p in _db.Payments
+                               where p.PatientId == patient.PatientId
+                               select p).ToList();
+        return View(list);
+    }
+    // ประวัตินัดหมาย: นัดที่จบแล้ว (ตรวจเสร็จ / ยกเลิก / ไม่มาตามนัด)
+    public IActionResult History(int UserId)
+    {
+        var patient = GetPatient(UserId);
+        if (patient == null)
+        {
+            return RedirectToAction("Index", "Profile", new { UserId = UserId });
+        }
+
+        var list = (from a in _db.Appointments
+                    where a.PatientId == patient.PatientId
+                       && (a.Status == "COMPLETED" || a.Status == "CANCELLED" || a.Status == "NO_SHOW")
                     orderby a.AppointmentDate descending, a.AppointmentTime descending
                     select a).ToList();
 
@@ -90,19 +115,10 @@ public class AppointmentController : Controller
             return RedirectToAction("MyAppointments", new { UserId = UserId });
         }
 
-        string msg = CheckCanChange(ap);
-
-        var paid = (from p in _db.Payments
-                    where p.AppointmentId == ap.AppointmentId && p.PaymentStatus == "PAID"
-                    select p).FirstOrDefault();
-        if (msg == "" && paid != null)
+        // ยกเลิกได้ทุกเวลา ขอแค่นัดยังไม่เริ่มตรวจ/ไม่ถูกยกเลิกไปแล้ว
+        if (ap.Status != "WAITING")
         {
-            msg = "นัดนี้ชำระเงินแล้ว กรุณาติดต่อเจ้าหน้าที่การเงินเพื่อดำเนินการยกเลิก";
-        }
-
-        if (msg != "")
-        {
-            TempData["Error"] = msg;
+            TempData["Error"] = "ไม่สามารถยกเลิกได้ เพราะสถานะนัดหมายคือ " + ap.Status;
             return RedirectToAction("MyAppointments", new { UserId = UserId });
         }
 

@@ -6,6 +6,7 @@
     var users = ViewBag.UserList as List<User>;
     var lines = ViewBag.ServiceLines as List<AppointmentService>;
     var services = ViewBag.ServiceList as List<Service>;
+    var paidIds = ViewBag.PaidIds as List<int> ?? new List<int>();
     DateOnly date = (DateOnly)ViewBag.Date;
     string dateText = date.ToString("yyyy-MM-dd");
     string status = ViewBag.FilterStatus as string ?? "ALL";
@@ -24,19 +25,28 @@
 
 <div class="row mb-4">
     <div class="col-md-4">
-        <div class="card text-bg-warning"><div class="card-body">
-            <div>รอตรวจ</div><h3>@ViewBag.WaitingCount คิว</h3>
-        </div></div>
+        <div class="card text-bg-warning">
+            <div class="card-body">
+                <div>รอตรวจ</div>
+                <h3>@ViewBag.WaitingCount คิว</h3>
+            </div>
+        </div>
     </div>
     <div class="col-md-4">
-        <div class="card text-bg-primary"><div class="card-body">
-            <div>กำลังตรวจ</div><h3>@ViewBag.InProgressCount คิว</h3>
-        </div></div>
+        <div class="card text-bg-primary">
+            <div class="card-body">
+                <div>กำลังตรวจ</div>
+                <h3>@ViewBag.InProgressCount คิว</h3>
+            </div>
+        </div>
     </div>
     <div class="col-md-4">
-        <div class="card text-bg-success"><div class="card-body">
-            <div>ตรวจเสร็จแล้ว</div><h3>@ViewBag.CompletedCount คิว</h3>
-        </div></div>
+        <div class="card text-bg-success">
+            <div class="card-body">
+                <div>ตรวจเสร็จแล้ว</div>
+                <h3>@ViewBag.CompletedCount คิว</h3>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -63,13 +73,20 @@
 <table class="table table-bordered table-striped align-middle">
     <thead>
         <tr>
-            <th>หมายเลขคิว</th><th>เวลา</th><th>ผู้ป่วย</th><th>บริการ</th><th>สถานะ</th><th>จัดการ</th>
+            <th>หมายเลขคิว</th>
+            <th>เวลา</th>
+            <th>ผู้ป่วย</th>
+            <th>บริการ</th>
+            <th>สถานะ</th>
+            <th>จัดการ</th>
         </tr>
     </thead>
     <tbody>
         @if (list.Count == 0)
         {
-            <tr><td colspan="6" class="text-center text-muted">ไม่มีคิวในวันที่เลือก</td></tr>
+            <tr>
+                <td colspan="6" class="text-center text-muted">ไม่มีคิวในวันที่เลือก</td>
+            </tr>
         }
         @foreach (var a in list)
         {
@@ -109,12 +126,19 @@
 
                     @if (a.Status == "WAITING")
                     {
-                        <form asp-controller="DoctorPortal" asp-action="UpdateStatus" method="post" class="d-inline">
-                            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
-                            <input type="hidden" name="AppointmentId" value="@a.AppointmentId" />
-                            <input type="hidden" name="NewStatus" value="IN_PROGRESS" />
-                            <button class="btn btn-sm btn-primary">เริ่มตรวจ</button>
-                        </form>
+                        if (paidIds.Contains(a.AppointmentId))
+                        {
+                            <form asp-controller="DoctorPortal" asp-action="UpdateStatus" method="post" class="d-inline">
+                                <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                                <input type="hidden" name="AppointmentId" value="@a.AppointmentId" />
+                                <input type="hidden" name="NewStatus" value="IN_PROGRESS" />
+                                <button class="btn btn-sm btn-primary">เริ่มตรวจ</button>
+                            </form>
+                        }
+                        else
+                        {
+                            <span class="badge text-bg-danger">รอชำระเงิน/รอการเงินอนุมัติ</span>
+                        }
                         <form asp-controller="DoctorPortal" asp-action="UpdateStatus" method="post" class="d-inline"
                               onsubmit="return confirm('บันทึกว่าผู้ป่วยไม่มาตามนัด?');">
                             <input type="hidden" name="UserId" value="@ViewBag.UserId" />

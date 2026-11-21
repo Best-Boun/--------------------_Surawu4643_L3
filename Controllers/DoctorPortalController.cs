@@ -80,6 +80,9 @@ public class DoctorPortalController : Controller
                                 where ids.Contains(l.AppointmentId)
                                 select l).ToList();
         ViewBag.ServiceList = (from s in _db.Services select s).ToList();
+        ViewBag.PaidIds = (from p in _db.Payments
+                           where p.PaymentStatus == "PAID" && ids.Contains(p.AppointmentId)
+                           select p.AppointmentId).ToList();
         ViewBag.WaitingCount = dayAll.Count(x => x.Status == "WAITING");
         ViewBag.InProgressCount = dayAll.Count(x => x.Status == "IN_PROGRESS");
         ViewBag.CompletedCount = dayAll.Count(x => x.Status == "COMPLETED");
@@ -145,6 +148,9 @@ public class DoctorPortalController : Controller
         ViewBag.Patient = patient;
         ViewBag.PatientUser = pu;
         ViewBag.Age = CalcAge(patient.BirthDate);
+        ViewBag.IsPaid = (from p in _db.Payments
+                          where p.AppointmentId == AppointmentId && p.PaymentStatus == "PAID"
+                          select p).Any();
         ViewBag.ServiceLines = (from l in _db.AppointmentServices
                                 where l.AppointmentId == AppointmentId
                                 select l).ToList();
@@ -188,6 +194,17 @@ public class DoctorPortalController : Controller
         {
             TempData["Error"] = "ไม่สามารถเปลี่ยนสถานะจาก " + ap.Status + " เป็น " + NewStatus + " ได้";
             return RedirectToAction("Index", new { UserId = UserId, Date = ap.AppointmentDate.ToString("yyyy-MM-dd") });
+        }
+        if (NewStatus == "IN_PROGRESS")
+        {
+            var paid = (from p in _db.Payments
+                        where p.AppointmentId == ap.AppointmentId && p.PaymentStatus == "PAID"
+                        select p).FirstOrDefault();
+            if (paid == null)
+            {
+                TempData["Error"] = "ผู้ป่วยยังไม่ได้ชำระเงิน หรือการเงินยังไม่อนุมัติ จึงยังเริ่มตรวจไม่ได้";
+                return RedirectToAction("Index", new { UserId = UserId, Date = ap.AppointmentDate.ToString("yyyy-MM-dd") });
+            }
         }
 
         string note = "";

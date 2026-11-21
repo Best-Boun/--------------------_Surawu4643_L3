@@ -31,6 +31,10 @@ build_property._RazorSourceGeneratorDebug =
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
+[C:/Users/tippe/Downloads/67144643 CSI402/67144643/ระบบจองคิวโรงพยายาบา_Surawu4643_L3/Views/Admin/Dashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/tippe/Downloads/67144643 CSI402/67144643/ระบบจองคิวโรงพยายาบา_Surawu4643_L3/Views/Admin/DepartmentForm.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGVwYXJ0bWVudEZvcm0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -65,6 +69,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/tippe/Downloads/67144643 CSI402/67144643/ระบบจองคิวโรงพยายาบา_Surawu4643_L3/Views/Admin/UserList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlckxpc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tippe/Downloads/67144643 CSI402/67144643/ระบบจองคิวโรงพยายาบา_Surawu4643_L3/Views/Appointment/History.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcSGlzdG9yeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/tippe/Downloads/67144643 CSI402/67144643/ระบบจองคิวโรงพยายาบา_Surawu4643_L3/Views/Appointment/MyAppointments.cshtml]

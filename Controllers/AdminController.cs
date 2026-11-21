@@ -835,4 +835,50 @@ public class AdminController : Controller
         TempData["Success"] = "ลบบริการเรียบร้อยแล้ว";
         return RedirectToAction("ServiceList", new { UserId = UserId });
     }
+    // ---------------- Dashboard ผู้ป่วยและการจอง ----------------
+    public IActionResult Dashboard(int UserId, DateOnly? From, DateOnly? To)
+    {
+        if (!IsAdmin(UserId))
+        {
+            return RedirectToAction("Login", "Home");
+        }
+
+        var today = DateOnly.FromDateTime(DateTime.Now);
+        var fromDate = From ?? new DateOnly(today.Year, today.Month, 1);
+        var toDate = To ?? today;
+
+        if (toDate < fromDate)
+        {
+            ViewBag.Status = "วันที่สิ้นสุดต้องไม่ก่อนวันที่เริ่ม ระบบสลับวันที่ให้แล้ว";
+            var tmp = fromDate;
+            fromDate = toDate;
+            toDate = tmp;
+        }
+
+        // การจองที่วันนัดอยู่ในช่วงที่เลือก
+        var aps = (from a in _db.Appointments
+                   where a.AppointmentDate >= fromDate && a.AppointmentDate <= toDate
+                   orderby a.AppointmentDate
+                   select a).ToList();
+
+        // ผู้ป่วยที่สมัครในช่วงที่เลือก
+        DateTime fromTime = fromDate.ToDateTime(TimeOnly.MinValue);
+        DateTime toTime = toDate.AddDays(1).ToDateTime(TimeOnly.MinValue);
+        int newPatients = (from p in _db.Patients
+                           join u in _db.Users on p.UserId equals u.UserId
+                           where u.CreatedAt >= fromTime && u.CreatedAt < toTime
+                           select p).Count();
+
+        ViewBag.UserId = UserId;
+        ViewBag.From = fromDate;
+        ViewBag.To = toDate;
+        ViewBag.AppointmentList = aps;
+        ViewBag.PatientTotal = (from p in _db.Patients select p).Count();
+        ViewBag.NewPatients = newPatients;
+        ViewBag.BookedPatients = aps.Select(x => x.PatientId).Distinct().Count();
+        ViewBag.DoctorList = (from d in _db.Doctors select d).ToList();
+        ViewBag.UserList = (from u in _db.Users select u).ToList();
+        ViewBag.DeptList = (from d in _db.Departments select d).ToList();
+        return View();
+    }
 }

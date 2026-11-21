@@ -1,0 +1,64 @@
+@model IEnumerable<Appointment>
+@{
+    ViewData["Title"] = "ประวัตินัดหมาย";
+    Layout = "_NavLayout";
+    var doctors = ViewBag.DoctorList as List<Doctor>;
+    var users = ViewBag.UserList as List<User>;
+    var payments = ViewBag.PaymentList as List<Payment>;
+}
+
+<h3>🕘 ประวัตินัดหมาย</h3>
+<p class="text-muted">นัดที่ตรวจเสร็จแล้ว ถูกยกเลิก หรือไม่มาตามนัด</p>
+
+<table class="table table-bordered table-striped align-middle">
+    <thead>
+        <tr>
+            <th>หมายเลขคิว</th><th>วันที่/เวลา</th><th>แพทย์</th>
+            <th>สถานะ</th><th class="text-end">ยอดสุทธิ</th><th>การชำระเงิน</th><th>ใบเสร็จ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr><td colspan="7" class="text-center text-muted">ยังไม่มีประวัตินัดหมาย</td></tr>
+        }
+        @foreach (var a in Model)
+        {
+            var doc = doctors.FirstOrDefault(x => x.DoctorId == a.DoctorId);
+            var docUser = doc == null ? null : users.FirstOrDefault(y => y.UserId == doc.UserId);
+            var pay = payments.Where(z => z.AppointmentId == a.AppointmentId).OrderByDescending(z => z.PaymentId).FirstOrDefault();
+            <tr>
+                <td>@a.QueueNo</td>
+                <td>@a.AppointmentDate.ToString("dd/MM/yyyy") @a.AppointmentTime.ToString("HH:mm")</td>
+                <td>@(docUser != null ? docUser.FirstName + " " + docUser.LastName : "-")</td>
+                <td>
+                    @if (a.Status == "COMPLETED")
+                    {
+                        <span class="badge text-bg-success">COMPLETED</span>
+                    }
+                    else if (a.Status == "CANCELLED")
+                    {
+                        <span class="badge text-bg-danger">CANCELLED</span>
+                    }
+                    else
+                    {
+                        <span class="badge text-bg-secondary">@a.Status</span>
+                    }
+                </td>
+                <td class="text-end">@((a.NetPrice ?? 0).ToString("N2"))</td>
+                <td>@(pay != null ? pay.PaymentStatus : "ยังไม่ชำระ")</td>
+                <td>
+                    @if (pay != null && pay.PaymentStatus == "PAID")
+                    {
+                        <a class="btn btn-sm btn-outline-primary" asp-controller="Payment" asp-action="Receipt"
+                           asp-route-UserId="@ViewBag.UserId" asp-route-PaymentId="@pay.PaymentId">ดูใบเสร็จ</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">-</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

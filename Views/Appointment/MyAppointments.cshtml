@@ -9,6 +9,11 @@
 
 <h3>📋 นัดหมายของฉัน</h3>
 
+<p>
+    <a class="btn btn-sm btn-outline-secondary" asp-controller="Appointment" asp-action="History"
+       asp-route-UserId="@ViewBag.UserId">🕘 ดูประวัตินัดหมาย</a>
+</p>
+
 @if (TempData["Success"] is string ok)
 {
     <div class="alert alert-success">@ok</div>
@@ -21,17 +26,30 @@
 <table class="table table-bordered table-striped align-middle">
     <thead>
         <tr>
-            <th>หมายเลขคิว</th><th>วันที่/เวลา</th><th>แพทย์</th>
-            <th>สถานะ</th><th class="text-end">ยอดสุทธิ</th><th>การชำระเงิน</th><th>จัดการ</th>
+            <th>หมายเลขคิว</th>
+            <th>วันที่/เวลา</th>
+            <th>แพทย์</th>
+            <th>สถานะ</th>
+            <th class="text-end">ยอดสุทธิ</th>
+            <th>การชำระเงิน</th>
+            <th>จัดการ</th>
         </tr>
     </thead>
     <tbody>
+        @if (!Model.Any())
+        {
+            <tr>
+                <td colspan="7" class="text-center text-muted">ไม่มีนัดหมายที่กำลังดำเนินการ</td>
+            </tr>
+        }
         @foreach (var a in Model)
         {
             var doc = doctors.FirstOrDefault(x => x.DoctorId == a.DoctorId);
             var docUser = doc == null ? null : users.FirstOrDefault(y => y.UserId == doc.UserId);
-            var pay = payments.Where(z => z.AppointmentId == a.AppointmentId).OrderByDescending(z => z.PaymentId).FirstOrDefault();
-            bool canPay = a.Status != "CANCELLED" && (pay == null || (pay.PaymentStatus != "PENDING" && pay.PaymentStatus != "PAID"));
+            var pay = payments.Where(z => z.AppointmentId == a.AppointmentId).OrderByDescending(z =>
+        z.PaymentId).FirstOrDefault();
+            bool canPay = a.Status != "CANCELLED" && (pay == null || (pay.PaymentStatus != "PENDING" && pay.PaymentStatus !=
+      "PAID"));
             <tr>
                 <td>@a.QueueNo</td>
                 <td>@a.AppointmentDate.ToString("dd/MM/yyyy") @a.AppointmentTime.ToString("HH:mm")</td>

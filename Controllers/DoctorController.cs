@@ -65,7 +65,7 @@ public class DoctorController : Controller
         foreach (var s in data.Services)
         {
             data.Total = data.Total + s.Price;
-            if (s.ServiceType == "HEALTH_PACKAGE")
+            if (string.Equals((s.ServiceType ?? "").Trim(), "HEALTH_PACKAGE", StringComparison.OrdinalIgnoreCase))
             {
                 hasPack = true;
             }
@@ -85,37 +85,57 @@ public class DoctorController : Controller
                       select p).ToList();
 
         data.DiscountPercent = 0;
+        data.DiscountAmount = 0;
         data.UsedPromotions = new List<Promotion>();
+        List<string> notes = new List<string>();   // โปรโมชั่นที่ยังไม่ได้สิทธิ์ + เหตุผล
 
         foreach (var p in promos)
         {
+            string type = (p.PromotionType ?? "").Trim().ToUpper();
             bool ok = false;
+            string why = "";
 
-            if (p.PromotionType == "AGE" && age >= (p.MinimumAge ?? 60))
+            if (type == "AGE")
             {
-                ok = true;
+                int minAge = p.MinimumAge ?? 60;
+                ok = age >= minAge;
+                if (!ok) { why = "ต้องมีอายุตั้งแต่ " + minAge + " ปี (คุณอายุ " + age + " ปี)"; }
             }
-            else if (p.PromotionType == "HEALTH_PACKAGE" && hasPack)
+            else if (type == "HEALTH_PACKAGE")
             {
-                ok = true;
+                ok = hasPack;
+                if (!ok) { why = "ต้องเลือกแพ็กเกจตรวจสุขภาพ"; }
             }
-            else if (p.PromotionType == "FAMILY" && data.PersonCount >= (p.MinimumPerson ?? 3))
+            else if (type == "FAMILY")
             {
-                ok = true;
+                int minPerson = p.MinimumPerson ?? 3;
+                ok = data.PersonCount >= minPerson;
+                if (!ok) { why = "ต้องมีผู้เข้ารับบริการตั้งแต่ " + minPerson + " คน"; }
             }
-            else if (p.PromotionType == "WEB")
+            else if (type == "WEB")
             {
                 ok = true;   // จองผ่านเว็บเสมอ
             }
-            else if (p.PromotionType == "BIRTH_MONTH" && patient.BirthDate.Month == schedule.ScheduleDate.Month)
+            else if (type == "BIRTH_MONTH")
             {
-                ok = true;
+                ok = patient.BirthDate.Month == schedule.ScheduleDate.Month;
+                if (!ok) { why = "วันนัดต้องอยู่ในเดือนเกิดของคุณ"; }
+            }
+            else
+            {
+                why = "ไม่รู้จักประเภทโปรโมชั่น '" + p.PromotionType + "'";
             }
 
             if (ok)
             {
+                decimal amount = Math.Round(data.Total * p.DiscountPercent / 100, 2);
                 data.DiscountPercent = data.DiscountPercent + p.DiscountPercent;
+                data.DiscountAmount = data.DiscountAmount + amount;   // รวมจากส่วนลดรายโปร ให้ตรงกับที่บันทึก
                 data.UsedPromotions.Add(p);
+            }
+            else
+            {
+                notes.Add(p.PromotionName + ": " + why);
             }
         }
 
@@ -123,9 +143,13 @@ public class DoctorController : Controller
         {
             data.DiscountPercent = 100;
         }
+        if (data.DiscountAmount > data.Total)
+        {
+            data.DiscountAmount = data.Total;
+        }
 
-        data.DiscountAmount = Math.Round(data.Total * data.DiscountPercent / 100, 2);
         data.NetPrice = data.Total - data.DiscountAmount;
+        ViewBag.PromoNotes = notes;
     }
 
     private string NextQueueNo(DoctorSchedule schedule)

@@ -17,6 +17,7 @@
         <div class="d-flex align-items-center gap-2 flex-wrap">
             <a class="nav-link px-3" asp-controller="Doctor" asp-action="Index" asp-route-UserId="@ViewBag.UserId">🩺 จองคิว</a>
             <a class="nav-link px-3" asp-controller="Appointment" asp-action="MyAppointments" asp-route-UserId="@ViewBag.UserId">📋 นัดหมายของฉัน</a>
+            <a class="nav-link px-3" asp-controller="Appointment" asp-action="History" asp-route-UserId="@ViewBag.UserId">🕘 ประวัตินัดหมาย</a>
             <a class="nav-link px-3" asp-controller="Payment" asp-action="History" asp-route-UserId="@ViewBag.UserId">💳 ประวัติการชำระเงิน</a>
         </div>
 

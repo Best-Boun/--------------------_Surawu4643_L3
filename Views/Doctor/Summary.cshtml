@@ -4,6 +4,7 @@
     Layout = "_NavLayout";
     var schedule = ViewBag.Schedule as DoctorSchedule;
     var du = ViewBag.DoctorUser as User;
+    var notes = ViewBag.PromoNotes as List<string>;
 }
 
 <h3>สรุปค่าใช้จ่าย</h3>
@@ -11,45 +12,78 @@
 <div class="card mb-3">
     <div class="card-body">
         <div>แพทย์: <b>@(du != null ? du.FirstName + " " + du.LastName : "-")</b></div>
-        <div>วันที่: <b>@schedule.ScheduleDate.ToString("dd/MM/yyyy")</b> เวลา <b>@schedule.StartTime.ToString("HH:mm")</b></div>
-        <div>จำนวนผู้เข้ารับบริการ: @Model.PersonCount คน</div>
+        <div>วันที่: <b>@schedule.ScheduleDate.ToString("dd/MM/yyyy")</b> เวลา
+            <b>@schedule.StartTime.ToString("HH:mm")</b></div>
+            <div>จำนวนผู้เข้ารับบริการ: @Model.PersonCount คน</div>
+        </div>
     </div>
-</div>
 
-<table class="table table-bordered" style="max-width:700px">
-    <thead><tr><th>รายการ</th><th class="text-end">จำนวนเงิน (บาท)</th></tr></thead>
-    <tbody>
-        @foreach (var s in Model.Services)
-        {
-            <tr><td>@s.ServiceName</td><td class="text-end">@s.Price.ToString("N2")</td></tr>
-        }
-        <tr class="table-light"><td><b>รวมค่าบริการ</b></td><td class="text-end"><b>@Model.Total.ToString("N2")</b></td></tr>
-
-        @if (Model.UsedPromotions.Count == 0)
-        {
-            <tr><td colspan="2" class="text-muted">ไม่มีโปรโมชั่นที่คุณมีสิทธิ์ใช้</td></tr>
-        }
-        @foreach (var p in Model.UsedPromotions)
-        {
-            <tr class="text-success">
-                <td>ส่วนลด: @p.PromotionName (@p.DiscountPercent.ToString("0.##")%)</td>
-                <td class="text-end">-@((Model.Total * p.DiscountPercent / 100).ToString("N2"))</td>
+    <table class="table table-bordered" style="max-width:700px">
+        <thead>
+            <tr>
+                <th>รายการ</th>
+                <th class="text-end">จำนวนเงิน (บาท)</th>
             </tr>
-        }
-        <tr class="table-light"><td><b>ส่วนลดรวม (@Model.DiscountPercent.ToString("0.##")%)</b></td><td class="text-end"><b>-@Model.DiscountAmount.ToString("N2")</b></td></tr>
-        <tr class="table-primary"><td><b>ยอดสุทธิ</b></td><td class="text-end"><b>@Model.NetPrice.ToString("N2")</b></td></tr>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var s in Model.Services)
+            {
+                <tr>
+                    <td>@s.ServiceName</td>
+                    <td class="text-end">@s.Price.ToString("N2")</td>
+                </tr>
+            }
+            <tr class="table-light">
+                <td><b>รวมค่าบริการ</b></td>
+                <td class="text-end"><b>@Model.Total.ToString("N2")</b></td>
+            </tr>
 
-<form asp-controller="Doctor" asp-action="Book" method="post">
-    <input type="hidden" name="UserId" value="@Model.UserId" />
-    <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
-    <input type="hidden" name="PersonCount" value="@Model.PersonCount" />
-    @foreach (var id in Model.ServiceIds)
+            @if (Model.UsedPromotions.Count == 0)
+            {
+                <tr>
+                    <td colspan="2" class="text-muted">ไม่มีโปรโมชั่นที่คุณมีสิทธิ์ใช้</td>
+                </tr>
+            }
+            @foreach (var p in Model.UsedPromotions)
+            {
+                <tr class="text-success">
+                    <td>ส่วนลด: @p.PromotionName (@p.DiscountPercent.ToString("0.##")%)</td>
+                    <td class="text-end">-@((Model.Total * p.DiscountPercent / 100).ToString("N2"))</td>
+                </tr>
+            }
+            <tr class="table-light">
+                <td><b>ส่วนลดรวม (@Model.DiscountPercent.ToString("0.##")%)</b></td>
+                <td class="text-end"><b>-@Model.DiscountAmount.ToString("N2")</b></td>
+            </tr>
+            <tr class="table-primary">
+                <td><b>ยอดสุทธิ</b></td>
+                <td class="text-end"><b>@Model.NetPrice.ToString("N2")</b></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    @if (notes != null && notes.Count > 0)
     {
-        <input type="hidden" name="ServiceIds" value="@id" />
+        <div class="alert alert-light border" style="max-width:700px">
+            <div class="fw-bold mb-1">โปรโมชั่นที่ยังไม่ได้สิทธิ์</div>
+            <ul class="mb-0 small">
+                @foreach (var n in notes)
+                {
+                    <li>@n</li>
+                }
+            </ul>
+        </div>
     }
-    <button type="submit" class="btn btn-success">✅ ยืนยันการจอง</button>
-    <a class="btn btn-outline-secondary" asp-controller="Doctor" asp-action="Confirm"
-       asp-route-UserId="@Model.UserId" asp-route-ScheduleId="@Model.ScheduleId">กลับไปแก้ไข</a>
-</form>
+
+    <form asp-controller="Doctor" asp-action="Book" method="post">
+        <input type="hidden" name="UserId" value="@Model.UserId" />
+        <input type="hidden" name="ScheduleId" value="@Model.ScheduleId" />
+        <input type="hidden" name="PersonCount" value="@Model.PersonCount" />
+        @foreach (var id in Model.ServiceIds)
+        {
+            <input type="hidden" name="ServiceIds" value="@id" />
+        }
+        <button type="submit" class="btn btn-success">✅ ยืนยันการจอง</button>
+        <a class="btn btn-outline-secondary" asp-controller="Doctor" asp-action="Confirm" asp-route-UserId="@Model.UserId"
+           asp-route-ScheduleId="@Model.ScheduleId">กลับไปแก้ไข</a>
+    </form>
