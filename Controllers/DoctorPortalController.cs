@@ -86,6 +86,10 @@ public class DoctorPortalController : Controller
         ViewBag.WaitingCount = dayAll.Count(x => x.Status == "WAITING");
         ViewBag.InProgressCount = dayAll.Count(x => x.Status == "IN_PROGRESS");
         ViewBag.CompletedCount = dayAll.Count(x => x.Status == "COMPLETED");
+        ViewBag.DayTotal = dayAll.Count;
+        ViewBag.DoctorInfo = doctor;
+        ViewBag.DoctorUser = (from u in _db.Users where u.UserId == UserId select u).FirstOrDefault();
+        ViewBag.DoctorDept = (from d in _db.Departments where d.DepartmentId == doctor.DepartmentId select d).FirstOrDefault();
         return View();
     }
 

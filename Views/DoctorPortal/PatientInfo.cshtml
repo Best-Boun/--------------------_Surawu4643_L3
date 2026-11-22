@@ -4,91 +4,114 @@
     var ap = ViewBag.Appointment as Appointment;
     var pt = ViewBag.Patient as Patient;
     var pu = ViewBag.PatientUser as User;
-    var lines = ViewBag.ServiceLines as List<AppointmentService>;
-    var services = ViewBag.ServiceList as List<Service>;
-    var history = ViewBag.History as List<Appointment>;
+    var lines = ViewBag.ServiceLines as List<AppointmentService> ?? new List<AppointmentService>();
+    var services = ViewBag.ServiceList as List<Service> ?? new List<Service>();
+    var history = ViewBag.History as List<Appointment> ?? new List<Appointment>();
+    string fullName = pu != null ? pu.FirstName + " " + pu.LastName : "-";
 }
 
-<h3>👤 ข้อมูลผู้ป่วย</h3>
+<div class="mq-head">
+    <div>
+        <h3>ข้อมูลรายละเอียดผู้ป่วย</h3>
+        <p>จัดการข้อมูลการรักษาและอัปเดตสถานะการบริการ</p>
+    </div>
+    <a class="btn btn-outline-secondary" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Date="@ap!.AppointmentDate.ToString("yyyy-MM-dd")">← กลับ</a>
+</div>
 
-<div class="card mb-3" style="max-width:700px">
-    <div class="card-body">
-        <h5>@(pu != null ? pu.FirstName + " " + pu.LastName : "-")</h5>
-        <div>อายุ: <b>@ViewBag.Age</b> ปี (เกิด @pt.BirthDate.ToString("dd/MM/yyyy"))</div>
-        <div>เพศ: @(string.IsNullOrEmpty(pt.Gender) ? "-" : pt.Gender)</div>
-        <div>เบอร์โทร: @(pu != null && !string.IsNullOrEmpty(pu.Phone) ? pu.Phone : "-")</div>
-        <div>ที่อยู่: @(string.IsNullOrEmpty(pt.Address) ? "-" : pt.Address)</div>
-        <div>ผู้ติดต่อฉุกเฉิน: @(string.IsNullOrEmpty(pt.EmergencyContact) ? "-" : pt.EmergencyContact)
-            (@(string.IsNullOrEmpty(pt.EmergencyPhone) ? "-" : pt.EmergencyPhone))</div>
+<div class="mq-panel mb-3">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-3">
+        <div class="mq-person">
+            <span class="mq-ava" style="width:56px;height:56px;flex-basis:56px;font-size:1.3rem">@(pu != null ? pu.FirstName.Substring(0, 1) : "?")</span>
+            <div><b style="font-size:1.2rem">@fullName</b><small>อายุ @ViewBag.Age ปี · @(pt != null && !string.IsNullOrEmpty(pt.Gender) ? pt.Gender : "-")</small></div>
+        </div>
+        <div class="text-end">
+            <div class="small text-muted">หมายเลขคิว</div>
+            <div class="mq-code" style="font-size:1.4rem">@ap.QueueNo</div>
+        </div>
+        <div>
+            <div class="small text-muted mb-1">สถานะปัจจุบัน</div>
+            <span class="mq-pill s-@(ap.Status)">@ap.Status</span>
         </div>
     </div>
 
-    <div class="card mb-3" style="max-width:700px">
-        <div class="card-body">
-            <h5>นัดหมายนี้</h5>
-            <div>หมายเลขคิว: <b>@ap.QueueNo</b></div>
-            <div>วันที่/เวลา: @ap.AppointmentDate.ToString("dd/MM/yyyy") @ap.AppointmentTime.ToString("HH:mm")</div>
-            <div>สถานะ: <b>@ap.Status</b></div>
-            <div class="mt-2">บริการที่เลือก:</div>
-            <ul>
-                @foreach (var l in lines)
-                {
-                    var sv = services.FirstOrDefault(x => x.ServiceId == l.ServiceId);
-                    <li>@(sv != null ? sv.ServiceName : "บริการ") × @l.Quantity</li>
-                }
-            </ul>
-
-            @if (ap.Status == "WAITING")
+    <hr />
+    <div class="d-flex flex-wrap gap-2 align-items-center">
+        <span class="small text-muted me-2">อัปเดตสถานะการบริการ:</span>
+        @if (ap.Status == "WAITING")
+        {
+            if ((bool)ViewBag.IsPaid)
             {
-                if ((bool)ViewBag.IsPaid)
-                {
-                    <form asp-controller="DoctorPortal" asp-action="UpdateStatus" method="post" class="d-inline">
-                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
-                        <input type="hidden" name="AppointmentId" value="@ap.AppointmentId" />
-                        <input type="hidden" name="NewStatus" value="IN_PROGRESS" />
-                        <button class="btn btn-primary">เริ่มตรวจ</button>
-                    </form>
-                }
-                else
-                {
-                    <div class="alert alert-warning mb-0">ผู้ป่วยยังไม่ได้ชำระเงิน หรือการเงินยังไม่อนุมัติ จึงยังเริ่มตรวจไม่ได้
-                    </div>
-                }
-            }
-            @if (ap.Status == "IN_PROGRESS")
-            {
-                <form asp-controller="DoctorPortal" asp-action="UpdateStatus" method="post" class="d-inline">
+                <form asp-action="UpdateStatus" method="post" class="d-inline">
                     <input type="hidden" name="UserId" value="@ViewBag.UserId" />
                     <input type="hidden" name="AppointmentId" value="@ap.AppointmentId" />
-                    <input type="hidden" name="NewStatus" value="COMPLETED" />
-                    <button class="btn btn-success">ตรวจเสร็จ</button>
+                    <input type="hidden" name="NewStatus" value="IN_PROGRESS" />
+                    <button class="btn btn-primary">เริ่มตรวจ</button>
                 </form>
             }
+            else
+            {
+                <span class="mq-pill s-PENDING">ผู้ป่วยยังไม่ชำระเงิน หรือการเงินยังไม่อนุมัติ จึงยังเริ่มตรวจไม่ได้</span>
+            }
+        }
+        @if (ap.Status == "IN_PROGRESS")
+        {
+            <form asp-action="UpdateStatus" method="post" class="d-inline">
+                <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                <input type="hidden" name="AppointmentId" value="@ap.AppointmentId" />
+                <input type="hidden" name="NewStatus" value="COMPLETED" />
+                <button class="btn btn-success">ตรวจเสร็จ</button>
+            </form>
+        }
+        @if (ap.Status != "WAITING" && ap.Status != "IN_PROGRESS")
+        {
+            <span class="text-muted small">นัดนี้จบแล้ว ไม่สามารถเปลี่ยนสถานะได้</span>
+        }
+    </div>
+</div>
+
+<div class="mq-split">
+    <div>
+        <div class="mq-panel mb-3">
+            <div class="mq-panel-title">นัดหมายนี้</div>
+            <div class="mq-panel-sub">รายละเอียดและบริการที่เลือก</div>
+            <div class="mq-line"><span>วันที่ / เวลา</span><b>@ap.AppointmentDate.ToString("dd/MM/yyyy") @ap.AppointmentTime.ToString("HH:mm") น.</b></div>
+            @foreach (var l in lines)
+            {
+                var sv = services.FirstOrDefault(x => x.ServiceId == l.ServiceId);
+                <div class="mq-line"><span>@(sv != null ? sv.ServiceName : "บริการ")</span><span>× @l.Quantity</span></div>
+            }
+        </div>
+
+        <div class="mq-panel">
+            <div class="mq-panel-title">ประวัตินัดหมายกับคุณหมอ</div>
+            <div class="mq-panel-sub">นัดทั้งหมดของผู้ป่วยรายนี้กับคุณ</div>
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead><tr><th>วันที่</th><th>เวลา</th><th>หมายเลขคิว</th><th>สถานะ</th></tr></thead>
+                    <tbody>
+                        @foreach (var h in history)
+                        {
+                            <tr>
+                                <td>@h.AppointmentDate.ToString("dd/MM/yyyy")</td>
+                                <td>@h.AppointmentTime.ToString("HH:mm")</td>
+                                <td class="mq-code">@h.QueueNo</td>
+                                <td><span class="mq-pill s-@(h.Status)">@h.Status</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <h5>ประวัตินัดหมายกับคุณหมอ</h5>
-    <table class="table table-bordered table-striped" style="max-width:700px">
-        <thead>
-            <tr>
-                <th>วันที่</th>
-                <th>เวลา</th>
-                <th>หมายเลขคิว</th>
-                <th>สถานะ</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var h in history)
-            {
-                <tr>
-                    <td>@h.AppointmentDate.ToString("dd/MM/yyyy")</td>
-                    <td>@h.AppointmentTime.ToString("HH:mm")</td>
-                    <td>@h.QueueNo</td>
-                    <td>@h.Status</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    <a class="btn btn-outline-secondary" asp-controller="DoctorPortal" asp-action="Index" asp-route-UserId="@ViewBag.UserId"
-       asp-route-Date="@ap.AppointmentDate.ToString("yyyy-MM-dd")">กลับ</a>
+    <div class="mq-panel">
+        <div class="mq-panel-title">ข้อมูลทั่วไป</div>
+        <div class="mq-panel-sub">ข้อมูลส่วนตัวของผู้ป่วย</div>
+        <div class="mq-line"><span>วันเกิด</span><span>@(pt != null ? pt.BirthDate.ToString("dd/MM/yyyy") : "-")</span></div>
+        <div class="mq-line"><span>เพศ</span><span>@(pt != null && !string.IsNullOrEmpty(pt.Gender) ? pt.Gender : "-")</span></div>
+        <div class="mq-line"><span>เบอร์โทร</span><span>@(pu != null && !string.IsNullOrEmpty(pu.Phone) ? pu.Phone : "-")</span></div>
+        <div class="mq-line"><span>ที่อยู่</span><span class="text-end" style="max-width:60%">@(pt != null && !string.IsNullOrEmpty(pt.Address) ? pt.Address : "-")</span></div>
+        <div class="mq-line"><span>ผู้ติดต่อฉุกเฉิน</span><span>@(pt != null && !string.IsNullOrEmpty(pt.EmergencyContact) ? pt.EmergencyContact : "-")</span></div>
+        <div class="mq-line"><span>เบอร์ฉุกเฉิน</span><span>@(pt != null && !string.IsNullOrEmpty(pt.EmergencyPhone) ? pt.EmergencyPhone : "-")</span></div>
+    </div>
+</div>

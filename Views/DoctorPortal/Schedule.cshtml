@@ -1,46 +1,63 @@
 @{
     ViewData["Title"] = "ตารางนัดหมายของฉัน";
     Layout = "_DoctorLayout";
-    var schedules = ViewBag.ScheduleList as List<DoctorSchedule>;
-    var appointments = ViewBag.AppointmentList as List<Appointment>;
+    var schedules = ViewBag.ScheduleList as List<DoctorSchedule> ?? new List<DoctorSchedule>();
+    var appointments = ViewBag.AppointmentList as List<Appointment> ?? new List<Appointment>();
+    var inv = System.Globalization.CultureInfo.InvariantCulture;
 }
 
-<h3>📅 ตารางนัดหมายของฉัน</h3>
-<p class="text-muted">รอบเวลาที่เปิดไว้ตั้งแต่วันนี้เป็นต้นไป (ปรับตารางได้โดยผู้ดูแลตารางแพทย์)</p>
+<div class="mq-head">
+    <div>
+        <h3>ตารางนัดหมายของฉัน</h3>
+        <p>รอบเวลาที่เปิดไว้ตั้งแต่วันนี้เป็นต้นไป (ปรับตารางได้โดยผู้ดูแลตารางแพทย์)</p>
+    </div>
+</div>
 
-<table class="table table-bordered table-striped align-middle">
-    <thead>
-        <tr>
-            <th>วันที่</th><th>เวลา</th><th class="text-center">จองแล้ว / รองรับ</th><th>สถานะรอบ</th><th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (schedules.Count == 0)
-        {
-            <tr><td colspan="5" class="text-center text-muted">ยังไม่มีรอบเวลา</td></tr>
-        }
-        @foreach (var s in schedules)
-        {
-            int booked = appointments.Count(x => x.ScheduleId == s.ScheduleId);
-            <tr>
-                <td>@s.ScheduleDate.ToString("dd/MM/yyyy")</td>
-                <td>@s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm")</td>
-                <td class="text-center">@booked / @s.MaxQueue</td>
-                <td>
-                    @if (s.Status == "OPEN")
-                    {
-                        <span class="badge text-bg-success">OPEN</span>
-                    }
-                    else
-                    {
-                        <span class="badge text-bg-secondary">@s.Status</span>
-                    }
-                </td>
-                <td>
-                    <a class="btn btn-sm btn-primary" asp-controller="DoctorPortal" asp-action="Index"
-                       asp-route-UserId="@ViewBag.UserId" asp-route-Date="@s.ScheduleDate.ToString("yyyy-MM-dd")">ดูคิววันนี้</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="mq-panel">
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr><th>วันที่</th><th>เวลา</th><th>ความจุคิว</th><th>สถานะรอบ</th><th class="text-end"></th></tr>
+            </thead>
+            <tbody>
+                @if (schedules.Count == 0)
+                {
+                    <tr><td colspan="5" class="text-center text-muted py-4">ยังไม่มีรอบเวลา</td></tr>
+                }
+                @foreach (var s in schedules)
+                {
+                    int booked = appointments.Count(x => x.ScheduleId == s.ScheduleId);
+                    double pct = s.MaxQueue == 0 ? 0 : booked * 100.0 / s.MaxQueue;
+                    bool isFull = s.AvailableQueue <= 0;
+                    <tr>
+                        <td><b>@s.ScheduleDate.ToString("dd/MM/yyyy")</b></td>
+                        <td>🕒 @s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm") น.</td>
+                        <td>
+                            <div class="mq-cap">
+                                <div class="mq-cap-top"><span>@booked/@s.MaxQueue</span><b>@pct.ToString("0")%</b></div>
+                                <div class="mq-cap-bar @(isFull ? "full" : "")"><div style="width:@(Math.Min(100, pct).ToString("0", inv))%"></div></div>
+                            </div>
+                        </td>
+                        <td>
+                            @if (s.Status != "OPEN")
+                            {
+                                <span class="mq-pill s-CLOSED">ปิดรอบ</span>
+                            }
+                            else if (isFull)
+                            {
+                                <span class="mq-pill s-FULL">คิวเต็ม</span>
+                            }
+                            else
+                            {
+                                <span class="mq-pill s-OPEN">เปิดจอง</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-primary" asp-action="Index" asp-route-UserId="@ViewBag.UserId" asp-route-Date="@s.ScheduleDate.ToString("yyyy-MM-dd")">ดูคิววันนั้น</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
