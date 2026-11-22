@@ -187,3 +187,90 @@ body { background: var(--mq-bg); color: var(--mq-ink); font-family: var(--bs-bod
 .mq-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 16px; }
 .mq-method { padding: 10px; border: 1px solid var(--mq-line); border-radius: 9px; background: #fff; text-align: center; font-size: .8rem; color: var(--mq-muted); }
 .mq-method.on { border-color: var(--mq-blue); background: #eef4ff; color: var(--mq-blue-dark); font-weight: 700; }
+/* ---------- Dashboard / การ์ดตัวเลข / แผง ---------- */
+.mq-kpi { padding: 18px 20px; background: #fff; border: 1px solid var(--mq-line); border-radius: 14px; box-shadow: 0 4px 14px rgba(29, 52, 83, .05); height: 100%; }
+.mq-kpi-label { color: var(--mq-muted); font-size: .85rem; }
+.mq-kpi-value { margin: 4px 0; font-size: 2rem; font-weight: 800; letter-spacing: -.02em; }
+.mq-kpi-sub { font-size: .78rem; }
+.mq-kpi-sub.up { color: #16a34a; }
+.mq-kpi-sub.down { color: #dc2626; }
+
+.mq-panel { padding: 22px; background: #fff; border: 1px solid var(--mq-line); border-radius: 14px; box-shadow: 0 4px 14px rgba(29, 52, 83, .05); }
+.mq-panel-title { font-size: 1.15rem; font-weight: 750; }
+.mq-panel-sub { margin-bottom: 14px; color: var(--mq-muted); font-size: .82rem; }
+
+.mq-chart { width: 100%; height: auto; display: block; }
+.mq-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 10px; padding-top: 12px; border-top: 1px solid var(--mq-line); font-size: .8rem; color: var(--mq-muted); }
+.mq-legend i, .mq-age-legend i { display: inline-block; width: 10px; height: 10px; margin-right: 6px; border-radius: 50%; }
+
+.mq-donut-wrap { display: flex; justify-content: center; padding: 10px 0 18px; }
+.mq-donut { display: grid; place-items: center; width: 180px; height: 180px; border-radius: 50%; }
+.mq-donut-hole { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 112px; height: 112px; border-radius: 50%; background: #fff; }
+.mq-donut-hole b { font-size: 1.6rem; line-height: 1; }
+.mq-donut-hole small { color: var(--mq-muted); }
+.mq-age-legend { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; font-size: .82rem; color: var(--mq-muted); }
+.mq-age-legend b { margin-left: 8px; color: var(--mq-ink); }
+
+.mq-bar-row { margin-bottom: 16px; font-size: .9rem; }
+.mq-bar { height: 8px; margin-top: 6px; border-radius: 999px; background: #eef1f5; overflow: hidden; }
+.mq-bar > div { height: 100%; border-radius: 999px; background: var(--mq-blue); }
+
+.mq-feed { display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid var(--mq-line); font-size: .88rem; }
+.mq-feed:first-of-type { border-top: 0; }
+.mq-feed-dot { flex: 0 0 10px; width: 10px; height: 10px; margin-top: 6px; border-radius: 50%; }
+
+/* ---------- Finance / Schedule ---------- */
+.mq-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 22px; }
+.mq-head h3 { margin: 0 0 4px; }
+.mq-head p { margin: 0; color: var(--mq-muted); font-size: .9rem; }
+
+.mq-ava { display: inline-grid; place-items: center; width: 34px; height: 34px; flex: 0 0 34px; border-radius: 50%; background: #dbeafe; color: var(--mq-blue-dark); font-size: .85rem; font-weight: 700; }
+.mq-person { display: flex; align-items: center; gap: 10px; }
+.mq-person small { display: block; color: var(--mq-muted); font-size: .75rem; }
+.mq-code { color: var(--mq-blue-dark); font-weight: 700; font-family: Consolas, monospace; }
+
+.mq-panel .table { border: 0; border-radius: 0; }
+
+.mq-cap { min-width: 130px; }
+.mq-cap-top { display: flex; justify-content: space-between; font-size: .78rem; color: var(--mq-muted); margin-bottom: 4px; }
+.mq-cap-bar { height: 6px; border-radius: 999px; background: #eef1f5; overflow: hidden; }
+.mq-cap-bar > div { height: 100%; border-radius: 999px; background: var(--mq-blue); }
+.mq-cap-bar.full > div { background: #f59e0b; }
+
+.mq-pill { display: inline-block; padding: 3px 11px; border-radius: 999px; background: #e5e7eb; color: #475569; font-size: .75rem; font-weight: 600; }
+.mq-pill.s-WAITING, .mq-pill.s-PENDING { background: #fef3c7; color: #b45309; }
+.mq-pill.s-IN_PROGRESS { background: #dbeafe; color: #1d4ed8; }
+.mq-pill.s-COMPLETED, .mq-pill.s-PAID, .mq-pill.s-OPEN { background: #dcfce7; color: #15803d; }
+.mq-pill.s-CANCELLED, .mq-pill.s-REJECTED { background: #fee2e2; color: #b91c1c; }
+.mq-pill.s-NO_SHOW, .mq-pill.s-CLOSED { background: #e5e7eb; color: #475569; }
+.mq-pill.s-FULL { background: #fef3c7; color: #b45309; }
+
+.mq-split { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(300px, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 991.98px) { .mq-split { grid-template-columns: 1fr; } }
+
+.mq-confirm { border-top: 4px solid var(--mq-blue); }
+.mq-line { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--mq-line); font-size: .9rem; }
+.mq-line.total { border-bottom: 0; font-size: 1.1rem; font-weight: 800; padding-top: 14px; }
+.mq-line.discount { color: #16a34a; }
+.mq-note { padding: 12px 14px; border-radius: 10px; background: #eef4ff; color: #1e40af; font-size: .82rem; }
+
+.mq-list-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 0; border-top: 1px solid var(--mq-line); font-size: .88rem; }
+.mq-list-row:first-of-type { border-top: 0; }
+
+/* ---------- Finance 2 คอลัมน์ ---------- */
+.mq-fin { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(320px, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 1099.98px) { .mq-fin { grid-template-columns: 1fr; } }
+
+.mq-tabs { display: inline-flex; padding: 3px; border-radius: 9px; background: #eef0f3; }
+.mq-tabs a { padding: 5px 14px; border-radius: 7px; color: var(--mq-muted); font-size: .82rem; text-decoration: none; }
+.mq-tabs a.active { background: #fff; color: var(--mq-ink); font-weight: 600; box-shadow: 0 1px 3px rgba(30, 41, 59, .1); }
+
+.mq-row-link { cursor: pointer; }
+.mq-row-link.selected > * { background: #eef4ff !important; }
+
+.mq-sel { padding: 14px; margin-bottom: 14px; border: 1px solid var(--mq-line); border-radius: 10px; background: #f8fafc; }
+.mq-sel .tag { float: right; padding: 2px 10px; border-radius: 6px; background: #dbeafe; color: var(--mq-blue-dark); font-size: .72rem; font-weight: 700; }
+
+.mq-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 16px; }
+.mq-method { padding: 10px; border: 1px solid var(--mq-line); border-radius: 9px; background: #fff; text-align: center; font-size: .8rem; color: var(--mq-muted); }
+.mq-method.on { border-color: var(--mq-blue); background: #eef4ff; color: var(--mq-blue-dark); font-weight: 700; }
