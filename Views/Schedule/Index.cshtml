@@ -1,15 +1,41 @@
 @{
     ViewData["Title"] = "ตารางแพทย์";
     Layout = "_ScheduleLayout";
-    var schedules = ViewBag.ScheduleList as List<DoctorSchedule>;
-    var appointments = ViewBag.AppointmentList as List<Appointment>;
-    var doctors = ViewBag.DoctorList as List<Doctor>;
-    var users = ViewBag.UserList as List<User>;
-    var filterDoctorId = (int?)ViewBag.FilterDoctorId;
-    string period = ViewBag.Period as string ?? "UPCOMING";
+    var schedules = ViewBag.ScheduleList as List<DoctorSchedule> ?? new List<DoctorSchedule>();
+    var appointments = ViewBag.AppointmentList as List<Appointment> ?? new List<Appointment>();
+    var doctors = ViewBag.DoctorList as List<Doctor> ?? new List<Doctor>();
+    var users = ViewBag.UserList as List<User> ?? new List<User>();
+    var depts = ViewBag.DeptList as List<Department> ?? new List<Department>();
+    var filterDeptId = (int?)ViewBag.FilterDeptId;
+    string keyword = ViewBag.Keyword as string ?? "";
+    string range = ViewBag.Range as string ?? "UPCOMING";
+    DateOnly? pickDate = ViewBag.PickDate as DateOnly?;
+    var today = DateOnly.FromDateTime(DateTime.Now);
+
+    string[] thMonth = { "มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน", "กรกฎาคม", "สิงหาคม", "กันยายน",
+"ตุลาคม", "พฤศจิกายน", "ธันวาคม" };
+    var refDate = pickDate ?? (schedules.Count > 0 ? schedules[0].ScheduleDate : today);
+    string monthTitle = thMonth[refDate.Month - 1] + " " + (refDate.Year + 543);
+
+    int doctorsToday = schedules.Where(s => s.ScheduleDate == today).Select(s => s.DoctorId).Distinct().Count();
+    int openCount = schedules.Count(s => s.Status == "OPEN");
+    int sumMax = schedules.Sum(s => s.MaxQueue);
+    int sumBooked = schedules.Sum(s => appointments.Count(a => a.ScheduleId == s.ScheduleId));
+    double fillRate = sumMax == 0 ? 0 : sumBooked * 100.0 / sumMax;
+    int fullCount = schedules.Count(s => s.AvailableQueue <= 0);
+
+    // จัดกลุ่มตามแพทย์ (ตามแบบ: แถวแพทย์ + แถวรอบย่อย)
+    var groups = schedules.GroupBy(s => s.DoctorId).ToList();
+    var inv = System.Globalization.CultureInfo.InvariantCulture;
 }
 
-<h3>📅 ตารางแพทย์</h3>
+<div class="mq-head">
+    <div>
+        <h3>จัดการตารางเวรแพทย์</h3>
+        <p>บริหารจัดการเวลาปฏิบัติงาน ความจุคิว และสถานะความพร้อมของทีมแพทย์</p>
+    </div>
+    <a class="btn btn-primary" asp-action="Create" asp-route-UserId="@ViewBag.UserId">＋ เพิ่มรอบเวลา</a>
+</div>
 
 @if (TempData["Success"] is string ok)
 {
@@ -20,84 +46,191 @@
     <div class="alert alert-danger">@err</div>
 }
 
-<form asp-controller="Schedule" asp-action="Index" method="get" class="row g-2 mb-3">
-    <input type="hidden" name="UserId" value="@ViewBag.UserId" />
-    <div class="col-md-4">
-        <select name="DoctorId" class="form-select">
-            <option value="">แพทย์ทุกท่าน</option>
-            @foreach (var d in doctors)
+<div class="row g-3 mb-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="mq-kpi-ic">
+            <span class="ic blue">👤</span>
+            <div>
+                <div class="lb">แพทย์ที่ปฏิบัติงานวันนี้</div>
+                <div class="vl">@doctorsToday ท่าน</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="mq-kpi-ic">
+            <span class="ic green">✔</span>
+            <div>
+                <div class="lb">ช่วงเวลาที่เปิดจอง (Shifts)</div>
+                <div class="vl">@openCount รอบ</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="mq-kpi-ic">
+            <span class="ic orange">👥</span>
+            <div>
+                <div class="lb">ความจุที่จองแล้ว</div>
+                <div class="vl">@fillRate.ToString("0")%</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-md-6">
+        <div class="mq-kpi-ic">
+            <span class="ic red">❗</span>
+            <div>
+                <div class="lb">รอบที่คิวเต็ม</div>
+                <div class="vl">@fullCount รายการ</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mq-panel">
+    <div class="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
+        <div class="mq-panel-title">📅 ตารางเวร @monthTitle</div>
+        <div class="mq-tabs">
+            <a class="@(range == "TODAY" && pickDate == null ? "active" : "")" asp-action="Index"
+               asp-route-UserId="@ViewBag.UserId" asp-route-Range="TODAY" asp-route-Keyword="@keyword"
+               asp-route-DepartmentId="@filterDeptId">วันนี้</a>
+            <a class="@(range == "WEEK" && pickDate == null ? "active" : "")" asp-action="Index"
+               asp-route-UserId="@ViewBag.UserId" asp-route-Range="WEEK" asp-route-Keyword="@keyword"
+               asp-route-DepartmentId="@filterDeptId">7 วัน</a>
+            <a class="@(range == "MONTH" && pickDate == null ? "active" : "")" asp-action="Index"
+               asp-route-UserId="@ViewBag.UserId" asp-route-Range="MONTH" asp-route-Keyword="@keyword"
+               asp-route-DepartmentId="@filterDeptId">30 วัน</a>
+            <a class="@(range == "UPCOMING" && pickDate == null ? "active" : "")" asp-action="Index"
+               asp-route-UserId="@ViewBag.UserId" asp-route-Range="UPCOMING" asp-route-Keyword="@keyword"
+               asp-route-DepartmentId="@filterDeptId">ถัดจากนี้</a>
+            <a class="@(range == "ALL" && pickDate == null ? "active" : "")" asp-action="Index"
+               asp-route-UserId="@ViewBag.UserId" asp-route-Range="ALL" asp-route-Keyword="@keyword"
+               asp-route-DepartmentId="@filterDeptId">ทั้งหมด</a>
+        </div>
+    </div>
+
+    <form asp-action="Index" method="get" class="mq-sch-tools">
+        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+        <input type="hidden" name="Range" value="@range" />
+        <input name="Keyword" value="@keyword" class="form-control grow"
+               placeholder="ค้นหาชื่อแพทย์ หรือความเชี่ยวชาญ..." />
+        <select name="DepartmentId" class="form-select" style="width:auto">
+            <option value="">ทุกแผนก</option>
+            @foreach (var dp in depts)
             {
-                var du = users.FirstOrDefault(x => x.UserId == d.UserId);
-                <option value="@d.DoctorId" selected="@(filterDoctorId == d.DoctorId)">@(du != null ? du.FirstName + " " + du.LastName : "-")</option>
+                <option value="@dp.DepartmentId" selected="@(filterDeptId == dp.DepartmentId)">@dp.DepartmentName</option>
             }
         </select>
-    </div>
-    <div class="col-md-3">
-        <select name="Period" class="form-select">
-            <option value="UPCOMING" selected="@(period == "UPCOMING")">ตั้งแต่วันนี้เป็นต้นไป</option>
-            <option value="ALL" selected="@(period == "ALL")">ทั้งหมด (รวมที่ผ่านมาแล้ว)</option>
-        </select>
-    </div>
-    <div class="col-md-2">
-        <button class="btn btn-primary w-100">ค้นหา</button>
-    </div>
-    <div class="col-md-3 text-end">
-        <a class="btn btn-success" asp-controller="Schedule" asp-action="Create" asp-route-UserId="@ViewBag.UserId">➕ เพิ่มรอบเวลา</a>
-    </div>
-</form>
+        <input type="date" name="Date" value="@(pickDate != null ? pickDate.Value.ToString("yyyy-MM-dd") : "")"
+               class="form-control" style="width:auto" />
+        <button class="btn btn-primary">กรองข้อมูล</button>
+        <a class="btn btn-outline-secondary" asp-action="Index" asp-route-UserId="@ViewBag.UserId">ล้าง</a>
+    </form>
 
-<table class="table table-bordered table-striped align-middle">
-    <thead>
-        <tr>
-            <th>วันที่</th><th>เวลา</th><th>แพทย์</th>
-            <th class="text-center">จองแล้ว / รองรับ</th><th class="text-center">คิวว่าง</th>
-            <th>สถานะ</th><th>จัดการ</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (schedules.Count == 0)
-        {
-            <tr><td colspan="7" class="text-center text-muted">ไม่มีรอบเวลา</td></tr>
-        }
-        @foreach (var s in schedules)
-        {
-            var doc = doctors.FirstOrDefault(x => x.DoctorId == s.DoctorId);
-            var du = doc == null ? null : users.FirstOrDefault(y => y.UserId == doc.UserId);
-            int booked = appointments.Count(z => z.ScheduleId == s.ScheduleId);
-            <tr>
-                <td>@s.ScheduleDate.ToString("dd/MM/yyyy")</td>
-                <td>@s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm")</td>
-                <td>@(du != null ? du.FirstName + " " + du.LastName : "-")</td>
-                <td class="text-center">@booked / @s.MaxQueue</td>
-                <td class="text-center">@s.AvailableQueue</td>
-                <td>
-                    @if (s.Status == "OPEN")
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>แพทย์ผู้เชี่ยวชาญ</th>
+                    <th>แผนก / สาขา</th>
+                    <th>ช่วงเวลา (Shifts)</th>
+                    <th>ความจุคิว</th>
+                    <th>สถานะ</th>
+                    <th class="text-end">จัดการ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (groups.Count == 0)
+                {
+                    <tr>
+                        <td colspan="6" class="text-center text-muted py-4">ไม่มีรอบเวลาตามเงื่อนไขที่เลือก</td>
+                    </tr>
+                }
+                @foreach (var g in groups)
+                {
+                    var doc = doctors.FirstOrDefault(x => x.DoctorId == g.Key);
+                    var du = doc == null ? null : users.FirstOrDefault(y => y.UserId == doc.UserId);
+                    var dept = doc == null ? null : depts.FirstOrDefault(d => d.DepartmentId == doc.DepartmentId);
+                    bool firstRow = true;
+                    foreach (var s in g.OrderBy(x => x.ScheduleDate).ThenBy(x => x.StartTime))
                     {
-                        <span class="badge text-bg-success">OPEN</span>
-                    }
-                    else
-                    {
-                        <span class="badge text-bg-secondary">@s.Status</span>
-                    }
-                </td>
-                <td class="text-nowrap">
-                    <a class="btn btn-sm btn-outline-primary" asp-controller="Schedule" asp-action="Edit"
-                       asp-route-UserId="@ViewBag.UserId" asp-route-ScheduleId="@s.ScheduleId">แก้ไข</a>
-
-                    <form asp-controller="Schedule" asp-action="ToggleStatus" method="post" class="d-inline">
-                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
-                        <input type="hidden" name="ScheduleId" value="@s.ScheduleId" />
-                        <button class="btn btn-sm btn-outline-warning">@(s.Status == "OPEN" ? "ปิดรอบ" : "เปิดรอบ")</button>
-                    </form>
-
-                    <form asp-controller="Schedule" asp-action="Delete" method="post" class="d-inline"
-                          onsubmit="return confirm('ยืนยันการลบรอบเวลานี้?');">
-                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
-                        <input type="hidden" name="ScheduleId" value="@s.ScheduleId" />
-                        <button class="btn btn-sm btn-outline-danger">ลบ</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        int booked = appointments.Count(z => z.ScheduleId == s.ScheduleId);
+                        double pct = s.MaxQueue == 0 ? 0 : booked * 100.0 / s.MaxQueue;
+                        bool isFull = s.AvailableQueue <= 0;
+                        <tr class="@(firstRow ? "mq-group-row" : "mq-sub-row")">
+                            <td>
+                                @if (firstRow)
+                                {
+                                    <div class="mq-person">
+                                        <span class="mq-ava">@(du != null ? du.FirstName.Substring(0, 1) : "?")</span>
+                                        <div><b>@(du != null ? du.FirstName + " " + du.LastName : "-")</b><small>@(doc != null ?
+                                                                                doc.Specialization : "")</small></div>
+                                        </div>
+                                    }
+                                else
+                                    {
+                                        <div class="mq-sub-label">รอบวันที่ @s.ScheduleDate.ToString("dd/MM/yyyy")</div>
+                                    }
+                                </td>
+                                <td>
+                                    @if (firstRow)
+                                    {
+                                        <div>@(dept != null ? dept.DepartmentName : "-")</div>
+                                        @if (doc != null && !string.IsNullOrEmpty(doc.Specialization))
+                                        {
+                                            <span class="mq-tag">@doc.Specialization</span>
+                                        }
+                                    }
+                                </td>
+                                <td>
+                                    @if (firstRow)
+                                    {
+                                        <div class="small text-muted mb-1">@s.ScheduleDate.ToString("dd/MM/yyyy")</div>
+                                    }
+                                    🕒 @s.StartTime.ToString("HH:mm") - @s.EndTime.ToString("HH:mm") น.
+                                </td>
+                                <td>
+                                    <div class="mq-cap">
+                                        <div class="mq-cap-top"><span>@booked/@s.MaxQueue</span><b>@pct.ToString("0")%</b></div>
+                                        <div class="mq-cap-bar @(isFull ? "full" : "")">
+                                            <div style="width:@(Math.Min(100, pct).ToString("0", inv))%"></div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @if (s.Status != "OPEN")
+                                    {
+                                        <span class="mq-pill s-CLOSED">ปิดรอบ</span>
+                                    }
+                                    else if (isFull)
+                                    {
+                                        <span class="mq-pill s-FULL">คิวเต็ม</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="mq-pill s-OPEN">ว่าง</span>
+                                    }
+                                </td>
+                                <td class="text-end text-nowrap">
+                                    <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-UserId="@ViewBag.UserId"
+                                       asp-route-ScheduleId="@s.ScheduleId">แก้ไข</a>
+                                    <form asp-action="ToggleStatus" method="post" class="d-inline">
+                                        <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                                        <input type="hidden" name="ScheduleId" value="@s.ScheduleId" />
+                                        <button class="btn btn-sm btn-outline-warning">@(s.Status == "OPEN" ? "ปิดรอบ" :
+                                                       "เปิดรอบ")</button>
+                                        </form>
+                                        <form asp-action="Delete" method="post" class="d-inline"
+                                              onsubmit="return confirm('ยืนยันการลบรอบเวลานี้?');">
+                                            <input type="hidden" name="UserId" value="@ViewBag.UserId" />
+                                            <input type="hidden" name="ScheduleId" value="@s.ScheduleId" />
+                                            <button class="btn btn-sm btn-outline-danger">ลบ</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                firstRow = false;
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-muted small mt-2">แสดงทั้งหมด @schedules.Count รอบ จาก @groups.Count แพทย์</div>
+        </div>

@@ -274,3 +274,21 @@ body { background: var(--mq-bg); color: var(--mq-ink); font-family: var(--bs-bod
 .mq-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 8px 0 16px; }
 .mq-method { padding: 10px; border: 1px solid var(--mq-line); border-radius: 9px; background: #fff; text-align: center; font-size: .8rem; color: var(--mq-muted); }
 .mq-method.on { border-color: var(--mq-blue); background: #eef4ff; color: var(--mq-blue-dark); font-weight: 700; }
+/* ---------- Schedule ตามแบบ ---------- */
+.mq-kpi-ic { display: flex; align-items: center; gap: 14px; padding: 16px 18px; background: #fff; border: 1px solid var(--mq-line); border-radius: 14px; box-shadow: 0 4px 14px rgba(29, 52, 83, .05); height: 100%; }
+.mq-kpi-ic .ic { display: grid; place-items: center; width: 46px; height: 46px; flex: 0 0 46px; border-radius: 12px; font-size: 1.3rem; }
+.mq-kpi-ic .ic.blue { background: #e0ecff; }
+.mq-kpi-ic .ic.green { background: #dcfce7; }
+.mq-kpi-ic .ic.orange { background: #fef3c7; }
+.mq-kpi-ic .ic.red { background: #fee2e2; }
+.mq-kpi-ic .lb { color: var(--mq-muted); font-size: .82rem; }
+.mq-kpi-ic .vl { font-size: 1.5rem; font-weight: 800; line-height: 1.2; }
+
+.mq-sch-tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 14px; }
+.mq-sch-tools .grow { flex: 1 1 260px; }
+
+.mq-group-row > td { background: #fff; }
+.mq-sub-row > td { background: #fafbfd !important; }
+.mq-sub-label { display: flex; align-items: center; gap: 8px; padding-left: 44px; color: var(--mq-muted); font-size: .85rem; }
+.mq-sub-label::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #cbd5e1; }
+.mq-tag { display: inline-block; margin-top: 4px; padding: 2px 9px; border-radius: 6px; background: #e8ebf0; color: #475569; font-size: .72rem; }

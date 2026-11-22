@@ -85,33 +85,76 @@ public class ScheduleController : Controller
     }
 
     // หน้าหลัก: รายการตารางแพทย์ (กรองตามแพทย์ / ช่วงเวลา)
-    public IActionResult Index(int UserId, int? DoctorId, string? Period)
+    public IActionResult Index(int UserId, int? DoctorId, int? DepartmentId, string? Keyword, string? Range, DateOnly? Date)
     {
         if (!IsScheduleManager(UserId))
         {
             return RedirectToAction("Login", "Home");
         }
 
-        if (string.IsNullOrEmpty(Period))
+        if (string.IsNullOrEmpty(Range))
         {
-            Period = "UPCOMING";
+            Range = "UPCOMING";
         }
 
         var today = DateOnly.FromDateTime(DateTime.Now);
-        var schedules = (from s in _db.DoctorSchedules
-                         where (DoctorId == null || s.DoctorId == DoctorId)
-                            && (Period == "ALL" || s.ScheduleDate >= today)
-                         orderby s.ScheduleDate, s.StartTime
-                         select s).ToList();
+        var doctorsAll = (from d in _db.Doctors select d).ToList();
+        var usersAll = (from u in _db.Users select u).ToList();
+
+        // แพทย์ที่ตรงกับตัวกรอง (ชื่อ/ความเชี่ยวชาญ/แผนก/คนที่เลือก)
+        var okDoctorIds = doctorsAll.Where(d =>
+        {
+            var du = usersAll.FirstOrDefault(u => u.UserId == d.UserId);
+            string name = du != null ? du.FirstName + " " + du.LastName : "";
+            bool byKey = string.IsNullOrWhiteSpace(Keyword)
+                || name.Contains(Keyword.Trim(), StringComparison.OrdinalIgnoreCase)
+                || (d.Specialization != null && d.Specialization.Contains(Keyword.Trim(), StringComparison.OrdinalIgnoreCase));
+            bool byDept = DepartmentId == null || d.DepartmentId == DepartmentId;
+            bool byDoc = DoctorId == null || d.DoctorId == DoctorId;
+            return byKey && byDept && byDoc;
+        }).Select(d => d.DoctorId).ToList();
+
+        var all = (from s in _db.DoctorSchedules
+                   orderby s.ScheduleDate, s.StartTime
+                   select s).ToList();
+
+        var schedules = all.Where(s => okDoctorIds.Contains(s.DoctorId)).ToList();
+
+        if (Date != null)
+        {
+            schedules = schedules.Where(s => s.ScheduleDate == Date.Value).ToList();
+        }
+        else if (Range == "TODAY")
+        {
+            schedules = schedules.Where(s => s.ScheduleDate == today).ToList();
+        }
+        else if (Range == "WEEK")
+        {
+            schedules = schedules.Where(s => s.ScheduleDate >= today && s.ScheduleDate <= today.AddDays(7)).ToList();
+        }
+        else if (Range == "MONTH")
+        {
+            schedules = schedules.Where(s => s.ScheduleDate >= today && s.ScheduleDate <= today.AddDays(30)).ToList();
+        }
+        else if (Range == "UPCOMING")
+        {
+            schedules = schedules.Where(s => s.ScheduleDate >= today).ToList();
+        }
+        // ALL = ไม่กรองวันที่
 
         ViewBag.UserId = UserId;
         ViewBag.ScheduleList = schedules;
         ViewBag.AppointmentList = (from a in _db.Appointments
                                    where a.Status != "CANCELLED"
                                    select a).ToList();
+        ViewBag.DoctorList = doctorsAll.Where(d => d.DoctorStatus == "ACTIVE").ToList();
+        ViewBag.UserList = usersAll;
+        ViewBag.DeptList = (from d in _db.Departments select d).ToList();
         ViewBag.FilterDoctorId = DoctorId;
-        ViewBag.Period = Period;
-        LoadDoctors();
+        ViewBag.FilterDeptId = DepartmentId;
+        ViewBag.Keyword = Keyword;
+        ViewBag.Range = Range;
+        ViewBag.PickDate = Date;
         return View();
     }
 
